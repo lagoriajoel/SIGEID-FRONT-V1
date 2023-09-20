@@ -1,0 +1,16 @@
+
+input {
+    margin-top: 5px;
+    width: 500px;
+}
+.profile-card {
+    text-align: center;
+    
+}
+img {
+    margin-top: 30%;
+}
+
+mat-form-field {
+    width: 100% !important;
+}

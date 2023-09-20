@@ -1,0 +1,46 @@
+<div class="container login-container" fxLayout="row" fxLayoutAlign="center center">
+    <form [formGroup]="loginForm" fxFlex="30%" fxFlex.sm="50%" fxFlex.xs="90%">
+        <mat-card>
+            <h2 class="titulo">SIGEID</h2>
+           <h4 class="subtitulo">Ingrese con su cuenta</h4>
+            <mat-card-content>
+
+                <mat-form-field class="full-width">
+                    <input id="userInput" matInput placeholder="Nombre de Usuario" formControlName="userName" autocomplete="user"
+                        type="text">
+
+                  
+                    <mat-error *ngIf="this.loginForm.get('userName')?.errors?.['required']">
+                        El Nombre de Usuario es 
+                        <strong>requirido</strong>
+                    </mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                    <input id="passwordInput" matInput placeholder="Password" [type]="hideNewPassword ? 'password' : 'text'" formControlName="password" type="password"
+                        autocomplete="current-password">
+                        <mat-icon matSuffix (click)="hideNewPassword = !hideNewPassword">
+                            {{hideNewPassword ? 'visibility' : 'visibility_off'}}
+                          </mat-icon>
+                    <mat-error id="requiredPasswordError"  *ngIf="this.loginForm.get('password')?.errors?.['required']">
+                        Password is
+                        <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+               
+
+            </mat-card-content>
+
+            <mat-card-actions class="login-actions">
+                <button mat-raised-button id="login"  [disabled]="loginForm.invalid || loading"
+                    (click)="login()">Login</button>
+                <button mat-button id="resetPassword" (click)="resetPassword()" type="button">Recuperar Contraseña</button>
+            </mat-card-actions>
+
+        </mat-card>
+
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    </form>
+</div>

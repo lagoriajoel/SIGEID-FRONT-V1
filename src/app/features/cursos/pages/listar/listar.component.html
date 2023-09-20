@@ -1,0 +1,111 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+  <div fxFlex="95%">
+
+    <h2 *ngIf="isAlumno"> Alumnos</h2>
+    <h2 *ngIf="isCurso || isInformeDesempenio"> Cursos</h2>
+    
+    <mat-card>
+      
+      <mat-card-content>
+      
+
+
+        <div class="serch">
+
+        <button *ngIf="isCurso" mat-raised-button (click)="addEditCurso()" >
+          <mat-icon>add</mat-icon>
+          Agregar Curso
+        </button>
+        <mat-form-field appearance="fill" *ngFor="let empfilter of empFilters">
+          <mat-label>{{ empfilter.name }}</mat-label>
+          <mat-select
+            [(value)]="empfilter.defaultValue"
+            (selectionChange)="applyEmpFilter($event, empfilter)"
+          >
+            <mat-option *ngFor="let op of empfilter.options" [value]="op">
+              {{ op }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        
+        </div>
+
+        <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
+         
+          <ng-container matColumnDef="anio">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by year"> Año </th>
+            <td mat-cell *matCellDef="let element"> {{element.anio}} </td>
+          </ng-container>
+        
+       
+          <ng-container matColumnDef="Division">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Division </th>
+            <td mat-cell *matCellDef="let element"> {{element.division}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Tecnicatura">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Técnicatura </th>
+            <td mat-cell *matCellDef="let element"> {{element.tecnicatura}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="turno">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Turno </th>
+            <td mat-cell *matCellDef="let element"> {{element.turno}} </td>
+          </ng-container>
+        
+       
+          <ng-container matColumnDef="Ciclo Lectivo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ciclo Lectivo </th>
+            <td mat-cell *matCellDef="let element"> {{element.cicloLectivo}} </td>
+                  
+          </ng-container>
+          
+          <ng-container  matColumnDef="acciones">
+            <th  mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</th>
+            <td mat-cell *matCellDef="let element" > 
+                <mat-icon *ngIf="isCurso" (click)="addEditCurso(element.id)" class="btnEdit" matTooltip="Editar">edit</mat-icon>
+                <mat-icon *ngIf="isCurso" (click)="deleteCurso(element.id)" class="btnDelete" matTooltip="Delete">delete</mat-icon>
+                <mat-icon *ngIf="isAlumno" (click)="addAlumno(element.id)" class="btnEdit" matTooltip="Agregar Alumno">person_add</mat-icon>
+                <mat-icon *ngIf="isAlumno" (click)="addAlumno(element.id)" class="btnEdit" matTooltip="Ver Alumnos">visibility</mat-icon>       
+                <button  *ngIf="isInforme" mat-raised-button (click)="informes(element.id , element.anio)">
+                  <mat-icon>add_circle</mat-icon>
+                  Generar Informes
+                </button>
+                
+              </td>
+         </ng-container>
+          
+         
+
+       
+
+        <ng-container matColumnDef="contenidos">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+          <td mat-cell *matCellDef="let element" > 
+        
+          <button *ngIf="isInforme" mat-raised-button (click)="agregarContenido(element.id , element.anio)" >
+            <mat-icon>add_circle</mat-icon>
+            Agregar Contenidos
+          </button>
+        </td>
+        </ng-container>
+        
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row (dblclick)="mostrarFila(row)"         
+          mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        
+          <mat-paginator [pageSizeOptions]="[10, 20]"
+          showFirstLastButtons
+          aria-label="">
+        </mat-paginator>
+        
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>
+

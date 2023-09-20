@@ -1,0 +1,73 @@
+<h2>{{ operacion }} Curso</h2>
+<div class="container">
+  <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+</div>
+<form [formGroup]="form" (ngSubmit)="addEditCurso()">
+
+  <mat-dialog-content >
+
+   
+
+
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td> <mat-form-field class="example-full-width">
+        <mat-label>Año</mat-label >
+        <mat-select formControlName="anio" class="example-full-width">
+          <mat-option *ngFor="let anio of anios" [value]="anio.value" class="example-full-width">
+            {{anio.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field></td>
+      <td><mat-form-field class="example-full-width">
+        <mat-label>División</mat-label>
+        <mat-select formControlName="division">
+          <mat-option *ngFor="let division of divisiones" [value]="division.value">
+            {{division.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field></td>
+    </tr></table>
+     
+      
+
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td> <mat-form-field class="example-full-width">
+        <mat-label>Turno</mat-label>
+        <mat-select formControlName="turno">
+          <mat-option *ngFor="let turno of turnos" [value]="turno.value">
+            {{turno.viewValue}}
+          </mat-option>
+        </mat-select>
+        
+      </mat-form-field></td>
+      <td><mat-form-field class="example-full-width">
+        <mat-label>tecnicatura</mat-label>
+        <mat-select formControlName="tecnicatura">
+          <mat-option *ngFor="let tec of tecnicaturas" [value]="tec.value">
+            {{tec.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field></td>
+    </tr></table>
+ 
+  
+  
+      <div class="column">
+        <mat-form-field class="middle-width">
+          <mat-label>Ciclo Lectivo</mat-label>
+          <input formControlName="cicloLectivo" matInput placeholder="Ingrese el ciclo lectivo" autocomplete="off">
+        </mat-form-field>
+        <div class="error">
+          <span *ngIf="form.get('cicloLectivo')?.hasError('required') && form.get('cicloLectivo')?.touched">
+            El Ciclo Lectivo es un campo <strong>requerido</strong>  
+          </span>
+        </div>
+      </div>
+   
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+    <button type="submit" mat-button cdkFocusInitial>Aceptar</button>
+  </mat-dialog-actions>
+  
+</form>

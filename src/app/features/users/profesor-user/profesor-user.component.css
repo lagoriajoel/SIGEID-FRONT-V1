@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+
+
+.serch {
+
+  align-items: center;
+}
+
+mat-form-field {
+   margin-left: 20px;
+}
+mat-icon {
+    margin-left: 10px;
+}
