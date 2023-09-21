@@ -69,6 +69,13 @@
           </mat-icon>
           <p mat-line> Mis Informes </p>
         </a>
+
+        <a *ngIf="!isAdmin&&!isProfesor&&!isDirectivo" mat-list-item [routerLink]="['/dashboard/dashboardCicloLectivo']" routerLinkActive="active">
+          <mat-icon mat-list-icon>
+            description
+          </mat-icon>
+          <p mat-line> Mis Cursos </p>
+        </a>
         <a *ngIf="isDirectivo" mat-list-item [routerLink]="['/cursos']" [queryParams]="{ informesDesempenio: 'true'}" routerLinkActive="active" >
           <mat-icon mat-list-icon>
            folder_open

@@ -7,5 +7,6 @@ export interface Materia {
     nombre: string;
     anioCurso:string;
     curso: CursoDto
+    cicloLectivo:string;
     profesor: Profesor
 }

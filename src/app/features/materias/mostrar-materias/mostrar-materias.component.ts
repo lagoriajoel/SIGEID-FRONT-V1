@@ -52,8 +52,7 @@ export class MostrarMateriasComponent implements OnInit {
 
   nombre: string[]=['Todos','Física','Matematica','Química','FEC','Ingles','Historia','Biología','Informatica','Geografía','Dibujo Técnico', 'Ed Física'];
   anioCurso: string[]=['Todos','1','2','3','4','5','6'];
-  division: string[]=['Todos','A','B','C','D','F','G','H','I'];
-
+  division: string[]=['Todos','A','B','C','D','F','G','H'];
   cicloLectivo: string[]=['Todos','2021','2022','2023','2024','2025','2026'];
   empFilters: EmpFilter[]=[];
   
@@ -66,9 +65,9 @@ export class MostrarMateriasComponent implements OnInit {
   displayedColumns: string[] = [
     "nombre",
     "anio",
-  "Division",
-  "turno",
-  "Ciclo Lectivo"
+    "division",
+    "turno",
+    "cicloLectivo"
   ];
 
   dataSource = new MatTableDataSource(this.materias);
@@ -105,7 +104,8 @@ export class MostrarMateriasComponent implements OnInit {
 
     this.empFilters.push({name:'nombre',options:this.nombre,defaultValue:this.defaultValue});
     this.empFilters.push({name:'anioCurso',options:this.anioCurso,defaultValue:this.defaultValue});
-    this.empFilters.push({name:'curso.division',options:this.division,defaultValue:this.defaultValue});
+    this.empFilters.push({name:'division',options:this.division,defaultValue:this.defaultValue});
+    this.empFilters.push({name:'cicloLectivo',options:this.cicloLectivo,defaultValue:this.defaultValue});
 
     this.dataSource.filterPredicate = function (record,filter) {
      
@@ -128,7 +128,7 @@ export class MostrarMateriasComponent implements OnInit {
     var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
     
     this.dataSource.filter = jsonString;
-    //console.log(this.filterValues);
+    
   }
 
   applyFilter(event: Event) {

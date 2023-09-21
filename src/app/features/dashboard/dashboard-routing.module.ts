@@ -4,6 +4,8 @@ import { LayoutComponent } from 'src/app/shared/layout/layout.component';
 
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
 import { DashboardAlumnosComponent } from './dashboard-alumnos/dashboard-alumnos.component';
+import { DashboardCicloLectivoComponent } from './dashboard-ciclo-lectivo/dashboard-ciclo-lectivo.component';
+
 
 const routes: Routes = [
   {
@@ -12,6 +14,9 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardHomeComponent },
       { path: 'dashboardAlumno', component: DashboardAlumnosComponent },
+      { path: 'dashboardCicloLectivo', component: DashboardCicloLectivoComponent },
+
+  
       { path:'**', redirectTo:'dashboard' }
     ]
   }

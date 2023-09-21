@@ -19,6 +19,9 @@ export class CursosService {
   public lista(): Observable<CursoDto[]> {
     return this.httpClient.get<CursoDto[]>(this.cursoURL + 'list');
   }
+  public listaPorAlumno(id:number): Observable<CursoDto[]> {
+    return this.httpClient.get<CursoDto[]>(this.cursoURL + `listCursosAlumno/${id}`);
+  }
 
   public detail(id: number): Observable<CursoDto> {
     return this.httpClient.get<CursoDto>(this.cursoURL + `list/${id}`);

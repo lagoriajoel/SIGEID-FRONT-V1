@@ -43,6 +43,7 @@ export class DashboardHomeComponent implements OnInit {
     this.titleService.setTitle("SiGeID - Dashboard");
      this.nombreUsuario=this.authService.getName()
      this.isAdmin = this.authService.isAdmin();
+
    
      this.isProfesor=this.authService.isProfesor();
      
@@ -51,6 +52,16 @@ export class DashboardHomeComponent implements OnInit {
      }
      else if(this.isProfesor){
          this.usuario='Profesor :';
+     }
+     else{
+         this.usuario= 'Alumno :';
+         this.alumnoService.listaPorDni(this.authService.getUserName()).subscribe({
+          next:data=>{
+            const id = data.id
+            localStorage.setItem("alumnoId", id.toString() );
+
+          }
+         })
      }
 
   }

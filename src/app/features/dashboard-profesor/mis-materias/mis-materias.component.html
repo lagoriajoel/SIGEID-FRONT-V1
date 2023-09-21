@@ -8,7 +8,18 @@
         <mat-card-content>
          
 
-
+ 
+          <mat-form-field appearance="standard" *ngFor="let empfilter of empFilters">
+            <mat-label>{{ empfilter.name }}</mat-label>
+            <mat-select
+              [(value)]="empfilter.defaultValue"
+              (selectionChange)="applyEmpFilter($event, empfilter)"
+            >
+              <mat-option *ngFor="let op of empfilter.options" [value]="op">
+                {{ op }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
          
          
            

@@ -17,7 +17,7 @@ import { AddEditAlumnosComponent } from '../../Alumno/add-edit-alumnos/add-edit-
 import { AddAlumnoCursoComponent } from '../../Alumno/add-alumno-curso/add-alumno-curso.component';
 import { tap } from 'rxjs';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-alumno-user',
@@ -50,6 +50,7 @@ export class AlumnoUserComponent implements OnInit {
      private _snackBar: MatSnackBar,
      private authService: AuthenticationService,
      private _routes :ActivatedRoute,
+     private router: Router
    
     
  
@@ -180,6 +181,7 @@ export class AlumnoUserComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+  
         this.cargarAlumnos();
       }
     });

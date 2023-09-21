@@ -54,10 +54,6 @@ export class ListarComponent implements OnInit {
 
 
 
-  anio: string[]=['Todos','1','2','3','4','5','6'];
-  division: string[]=['Todos','A','B','C','D','F','G','H','I'];
-  cicloLectivo: string[]=['Todos','2021','2022','2023','2024','2025','2026'];
-  empFilters: EmpFilter[]=[];
   isAdmin: boolean = false;
   
   defaultValue = "Todos";
@@ -65,12 +61,16 @@ export class ListarComponent implements OnInit {
   filterDictionary= new Map<string,string>();
   
 
+  anio: string[]=['Todos','1','2','3','4','5','6'];
+  division: string[]=['Todos','A','B','C','D','F','G','H','I'];
+  cicloLectivo: string[]=['Todos','2021','2022','2023','2024','2025','2026'];
+  empFilters: EmpFilter[]=[];
 
   displayedColumns: string[] = ["anio",
   "Division",
   "Tecnicatura",
   "turno",
-  "Ciclo Lectivo",
+  "cicloLectivo",
   "acciones",
   "contenidos"];
 
@@ -97,13 +97,13 @@ export class ListarComponent implements OnInit {
     this.dataSource = new MatTableDataSource();
     this.auth.isAdmin() ? this.isAdmin = true : this.isAdmin = false;
   }
-
+  
   ngOnInit() {
-
+    
     this.titleService.setTitle("Gestion de Informes - Cursos");
     this.dataSource.sort = this.sort;
     this.cargarCurso();
-
+    
     this.route.queryParamMap.subscribe((params) => {
       params.get("alumnos") ? (this.isAlumno = true) : (this.isAlumno = false);
       params.get("informes") ? (this.isInforme = true) : (this.isInforme = false);
@@ -112,18 +112,18 @@ export class ListarComponent implements OnInit {
       params.get("materias") ? (this.isMaterias = true) : (this.isMaterias = false);
       
 
-
-
+      
+      
     });
-
-
-
+    
+    
+    
     //filtrado
-
+    
     this.empFilters.push({name:'anio',options:this.anio,defaultValue:this.defaultValue});
     this.empFilters.push({name:'division',options:this.division,defaultValue:this.defaultValue});
-    this.empFilters.push({name:'cicloLectivo',options:this.cicloLectivo,defaultValue:this.defaultValue});
-
+    this.empFilters.push({name:'cicloLectivo',options:this.cicloLectivo,defaultValue:"2023"});
+    
     this.dataSource.filterPredicate = function (record,filter) {
      
       var map = new Map(JSON.parse(filter));

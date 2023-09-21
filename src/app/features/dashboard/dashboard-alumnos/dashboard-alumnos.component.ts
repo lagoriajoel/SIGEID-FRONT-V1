@@ -7,8 +7,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NGXLogger } from 'ngx-logger';
+import { InformesAlumnoDto } from 'src/app/core/Entities/InformeAlumnoDto';
 import { Alumno } from 'src/app/core/Entities/alumno';
 import { Informes } from 'src/app/core/Entities/informe';
+import { informeIdDto } from 'src/app/core/Entities/informeIdDto';
 import { AlumnoService } from 'src/app/core/services/alumno.service';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
@@ -33,6 +35,7 @@ export class DashboardAlumnosComponent implements OnInit {
   cicloLectivo: string = "";
   mesaExamen:boolean=false
   isAdmin:boolean = false
+  cicloLecto:string = "";
   
 
   displayedColumns: string[] = ["Asignatura", "Curso", "acciones"];
@@ -56,6 +59,9 @@ export class DashboardAlumnosComponent implements OnInit {
     this._routes.queryParamMap
     .subscribe((params) => {
       params.get("mesa") ? (this.mesaExamen= true) : (this.mesaExamen = false);
+      this.cicloLectivo = params.get("cicloLectivo")!;
+      console.log(this.cicloLectivo);
+
     })
   }
 
@@ -69,10 +75,18 @@ export class DashboardAlumnosComponent implements OnInit {
 
 
     this.isAdmin=this._authService.isAdmin()
+    
 
     
   }
 
+  filtrarInformesAlumnos(cicloLectivo:string, informe:InformesAlumnoDto[]):InformesAlumnoDto[] {
+
+    const informeFiltrado = informe.filter(informe =>informe.asignatura.cicloLectivo==cicloLectivo)   
+      console.log(informeFiltrado);   
+    
+    return informeFiltrado;
+  }
 
   listarInformesAlumnos(dni:string): void {
     this.alumnos = [];

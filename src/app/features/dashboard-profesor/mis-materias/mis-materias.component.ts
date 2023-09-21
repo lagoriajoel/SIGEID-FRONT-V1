@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,7 +14,17 @@ import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { MateriasService } from 'src/app/core/services/materias.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
 import { ProfesorService } from 'src/app/core/services/profesor.service';
+export interface EmpFilter {
+  name:string;
+  options:string[];
+  defaultValue:string;
+}
 
+export interface filterOption{
+  name:string;
+  value:string;
+  isdefault:boolean;
+}
 @Component({
   selector: 'app-mis-materias',
   templateUrl: './mis-materias.component.html',
@@ -29,10 +40,19 @@ export class MisMateriasComponent implements OnInit {
   isMaterias: boolean=false;
   informes: boolean=false;
  
+  nombre: string[]=['Todos','Física','Matematica','Química','FEC','Ingles','Historia','Biología','Informatica','Geografía','Dibujo Técnico', 'Ed Física'];
+  anioCurso: string[]=['Todos','1','2','3','4','5','6'];
+  cicloLectivo: string[]=['Todos','2021','2022','2023','2024','2025','2026'];
+  empFilters: EmpFilter[]=[];
+  
+  defaultValue = "Todos";
+
+  filterDictionary= new Map<string,string>();
   
   displayedColumns: string[] = ["nombre", "año", "division", "cicloLectivo"];
   dataSource = new MatTableDataSource(this.materias);
-
+  //dataSourceFilters = new MatTableDataSource(this.materias);
+  
   clickedRows = new Set<MateriasDto>();
 
   @ViewChild(MatSort, { static: true })
@@ -63,6 +83,25 @@ export class MisMateriasComponent implements OnInit {
 
 
   ngOnInit() {
+
+   //filtrado
+
+   this.empFilters.push({name:'nombre',options:this.nombre,defaultValue:this.defaultValue});
+   this.empFilters.push({name:'anioCurso',options:this.anioCurso,defaultValue:this.defaultValue});
+   this.empFilters.push({name:'cicloLectivo',options:this.cicloLectivo,defaultValue:"2023"});
+
+   this.dataSource.filterPredicate = function (record,filter) {
+    
+     var map = new Map(JSON.parse(filter));
+     let isMatch = false;
+     for(let [key,value] of map){
+       isMatch = (value=="Todos") || (record[key as keyof MateriasDto] == value); 
+       if(!isMatch) return false;
+     }
+     return isMatch;
+   }
+
+
     this.titleService.setTitle("Gestion de Informes - Mis Espacios");
     this.dataSource.sort = this.sort;
     this.route.queryParamMap.subscribe((params) => {
@@ -86,6 +125,24 @@ export class MisMateriasComponent implements OnInit {
     
     
   }
+
+   //metodos para el filtrado
+   applyEmpFilter(ob:MatSelectChange,empfilter:EmpFilter) {
+
+    this.filterDictionary.set(empfilter.name,ob.value);
+
+
+    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
+    
+    this.dataSource.filter = jsonString;
+    
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   listarMaterias(): void {
   
 
@@ -119,14 +176,7 @@ export class MisMateriasComponent implements OnInit {
   }
 
   
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+  
 
   
   mensajeExito() {

@@ -96,6 +96,7 @@ export class AgregarMateriasCursoComponent implements OnInit {
      asignatura_id: 0,
       nombre: this.form.value.nombre,
       anioCurso: this.anioCurso!,
+      cicloLectivo: this.curso.cicloLectivo,
       curso: cursoAlumno!,
       profesor: null,
     };

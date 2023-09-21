@@ -117,7 +117,7 @@ export class AddAlumnoCursoComponent implements OnInit {
     this._alumnoService.agregarCurso(this.idAlumno, this.id).subscribe({
      next: data=>{
        console.log("ok");
-       this._router.navigate(["/user"]);
+       this.dialogRef.close(true);
        
      },
    error: error=>{
