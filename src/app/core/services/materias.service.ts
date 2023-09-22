@@ -24,6 +24,10 @@ export class MateriasService {
     return this.httpClient.get<MateriasDto[]>(this.materiasURL + `listOfProfesor/${id}` );
   }
 
+  public listarPorProfesorPorCicloLectivo(id: number, cicloLectivo:string): Observable<MateriasDto[]> {
+    return this.httpClient.get<MateriasDto[]>(this.materiasURL + `listOfProfesorCicloLectivo/${id}/${cicloLectivo}` );
+  }
+
   public detail(id: number): Observable<MateriasDto> {
     return this.httpClient.get<MateriasDto>(this.materiasURL + `list/${id}`);
   }

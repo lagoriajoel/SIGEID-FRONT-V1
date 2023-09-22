@@ -55,13 +55,7 @@ export class DashboardHomeComponent implements OnInit {
      }
      else{
          this.usuario= 'Alumno :';
-         this.alumnoService.listaPorDni(this.authService.getUserName()).subscribe({
-          next:data=>{
-            const id = data.id
-            localStorage.setItem("alumnoId", id.toString() );
-
-          }
-         })
+        
      }
 
   }

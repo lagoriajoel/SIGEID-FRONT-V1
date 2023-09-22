@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -28,7 +29,14 @@ export interface filterOption{
 @Component({
   selector: 'app-mis-materias',
   templateUrl: './mis-materias.component.html',
-  styleUrls: ['./mis-materias.component.css']
+  styleUrls: ['./mis-materias.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class MisMateriasComponent implements OnInit {
 
@@ -39,25 +47,14 @@ export class MisMateriasComponent implements OnInit {
   isInformes=0;
   isMaterias: boolean=false;
   informes: boolean=false;
+  cicloLectivo:string="";
+  
  
-  nombre: string[]=['Todos','Física','Matematica','Química','FEC','Ingles','Historia','Biología','Informatica','Geografía','Dibujo Técnico', 'Ed Física'];
-  anioCurso: string[]=['Todos','1','2','3','4','5','6'];
-  cicloLectivo: string[]=['Todos','2021','2022','2023','2024','2025','2026'];
-  empFilters: EmpFilter[]=[];
-  
-  defaultValue = "Todos";
-
-  filterDictionary= new Map<string,string>();
-  
-  displayedColumns: string[] = ["nombre", "año", "division", "cicloLectivo"];
-  dataSource = new MatTableDataSource(this.materias);
-  //dataSourceFilters = new MatTableDataSource(this.materias);
-  
-  clickedRows = new Set<MateriasDto>();
-
-  @ViewChild(MatSort, { static: true })
-  sort: MatSort = new MatSort();
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  dataSource!:MateriasDto[];
+  columnsToDisplay = ['nombre','anioCurso'];
+  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
+  expandedElement!: MateriasDto | null;
+ 
   
   constructor(
     private logger: NGXLogger,
@@ -75,37 +72,11 @@ export class MisMateriasComponent implements OnInit {
 
   ) {
     
-    this.dataSource = new MatTableDataSource();
-   
-  }
-
-  
-
-
-  ngOnInit() {
-
-   //filtrado
-
-   this.empFilters.push({name:'nombre',options:this.nombre,defaultValue:this.defaultValue});
-   this.empFilters.push({name:'anioCurso',options:this.anioCurso,defaultValue:this.defaultValue});
-   this.empFilters.push({name:'cicloLectivo',options:this.cicloLectivo,defaultValue:"2023"});
-
-   this.dataSource.filterPredicate = function (record,filter) {
-    
-     var map = new Map(JSON.parse(filter));
-     let isMatch = false;
-     for(let [key,value] of map){
-       isMatch = (value=="Todos") || (record[key as keyof MateriasDto] == value); 
-       if(!isMatch) return false;
-     }
-     return isMatch;
-   }
-
-
     this.titleService.setTitle("Gestion de Informes - Mis Espacios");
-    this.dataSource.sort = this.sort;
+   
     this.route.queryParamMap.subscribe((params) => {
       params.get("contenidos") ? (this.isContenidos = true) : (this.isContenidos = false);
+      this.cicloLectivo = params.get("cicloLectivo")!
      
       if (params.get("informes")) {
           this.isInformes=1
@@ -120,28 +91,28 @@ export class MisMateriasComponent implements OnInit {
 
     })
     this.listarMaterias();
+    
+  
+   
+  }
+
+  
+  irAmaterias(){
+
+  }
+
+  ngOnInit() {
+
+   
+   
+
+
    
     
     
     
   }
 
-   //metodos para el filtrado
-   applyEmpFilter(ob:MatSelectChange,empfilter:EmpFilter) {
-
-    this.filterDictionary.set(empfilter.name,ob.value);
-
-
-    var jsonString = JSON.stringify(Array.from(this.filterDictionary.entries()));
-    
-    this.dataSource.filter = jsonString;
-    
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 
   listarMaterias(): void {
   
@@ -151,9 +122,10 @@ export class MisMateriasComponent implements OnInit {
           next: data=> {
             console.log(data);
             
-          this.materiaService.listarPorProfesor(data.id).subscribe({
+          this.materiaService.listarPorProfesorPorCicloLectivo(data.id, this.cicloLectivo).subscribe({
             next: data=> {
-              this.dataSource.data = data
+              console.log(data);
+              this.dataSource=data
             }
           })
           
@@ -170,10 +142,7 @@ export class MisMateriasComponent implements OnInit {
   }
 
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  
 
   
   

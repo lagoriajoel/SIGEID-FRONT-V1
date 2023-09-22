@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { InformesAlumnoDto } from 'src/app/core/Entities/InformeAlumnoDto';
 import { Alumno } from 'src/app/core/Entities/alumno';
 import { Informes } from 'src/app/core/Entities/informe';
 import { AlumnoService } from 'src/app/core/services/alumno.service';
@@ -21,7 +22,7 @@ export class DashboardComponent implements OnInit {
 
   alumnos: Alumno[] = [];
   alumno!: Alumno;
-  informesDesempenio: Informes[] = [];
+  informesDesempenio: InformesAlumnoDto[] = [];
   loading: boolean = true;
   id = null;
   dni_ingresado: string = "";
@@ -86,7 +87,7 @@ export class DashboardComponent implements OnInit {
         this.alumnoService.listaPorDni(dni).subscribe({
          next: (data) => {
             
-          console.log(data);
+        
             this.alumnos.push(data);
             this.alumno = data;
             

@@ -5,16 +5,16 @@ import { DashboarProfesorRoutingModule } from './dashboar-profesor-routing.modul
 import { MisContenidosComponent } from './mis-contenidos/mis-contenidos.component';
 import { MisMateriasComponent } from './mis-materias/mis-materias.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { DashboardHomeProfesorComponent } from './dashboard-home-profesor/dashboard-home-profesor.component';
 import { ActualizarInformesComponent } from './actualizar-informes/actualizar-informes.component';
 import { ListarInformesMateriasComponent } from './listar-informes-materias/listar-informes-materias.component';
 import { FormEditInformeComponent } from './form-edit-informe/form-edit-informe.component';
+import { CicloLectivoComponent } from './ciclo-lectivo/ciclo-lectivo.component';
 
 
 
 
 @NgModule({
-  declarations: [DashboardHomeProfesorComponent, MisContenidosComponent, MisMateriasComponent, ActualizarInformesComponent, ListarInformesMateriasComponent, FormEditInformeComponent],
+  declarations: [MisContenidosComponent, MisMateriasComponent, ActualizarInformesComponent, ListarInformesMateriasComponent, FormEditInformeComponent, CicloLectivoComponent],
   imports: [
     CommonModule,
     DashboarProfesorRoutingModule,

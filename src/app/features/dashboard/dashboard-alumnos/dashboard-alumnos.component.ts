@@ -24,7 +24,7 @@ export class DashboardAlumnosComponent implements OnInit {
 
   alumnos: Alumno[] = [];
   alumno!: Alumno;
-  informesDesempenio: Informes[] = [];
+  informesDesempenio: InformesAlumnoDto[] = [];
   loading: boolean = true;
   id = null;
   dni_ingresado: string = "";
@@ -61,6 +61,7 @@ export class DashboardAlumnosComponent implements OnInit {
       params.get("mesa") ? (this.mesaExamen= true) : (this.mesaExamen = false);
       this.cicloLectivo = params.get("cicloLectivo")!;
       console.log(this.cicloLectivo);
+      
 
     })
   }
@@ -83,7 +84,7 @@ export class DashboardAlumnosComponent implements OnInit {
   filtrarInformesAlumnos(cicloLectivo:string, informe:InformesAlumnoDto[]):InformesAlumnoDto[] {
 
     const informeFiltrado = informe.filter(informe =>informe.asignatura.cicloLectivo==cicloLectivo)   
-      console.log(informeFiltrado);   
+    
     
     return informeFiltrado;
   }
@@ -95,11 +96,11 @@ export class DashboardAlumnosComponent implements OnInit {
         this.alumnoService.listaPorDni(dni).subscribe({
          next: (data) => {
             
-          console.log(data);
+        
             this.alumnos.push(data);
             this.alumno = data;
+            this.dataSource.data = this.filtrarInformesAlumnos(this.cicloLectivo, data.informeDesempenios);
             
-            this.dataSource.data = data.informeDesempenios;
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
           

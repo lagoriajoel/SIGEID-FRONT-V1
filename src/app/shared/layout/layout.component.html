@@ -63,12 +63,7 @@
           </mat-icon>
           <p mat-line> Buscar Informe </p>
         </a>
-        <a *ngIf="!isAdmin&&!isProfesor&&!isDirectivo" mat-list-item [routerLink]="['/dashboard/dashboardAlumno']" routerLinkActive="active">
-          <mat-icon mat-list-icon>
-            description
-          </mat-icon>
-          <p mat-line> Mis Informes </p>
-        </a>
+  
 
         <a *ngIf="!isAdmin&&!isProfesor&&!isDirectivo" mat-list-item [routerLink]="['/dashboard/dashboardCicloLectivo']" routerLinkActive="active">
           <mat-icon mat-list-icon>
@@ -96,6 +91,12 @@
             assignment
           </mat-icon>
           <p mat-line> mis Espacios </p>
+        </a>
+        <a *ngIf="isProfesor" mat-list-item [routerLink]="['/dashboardProfesor/cicloLectivo']" routerLinkActive="active">
+          <mat-icon mat-list-icon>
+            assignment
+          </mat-icon>
+          <p mat-line> mis Espacios2 </p>
         </a>
 
         <a *ngIf="isProfesor" mat-list-item [routerLink]="['/dashboardProfesor/misMaterias']"[queryParams]="{ contenidos: 'true'}" routerLinkActive="active">

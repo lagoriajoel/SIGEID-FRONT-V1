@@ -12,6 +12,7 @@ import { AddEditInformesComponent } from "../add-edit-informes/add-edit-informes
 import { MostrarInformeComponent } from "../mostrar-informe/mostrar-informe.component";
 import { MateriasService } from "src/app/core/services/materias.service";
 import { MostrarIInformeFebreroComponent } from "../mostrar-i-informe-febrero/mostrar-i-informe-febrero.component";
+import { InformesAlumnoDto } from "src/app/core/Entities/InformeAlumnoDto";
 
 
 @Component({
@@ -29,7 +30,7 @@ export class ListInformesComponent implements OnInit {
   idAsignatura!: number;
   fecha: string = "";
   isInforme!: number;
-  InformeAlumno!: Informes;
+  InformeAlumno!: InformesAlumnoDto;
   NombreAsignatura: string = "";
 
   displayedColumns: string[] = ["dni", "nombres", "apellido", "informes"];
@@ -224,7 +225,7 @@ export class ListInformesComponent implements OnInit {
 
  // metodo que obtiene el informe de un alumno por asignatura
 
-  getInformeAlumno(alumno: Alumno, idAsignatura: number): Informes {
+  getInformeAlumno(alumno: Alumno, idAsignatura: number): InformesAlumnoDto {
     const informe = alumno.informeDesempenios.filter(
       (inf) => inf.asignatura.asignatura_id === idAsignatura
     );
