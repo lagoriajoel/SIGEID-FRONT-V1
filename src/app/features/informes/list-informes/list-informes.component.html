@@ -3,7 +3,10 @@
       <mat-card>
         
         <mat-card-content>
-          <h2>Informes de Desemepeño de {{NombreAsignatura}}</h2>
+        
+         <p mat-line>Espacio Curricular: {{NombreAsignatura}}</p>
+         <p mat-line>Curso: {{anioCurso}} Año  "{{divisionCurso}}"  -  {{tecnicatura}}</p>
+         
           <div class="serch">
 
          
@@ -35,12 +38,14 @@
                     
             </ng-container>
 
+           
+
           
 
             
             
             <ng-container matColumnDef="informes">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Accionessss</th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</th>
               <td mat-cell *matCellDef="let element" > 
                
                 <button *ngIf="isInforme===0" mat-raised-button (click)="generarInforme(element.id)" >

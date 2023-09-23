@@ -97,10 +97,37 @@ export class MisMateriasComponent implements OnInit {
   }
 
   
-  irAmaterias(){
-
+  generarInformes(materia: MateriasDto){
+    this.router.navigate(["/informes/listar/"], { 
+      queryParams: {
+        curso:materia.curso.id,
+        asignatura:materia.asignatura_id,
+        informe: 0,
+        nombreAsignatura:materia.nombre
+      }});
   }
+  contenidos(materia: MateriasDto){
+    this.router.navigate(["/contenidos/contenidos/", materia.asignatura_id]);
+  }
+  actualizar(materia: MateriasDto){
+    this.router.navigate(["/informes/listar/"], { 
+      queryParams: {
+        curso:materia.curso.id,
+        asignatura:materia.asignatura_id,
+        informe: 1,
+        nombreAsignatura:materia.nombre
+      }});
+  }
+  actualizarMesa(materia: MateriasDto){
+    this.router.navigate(['/dashboardProfesor/listarInformesMaterias'], { 
+      queryParams: {
+        nombreMateria: materia.nombre,
+        anioMateria:materia.anioCurso,
+        idAsignatura: materia.asignatura_id
 
+                }
+    }) 
+}
   ngOnInit() {
 
    

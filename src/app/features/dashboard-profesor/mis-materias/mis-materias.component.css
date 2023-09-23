@@ -46,3 +46,12 @@ table {
     opacity: 0.5;
   }
   
+  .botones {
+    display: flex;
+    margin-top: 5px;
+    width: 200px;
+    font-size: medium;
+    justify-content: space-around;
+    font-weight: 200;
+    
+  }

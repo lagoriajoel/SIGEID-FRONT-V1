@@ -13,6 +13,9 @@ import { MostrarInformeComponent } from "../mostrar-informe/mostrar-informe.comp
 import { MateriasService } from "src/app/core/services/materias.service";
 import { MostrarIInformeFebreroComponent } from "../mostrar-i-informe-febrero/mostrar-i-informe-febrero.component";
 import { InformesAlumnoDto } from "src/app/core/Entities/InformeAlumnoDto";
+import { Materia } from "src/app/core/Entities/Materia";
+import { CursosService } from "src/app/core/services/cursos/cursos.service";
+import { CursoDto } from "src/app/core/Entities/CursoDto";
 
 
 @Component({
@@ -32,8 +35,12 @@ export class ListInformesComponent implements OnInit {
   isInforme!: number;
   InformeAlumno!: InformesAlumnoDto;
   NombreAsignatura: string = "";
+  curso!:CursoDto
+  anioCurso: string = "";
+  divisionCurso: string = "";
+  tecnicatura: string = "";
 
-  displayedColumns: string[] = ["dni", "nombres", "apellido", "informes"];
+  displayedColumns: string[] = ["dni", "nombres", "apellido","informes"];
   dataSource = new MatTableDataSource(this.alumnos);
 
   @ViewChild(MatSort, { static: true })
@@ -45,6 +52,7 @@ export class ListInformesComponent implements OnInit {
     private titleService: Title,
     private alumnoService: AlumnoService,
     private _materiaService: MateriasService,
+    private _cursorService:CursosService,
     public dialog: MatDialog,
   
     private _routes: ActivatedRoute
@@ -58,8 +66,15 @@ export class ListInformesComponent implements OnInit {
       this.NombreAsignatura = params.get("nombreAsignatura")!;
        params.get("directivo") ? this.isDirectivo=true : this.isDirectivo=false;
 
-     console.log(this.isDirectivo);
 
+
+      
+        this._cursorService.detail(Number(this.id)).subscribe(data => {
+          this.anioCurso=data.anio;
+          this.divisionCurso=data.division;
+          this.tecnicatura=data.tecnicatura;
+    })
+    
     });
 
   }
@@ -71,11 +86,15 @@ export class ListInformesComponent implements OnInit {
     this.isInforme === 0
       ? this.listarAlumnos()
       : this.listarAlumnosConInformes();
+      
+        
   }
+
   //lista todos los alumnos del curso
   listarAlumnos(): void {
     this.alumnoService.listarCurso(Number(this.id)).subscribe((data) => {
       this.dataSource.data = data;
+      console.log(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });

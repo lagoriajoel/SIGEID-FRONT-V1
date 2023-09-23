@@ -8,3 +8,8 @@ button:hover{
     background-color:#8ac6ee;
     color: aliceblue;
     };
+
+.curso {
+    display: flex;
+    align-items: flex-end;
+}

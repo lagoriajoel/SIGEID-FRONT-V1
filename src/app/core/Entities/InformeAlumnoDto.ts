@@ -6,4 +6,5 @@ export interface InformesAlumnoDto {
     profesorNombre: string;
     asignatura: Materia;
     contenidosAdeudados: contenido []
+    created:boolean;
 }

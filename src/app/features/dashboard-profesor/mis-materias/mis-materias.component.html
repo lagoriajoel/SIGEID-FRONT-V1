@@ -31,10 +31,11 @@
           
         </div>
         <div class="example-element-description">
-          {{element.description}}
-          <button type="button" (click)="irAmaterias()">Generar Informes</button>
-          <button type="button" (click)="irAmaterias()">Contenidos</button>
-          <button type="button" (click)="irAmaterias()">Criterios de Evaluacion</button>
+         
+          <button class="botones" type="button" (click)="generarInformes(element)">Generar Informes</button>
+          <button  class="botones" type="button" (click)="contenidos(element)">Contenidos/Estrategias</button>
+          <button class="botones" type="button" (click)="actualizar(element)">Actualizar Diciembre/Febrero</button>
+          <button class="botones" type="button" (click)="actualizarMesa(element)">Actualizar Mesa Examen</button>
 
         </div>
       </div>

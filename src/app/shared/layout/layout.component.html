@@ -86,38 +86,17 @@
           <p mat-line> Estadística </p>
         </a>
 
-        <a *ngIf="isProfesor" mat-list-item [routerLink]="['/dashboardProfesor/misMaterias']"[queryParams]="{ materias: 'true'}" routerLinkActive="active">
+        
+        <a *ngIf="isProfesor" mat-list-item [routerLink]="['/dashboardProfesor/cicloLectivo']" routerLinkActive="active">
           <mat-icon mat-list-icon>
             assignment
           </mat-icon>
           <p mat-line> mis Espacios </p>
         </a>
-        <a *ngIf="isProfesor" mat-list-item [routerLink]="['/dashboardProfesor/cicloLectivo']" routerLinkActive="active">
-          <mat-icon mat-list-icon>
-            assignment
-          </mat-icon>
-          <p mat-line> mis Espacios2 </p>
-        </a>
 
-        <a *ngIf="isProfesor" mat-list-item [routerLink]="['/dashboardProfesor/misMaterias']"[queryParams]="{ contenidos: 'true'}" routerLinkActive="active">
-          <mat-icon mat-list-icon>
-            library_books
-          </mat-icon>
-          <p mat-line> mis Contenidos </p>
-        </a>
-        <a *ngIf="isProfesor" mat-list-item [routerLink]="['/dashboardProfesor/misMaterias']"[queryParams]="{ informes: 'true'}" routerLinkActive="active">
-          <mat-icon mat-list-icon>
-            book
-          </mat-icon>
-          <p mat-line> mis Informes </p>
-        </a>
-
-        <a *ngIf="isProfesor" mat-list-item [routerLink]="['/dashboardProfesor/actualizar']">
-          <mat-icon mat-list-icon>
-              drive_folder_upload
-          </mat-icon>
-          <p mat-line> Actualizar Informes</p>
-        </a>
+       
+    
+       
 
         <a *ngIf="isAdmin" mat-list-item [routerLink]="['/cursos']"  [queryParams]="{ curso: 'true'}" routerLinkActive="active">
 
