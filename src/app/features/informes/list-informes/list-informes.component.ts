@@ -39,6 +39,7 @@ export class ListInformesComponent implements OnInit {
   anioCurso: string = "";
   divisionCurso: string = "";
   tecnicatura: string = "";
+  cicloLectivo: string = "";
 
   displayedColumns: string[] = ["dni", "nombres", "apellido","informes"];
   dataSource = new MatTableDataSource(this.alumnos);
@@ -73,6 +74,7 @@ export class ListInformesComponent implements OnInit {
           this.anioCurso=data.anio;
           this.divisionCurso=data.division;
           this.tecnicatura=data.tecnicatura;
+          this.cicloLectivo=data.cicloLectivo;
     })
     
     });

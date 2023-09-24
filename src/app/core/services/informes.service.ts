@@ -7,6 +7,7 @@ import { contenidoAdeudadoDto } from '../Entities/contenidoAdeudadoDto';
 import { InformeContenidoDto } from '../Entities/informeContenidosDto';
 import { contenidoInformeDto } from '../Entities/contenidoInformeDto';
 import { environment } from 'src/environments/environment';
+import { InformesHistorial } from '../Entities/InformeHistorial';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,9 @@ export class InformesService {
   public lista(): Observable<Informes[]> {
     return this.httpClient.get<Informes[]>(this.informeURL + 'list');
   }
+  public listaPorAlumnoMateria(id: number, idAsignatura:number): Observable<Informes> {
+    return this.httpClient.get<Informes>(this.informeURL + `/listAlumno/${id}/asignatura/${idAsignatura}`);
+  }
   public listarPorMaterias(nombre:string, anio:string): Observable<Informes[]> {
     return this.httpClient.get<Informes[]>(this.informeURL + `listOfNombreAsignatura/${nombre}/${anio}`);
   }
@@ -30,8 +34,8 @@ export class InformesService {
   
  
 
-  public detail(id: number): Observable<Informes> {
-    return this.httpClient.get<Informes>(this.informeURL + `list/${id}`);
+  public detail(id: number): Observable<InformesHistorial> {
+    return this.httpClient.get<InformesHistorial>(this.informeURL + `list/${id}`);
   }
 
  

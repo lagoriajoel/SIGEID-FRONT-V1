@@ -86,6 +86,7 @@ dataSource: any;
     this.dataSource = new MatTableDataSource<contenido>(this.contenidos) 
    this.alumnoInforme=data.informe
    this.value=data.value
+   this.idInforme=data.informe.id
      
    
  

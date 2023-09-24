@@ -23,6 +23,7 @@ export class ListarInformesMateriasComponent implements OnInit {
   nombreMateria: string = "";
   anioMateria: string = "";
   idAsignatura!:number
+  cicloLectivo:string=""
   InformeAlumno!: InformesAlumnoDto;
   @ViewChild(MatSort, { static: true })
   sort: MatSort = new MatSort();
@@ -41,6 +42,9 @@ export class ListarInformesMateriasComponent implements OnInit {
       this.nombreMateria = params.get("nombreMateria")!;
       this.anioMateria = params.get("anioMateria")!;
       this.idAsignatura =Number(params.get("idAsignatura"))!
+      this.cicloLectivo =params.get("cicloLectivo")!
+      console.log(this.cicloLectivo);
+
       
     });
   }
@@ -66,17 +70,28 @@ this.title.setTitle("SIGEID - INFORMES")
 
   // lista los alumnos que tiene informes de desempeño de la asignatura
   listarAlumnosConInformes(): void {
-    this.alumnoService.listarAnioCurso(this.anioMateria).subscribe({
+    this.alumnoService.listarAnioCurso(this.anioMateria, this.cicloLectivo).subscribe({
       next: (data) => {
-        console.log(data);
+      
         data.forEach((alumno) => {
+
+
           if (
             alumno.informeDesempenios.some(
-              (x) => x.asignatura.nombre == this.nombreMateria
+              (x) => x.asignatura.nombre == this.nombreMateria &&
+              x.asignatura.anioCurso == this.anioMateria 
+
+              
             )
           )
+          {
+            
             this.alumnos.push(alumno);
+            console.log(this.alumnos);
+          }
         });
+
+
 
         this.dataSource.data = this.alumnos;
         this.dataSource.paginator = this.paginator;
@@ -90,7 +105,7 @@ this.title.setTitle("SIGEID - INFORMES")
     const alumno=this.alumnos.find(alumno=>alumno.id == id)!
       
       
-    this.InformeAlumno = this.getInformeAlumno(alumno, this.nombreMateria);
+    this.InformeAlumno = this.getInformeAlumno(alumno, this.nombreMateria, this.anioMateria);
   
 
    const dialogRef = this.dialog.open(FormEditInformeComponent, {
@@ -116,10 +131,10 @@ this.title.setTitle("SIGEID - INFORMES")
 
   // metodo que obtiene el informe de un alumno por asignatura
 
-  getInformeAlumno(alumno: AlumnoInformeDto, NombreMateria: string): InformesAlumnoDto {
+  getInformeAlumno(alumno: AlumnoInformeDto, NombreMateria: string, AnioCurso:string ): InformesAlumnoDto {
    console.log(alumno);
     const informe = alumno.informeDesempenios.filter(
-      (inf) => inf.asignatura.nombre == NombreMateria
+      (inf) => inf.asignatura.nombre == NombreMateria && inf.asignatura.anioCurso == AnioCurso
     );
 console.log(informe);
     return informe[0];
@@ -134,7 +149,7 @@ console.log(informe);
     const alumno=this.alumnos.find(alumno=>alumno.id == idAlumno)!
       
       
-    this.InformeAlumno = this.getInformeAlumno(alumno, this.nombreMateria);
+    this.InformeAlumno = this.getInformeAlumno(alumno, this.nombreMateria, this.anioMateria);
 
     let informeId = this.InformeAlumno.id;
 
@@ -150,5 +165,25 @@ console.log(informe);
 
         window.open(donwloadURL, "_blank");
       });
+  }
+
+  historialContenidos(id: number){
+      
+     
+    const alumno=this.alumnos.find(alumno=>alumno.id == id)!
+      
+      
+    this.InformeAlumno = this.getInformeAlumno(alumno, this.nombreMateria, this.anioMateria);
+
+    let informeId = this.InformeAlumno.id;
+    this._router.navigate(['contenidos/historial'],{ 
+      queryParams: {
+        informeId:informeId,
+        alumnoId: id
+       
+        
+
+                }
+    })
   }
 }

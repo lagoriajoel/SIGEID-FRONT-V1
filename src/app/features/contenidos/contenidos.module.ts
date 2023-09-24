@@ -10,6 +10,7 @@ import { CriteriosEstrategiasComponent } from './criterios-estrategias/criterios
 import { AddEditCriteriosComponent } from './add-edit-criterios/add-edit-criterios.component';
 import { EstrategiasComponent } from './estrategias/estrategias.component';
 import { AddEditEstrategiasComponent } from './add-edit-estrategias/add-edit-estrategias.component';
+import { HistorialContenidosComponent } from './historial-contenidos/historial-contenidos.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { AddEditEstrategiasComponent } from './add-edit-estrategias/add-edit-est
     CriteriosEstrategiasComponent,
     AddEditCriteriosComponent,
     EstrategiasComponent,
-    AddEditEstrategiasComponent
+    AddEditEstrategiasComponent,
+    HistorialContenidosComponent
   ],
   imports: [
     CommonModule,

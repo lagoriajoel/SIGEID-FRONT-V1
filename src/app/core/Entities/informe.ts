@@ -2,6 +2,7 @@ import { contenido } from "./Contenido";
 import { Materia } from "./Materia";
 
 import { AlumnoInforme } from "./alumnoInforme";
+import { contenidoAdeudadoDto } from "./contenidoAdeudadoDto";
 import { criterioDto } from "./criterioDTO";
 import { estrategiaDto } from "./estrategiaDto";
 import { MateriaContenido } from "./materiaContenido";

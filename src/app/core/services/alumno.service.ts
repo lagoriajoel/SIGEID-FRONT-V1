@@ -31,8 +31,8 @@ export class AlumnoService {
   public cantidadDeAlumnosAnio(anio: string): Observable<number> {
     return this.httpClient.get<number>(this.AlumnoURL + `numAlumnosPorAnio/${anio}` );
   }
-  public listarAnioCurso(anio:string): Observable<AlumnoInformeDto[]> {
-    return this.httpClient.get<AlumnoInformeDto[]>(this.AlumnoURL + `listOfAnioCurso/${anio}` );
+  public listarAnioCurso(anio:string, cicloLectivo: string): Observable<AlumnoInformeDto[]> {
+    return this.httpClient.get<AlumnoInformeDto[]>(this.AlumnoURL + `listOfAnioCurso/${anio}/cicloLectivo/${cicloLectivo}` );
   }
 
   public listaPorDni(dni: string): Observable<Alumno> {

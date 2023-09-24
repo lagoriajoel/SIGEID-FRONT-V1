@@ -13,3 +13,8 @@ button:hover{
     display: flex;
     align-items: flex-end;
 }
+
+p {
+   display: inline; 
+   margin-left: 50px;
+}

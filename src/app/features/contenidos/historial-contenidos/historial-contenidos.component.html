@@ -1,0 +1,306 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center none">
+    <div fxFlex="95%">
+        <mat-card>
+        
+
+          <mat-card-content>
+            <div class="container">
+              
+              
+
+
+                  <mat-divider></mat-divider>
+                  <div class="titulo">
+
+                      <h3 >HISTORIAL DE CONTENIDOS ADEUDADOS </h3>
+                  </div>
+                  <mat-divider></mat-divider>
+                
+        
+                <mat-grid-list cols="4" rowHeight="100px">
+                 
+                  <mat-grid-tile>
+                   
+                      <div class="mat-grid-tile-content">
+                         
+                        <div class="row">
+                         
+                          <mat-label>DNI</mat-label>  
+                       
+                       
+                        </div>
+                        <div class="row">
+                          <mat-label>Nombres</mat-label> 
+                       
+                        </div>
+                        <div class="row">
+                          <mat-label>Profesor</mat-label> 
+                       
+                        </div>
+                     
+                     </div>
+              
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <div class="mat-grid-tile-content">
+                         
+                      <div >
+                       
+                         {{dniAlumno}}
+                     
+                     
+                      </div>
+                      <div>
+                       {{NombreAlumno}}
+                     
+                      </div>
+                      <div>
+                        {{NombreProfesor}}
+                      
+                       </div>
+                   
+                   </div>
+                  </mat-grid-tile>
+                  <mat-grid-tile>
+                    <div class="mat-grid-tile-content">
+                    <div class="row">
+                        <mat-label>Apellido</mat-label>  
+                       
+                    </div>
+                    <div class="row">
+                      Email  
+                  </div>
+                  <div class="row">
+                    Ciclo Lectivo  
+                </div>
+                 </div>
+                </mat-grid-tile>
+                  <mat-grid-tile>
+                    <div class="mat-grid-tile-content">
+                      <div >
+                           {{ApellidoAlumno}}
+                         
+                      </div>
+                      <div >
+                         {{email}}
+                    </div>
+                    <div >
+                      {{cicloLectivo}}
+                 </div>
+                   </div>
+                     
+                  </mat-grid-tile>
+              
+              
+                  
+                </mat-grid-list>
+               
+               
+                 
+                
+
+<div class="encab">
+
+    <p>Instancia de Evaluacion Diciembre</p>
+    <div class="fecha"> Fecha: {{InstanciaDicFecha}}</div>
+</div>
+                <mat-divider></mat-divider>     
+              
+                <table mat-table [dataSource]="dataSource" matSort>
+              
+                       
+                    <ng-container matColumnDef="nombre">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Contenido </th>
+                      <td mat-cell *matCellDef="let element"> {{element.nombre}}</td>
+                    </ng-container>
+                  
+                 
+                  
+                  
+                    
+                    <ng-container matColumnDef="diciembre">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Diciembre</th>
+                      <td mat-cell *matCellDef="let element" [ngClass]="colorFila(element.instanciaEvaluacion_diciembre)"> {{element.instanciaEvaluacion_diciembre}}</td>                 
+            
+                       
+                   </ng-container>
+                  
+                
+                  
+                  
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>
+                  
+                  <div class="encab">
+                      <p>Instancia de Evaluacion Febrero</p>
+                      <div class="fecha"> Fecha: {{InstanciaFebFecha}}</div>
+                  </div>
+
+                  <mat-divider></mat-divider>
+
+                <table mat-table [dataSource]="dataSource2" matSort>
+              
+                       
+                    <ng-container matColumnDef="nombre">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Contenido </th>
+                      <td mat-cell *matCellDef="let element"> {{element.nombre}}</td>
+                    </ng-container>
+                  
+                    
+                    <ng-container matColumnDef="Febrero">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Febrero</th>
+                      <td mat-cell *matCellDef="let element" [ngClass]="colorFila(element.instanciaEvaluacion_febrero)"> {{element.instanciaEvaluacion_febrero}}
+                        
+                    
+                              
+                        </td>
+                   </ng-container>
+                  
+                
+                  
+                  
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                  </table>
+                  <div class="encab">
+
+                      <p>Instancia de Evaluacion N° 1</p>
+                      <div class="fecha"> Fecha: {{Instanci1_Fecha}}</div>
+                  </div>
+                  <mat-divider></mat-divider>
+
+                <table mat-table [dataSource]="dataSource3" matSort>
+              
+                       
+                    <ng-container matColumnDef="nombre">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Contenido </th>
+                      <td mat-cell *matCellDef="let element"> {{element.nombre}}</td>
+                    </ng-container>
+                  
+                    
+                    <ng-container matColumnDef="instancia">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Instancia N° 1</th>
+                      <td mat-cell *matCellDef="let element" [ngClass]="colorFila(element.instanciaEvaluacion_1)"> {{element.instanciaEvaluacion_1}}
+                        
+                    
+                              
+                        </td>
+                   </ng-container>
+                  
+                
+                  
+                  
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+                  </table>
+                  <div class="encab">
+
+                      <p>Instancia de Evaluacion N° 2</p>
+                      <div class="fecha"> Fecha: {{Instancia2_Fecha}}</div>
+                  </div>
+                  <mat-divider></mat-divider>
+
+                <table mat-table [dataSource]="dataSource4" matSort>
+              
+                       
+                    <ng-container matColumnDef="nombre">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Contenido </th>
+                      <td mat-cell *matCellDef="let element"> {{element.nombre}}</td>
+                    </ng-container>
+                  
+                    
+                    <ng-container matColumnDef="instancia">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Instancia N° 2</th>
+                      <td mat-cell *matCellDef="let element"[ngClass]="colorFila(element.instanciaEvaluacion_2)"> {{element.instanciaEvaluacion_2}}
+                        
+                    
+                              
+                        </td>
+                   </ng-container>
+                  
+                
+                  
+                  
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns4"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
+                  </table>
+                  <div class="encab">
+
+                      <p>Instancia de Evaluacion N° 3</p>
+                      <div class="fecha"> Fecha: {{Instancia3_Fecha}}</div>
+                  </div>
+                  <mat-divider></mat-divider>
+
+                <table mat-table [dataSource]="dataSource5" matSort>
+              
+                       
+                    <ng-container matColumnDef="nombre">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Contenido </th>
+                      <td mat-cell *matCellDef="let element"> {{element.nombre}}</td>
+                    </ng-container>
+                  
+                    
+                    <ng-container matColumnDef="instancia">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Instancia N° 3</th>
+                      <td mat-cell *matCellDef="let element" [ngClass]="colorFila(element.instanciaEvaluacion_3)"> {{element.instanciaEvaluacion_3}}
+                        
+                    
+                              
+                        </td>
+                   </ng-container>
+                  
+                
+                  
+                  
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns5"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns5;"></tr>
+                  </table>
+                  <div class="encab">
+
+                      <p>Instancia de Evaluacion N° 4</p>
+                      <div class="fecha"> Fecha: {{Instancia4_Fecha}}</div>
+                  </div>
+                  <mat-divider></mat-divider>
+
+                <table mat-table [dataSource]="dataSource6" matSort>
+              
+                       
+                    <ng-container matColumnDef="nombre">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Contenido </th>
+                      <td mat-cell *matCellDef="let element"> {{element.nombre}}</td>
+                    </ng-container>
+                  
+                    
+                    <ng-container matColumnDef="instancia">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>Instancia N° 4</th>
+                      <td mat-cell *matCellDef="let element" [ngClass]="colorFila(element.instanciaEvaluacion_4)"> {{element.instanciaEvaluacion_4}}
+                        
+                    
+                              
+                        </td>
+                   </ng-container>
+                  
+                
+                  
+                  
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns6"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns6;"></tr>
+                  </table>
+              
+             
+                </div>
+              
+              
+          </mat-card-content>
+      </mat-card>
+        
+    </div>
+
+    </div>    

@@ -119,11 +119,14 @@ export class MisMateriasComponent implements OnInit {
       }});
   }
   actualizarMesa(materia: MateriasDto){
+    console.log(materia);
     this.router.navigate(['/dashboardProfesor/listarInformesMaterias'], { 
       queryParams: {
         nombreMateria: materia.nombre,
         anioMateria:materia.anioCurso,
-        idAsignatura: materia.asignatura_id
+        idAsignatura: materia.asignatura_id,
+        cicloLectivo: materia.cicloLectivo
+        
 
                 }
     }) 

@@ -4,7 +4,8 @@
       <mat-card>
         
         <mat-card-content>
-          <h2>Actualizacion Mesas de Exámen</h2>
+          <h2>Actualizacion Mesas de Exámen </h2>
+          <p>{{nombreMateria}}  {{anioMateria}} año</p>
 
           <div class="serch">
 
@@ -48,6 +49,11 @@
                 <button mat-raised-button (click)="actualizarInforme(element.id)" >
                   <mat-icon>add</mat-icon>
                   Actualizar
+                </button>
+
+                <button mat-raised-button (click)="historialContenidos(element.id)" >
+                  <mat-icon>add</mat-icon>
+                  Historial Contenidos
                 </button>
                  
                 <mat-icon   class="btnEdit" (click)="verInforme(element.id)" matTooltip="Ver Informe">visibility</mat-icon>   

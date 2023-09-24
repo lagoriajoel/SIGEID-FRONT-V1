@@ -106,7 +106,7 @@ export class FormEditInformeComponent implements OnInit {
     this.NombreCurso = data.alumno.curso.anio;
     this.dniAlumno = data.alumno.dni;
     this.NombreDivision = data.alumno.curso.division;
-    this.cicloLectivo = data.alumno.curso.cicloLectivo;
+    this.cicloLectivo = data.informe.asignatura.cicloLectivo;
     this.listarCriteriosEstrategias(data.idAsignatura);
 
     this.getContenidosInformeMesaDto(this.contenidos);
