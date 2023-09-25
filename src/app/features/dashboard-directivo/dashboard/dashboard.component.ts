@@ -150,5 +150,22 @@ buscar(){
 
   }
 
+  historialContenidos(id: number){
+      
+      
+      
+   
+    this._router.navigate(['contenidos/historial'],{ 
+      queryParams: {
+        informeId:id,
+        alumnoId: this.alumno.id
+       
+        
+
+                }
+    })
+
+  }
+
   
 }

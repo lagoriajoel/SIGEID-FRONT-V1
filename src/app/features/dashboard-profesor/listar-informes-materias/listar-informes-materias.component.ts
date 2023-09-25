@@ -10,6 +10,8 @@ import { InformesService } from "src/app/core/services/informes.service";
 import { FormEditInformeComponent } from "../form-edit-informe/form-edit-informe.component";
 import { InformesAlumnoDto } from "src/app/core/Entities/InformeAlumnoDto";
 import { Title } from "@angular/platform-browser";
+import { InformesHistorial } from "src/app/core/Entities/InformeHistorial";
+import { AuthenticationService } from "src/app/core/services/auth.service";
 
 @Component({
   selector: "app-listar-informes-materias",
@@ -23,8 +25,9 @@ export class ListarInformesMateriasComponent implements OnInit {
   nombreMateria: string = "";
   anioMateria: string = "";
   idAsignatura!:number
+  isDirectivo:boolean=false
   cicloLectivo:string=""
-  InformeAlumno!: InformesAlumnoDto;
+  InformeAlumno!: InformesHistorial;
   @ViewChild(MatSort, { static: true })
   sort: MatSort = new MatSort();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -34,6 +37,8 @@ export class ListarInformesMateriasComponent implements OnInit {
     private title: Title,
     private _informeService: InformesService,
     private _router: Router,
+    private _route: ActivatedRoute,
+    private authService: AuthenticationService,
     private route: ActivatedRoute
   ) {
     this.dataSource = new MatTableDataSource();
@@ -43,8 +48,8 @@ export class ListarInformesMateriasComponent implements OnInit {
       this.anioMateria = params.get("anioMateria")!;
       this.idAsignatura =Number(params.get("idAsignatura"))!
       this.cicloLectivo =params.get("cicloLectivo")!
-      console.log(this.cicloLectivo);
-
+      
+     this.authService.isDirectivo()? this.isDirectivo=true : false
       
     });
   }
@@ -79,7 +84,9 @@ this.title.setTitle("SIGEID - INFORMES")
           if (
             alumno.informeDesempenios.some(
               (x) => x.asignatura.nombre == this.nombreMateria &&
-              x.asignatura.anioCurso == this.anioMateria 
+              x.asignatura.anioCurso == this.anioMateria &&
+              x.diciembreFebrero
+             
 
               
             )
@@ -131,7 +138,7 @@ this.title.setTitle("SIGEID - INFORMES")
 
   // metodo que obtiene el informe de un alumno por asignatura
 
-  getInformeAlumno(alumno: AlumnoInformeDto, NombreMateria: string, AnioCurso:string ): InformesAlumnoDto {
+  getInformeAlumno(alumno: AlumnoInformeDto, NombreMateria: string, AnioCurso:string ): InformesHistorial {
    console.log(alumno);
     const informe = alumno.informeDesempenios.filter(
       (inf) => inf.asignatura.nombre == NombreMateria && inf.asignatura.anioCurso == AnioCurso

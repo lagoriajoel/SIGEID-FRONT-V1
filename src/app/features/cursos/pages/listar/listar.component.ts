@@ -63,7 +63,7 @@ export class ListarComponent implements OnInit {
 
   anio: string[]=['Todos','1','2','3','4','5','6'];
   division: string[]=['Todos','A','B','C','D','F','G','H','I'];
-  cicloLectivo: string[]=['Todos','2021','2022','2023','2024','2025','2026'];
+  cicloLectivo: string[]=['Todos','2020','2021','2022','2023','2024','2025','2026'];
   empFilters: EmpFilter[]=[];
 
   displayedColumns: string[] = ["anio",

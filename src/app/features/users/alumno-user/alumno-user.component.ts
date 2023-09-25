@@ -158,9 +158,14 @@ export class AlumnoUserComponent implements OnInit {
 
      if(res){
       
-      this.alumnosService.delete(id).subscribe(() => {
-        this.cargarAlumnos();
-        this.mensajeExito();
+      this.alumnosService.delete(id).subscribe({
+        next: data => {
+          this.cargarAlumnos()
+          this.mensajeExito();
+        },
+        error: error => {
+          this.notificationService.openSnackBar(error.error.Mensaje);
+        }
       })
 
      }

@@ -4,8 +4,22 @@
       <mat-card>
         
         <mat-card-content>
-          <h2>Actualizacion Mesas de Exámen </h2>
-          <p>{{nombreMateria}}  {{anioMateria}} año</p>
+          <mat-divider></mat-divider>
+          <div *ngIf="!isDirectivo" class="titulo">
+              <h3 >ACTUALIZACIÓN MESA DE EXÁMEN </h3>
+          </div>
+          <div *ngIf="isDirectivo" class="titulo">
+            <h3 >INFORME DE DESEMEPEÑO </h3>
+        </div>
+          <mat-divider></mat-divider>
+          <div class="subtitulo">
+
+              <h3 >Curso: {{anioMateria}} Año  </h3>
+              <h3 >Espacio Curricular: {{nombreMateria}}  </h3>
+              <h3 >Ciclo Lectívo: {{cicloLectivo}} </h3>
+
+          </div>
+          <mat-divider></mat-divider>
 
           <div class="serch">
 
@@ -46,7 +60,7 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</th>
               <td mat-cell *matCellDef="let element" > 
                
-                <button mat-raised-button (click)="actualizarInforme(element.id)" >
+                <button mat-raised-button *ngIf="!isDirectivo"(click)="actualizarInforme(element.id)" >
                   <mat-icon>add</mat-icon>
                   Actualizar
                 </button>

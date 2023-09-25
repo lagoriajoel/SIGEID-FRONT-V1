@@ -26,6 +26,8 @@ export class ListarMateriasComponent implements OnInit {
   isMaterias: boolean = false;
   informes: boolean = false;
   isAdministrador: boolean = false;
+  isDirectivo: boolean = false;
+  
   
 
   displayedColumns: string[] = ["nombre", "año", "division", "cicloLectivo"];
@@ -49,6 +51,7 @@ export class ListarMateriasComponent implements OnInit {
     private authService: AuthenticationService
   ) {
     this.dataSource = new MatTableDataSource();
+    this.authService.isDirectivo()
 
   }
 
@@ -60,7 +63,7 @@ export class ListarMateriasComponent implements OnInit {
      //params.get("isAdministrador") ? this.isAdministrador= true : false;
      this.authService.isAdmin()? this.isAdministrador=true: false;
      console.log(this.isAdministrador);
-  
+     this.authService.isDirectivo()? this.isDirectivo=true: false;
     });
 
 
@@ -105,15 +108,16 @@ export class ListarMateriasComponent implements OnInit {
           asignaturas.asignatura_id,
         ]);
       } else {
-        this.router.navigate(["/informes/listar/"], {
+        this.router.navigate(['/dashboardProfesor/listarInformesMaterias'], { 
           queryParams: {
-            curso: asignaturas.curso.id,
-            asignatura: asignaturas.asignatura_id,
-            informe: 1,
-            nombreAsignatura: asignaturas.nombre,
-            directivo:1
-          },
-        });
+            nombreMateria: asignaturas.nombre,
+            anioMateria:asignaturas.anioCurso,
+            idAsignatura: asignaturas.asignatura_id,
+            cicloLectivo: asignaturas.cicloLectivo
+            
+    
+                    }
+        }) 
       }
   
      

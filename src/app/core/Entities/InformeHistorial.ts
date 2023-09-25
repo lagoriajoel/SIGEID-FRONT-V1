@@ -21,6 +21,7 @@ export interface InformesHistorial {
     presidenteMesaInstancia_2:string
     presidenteMesaInstancia_3:string
     presidenteMesaInstancia_4:string
+    diciembreFebrero:string
 
 
 }

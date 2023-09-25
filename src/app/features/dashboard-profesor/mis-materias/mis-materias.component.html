@@ -1,5 +1,17 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center none">
     <div fxFlex="95%">
+      <mat-card>
+        
+
+        <mat-card-content>
+          
+            
+                <mat-divider></mat-divider>
+                <div class="titulo">
+
+                    <h3 >CICLO LECTIVO {{cicloLectivo}} </h3>
+                </div>
+                <mat-divider></mat-divider>
   
         <table mat-table
        [dataSource]="dataSource" multiTemplateDataRows
@@ -49,9 +61,9 @@
       (click)="expandedElement = expandedElement === element ? null : element">
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-</table>
-          
-
+       </table>
+      </mat-card-content>
+      </mat-card>
       
     </div>
   </div>

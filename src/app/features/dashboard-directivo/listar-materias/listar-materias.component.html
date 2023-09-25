@@ -6,7 +6,7 @@
       <mat-card>
         
      
-        <button mat-raised-button (click)="agregarEspacio()">Agregar Espacio Curricular</button>
+        <button *ngIf="!isDirectivo"mat-raised-button (click)="agregarEspacio()">Agregar Espacio Curricular</button>
          
            
         

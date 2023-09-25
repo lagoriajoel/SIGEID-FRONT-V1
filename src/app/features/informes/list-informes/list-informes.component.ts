@@ -16,6 +16,8 @@ import { InformesAlumnoDto } from "src/app/core/Entities/InformeAlumnoDto";
 import { Materia } from "src/app/core/Entities/Materia";
 import { CursosService } from "src/app/core/services/cursos/cursos.service";
 import { CursoDto } from "src/app/core/Entities/CursoDto";
+import { AlumnoInformeDto } from "src/app/core/Entities/AlumnoInformeDto";
+import { InformesHistorial } from "src/app/core/Entities/InformeHistorial";
 
 
 @Component({
@@ -24,16 +26,16 @@ import { CursoDto } from "src/app/core/Entities/CursoDto";
   styleUrls: ["./list-informes.component.css"],
 })
 export class ListInformesComponent implements OnInit {
-  informes: Informes[] = [];
+  informes: InformesHistorial[] = [];
  // informeAlumnos!: Informes;
-  alumnos: Alumno[] = [];
-  alumnosConInformes: Alumno[] = [];
+  alumnos: AlumnoInformeDto[] = [];
+  alumnosConInformes: AlumnoInformeDto[] = [];
   loading: boolean = true;
   id: string = "";
   idAsignatura!: number;
   fecha: string = "";
   isInforme!: number;
-  InformeAlumno!: InformesAlumnoDto;
+  InformeAlumno!: InformesHistorial;
   NombreAsignatura: string = "";
   curso!:CursoDto
   anioCurso: string = "";
@@ -111,7 +113,9 @@ export class ListInformesComponent implements OnInit {
           alumno.informeDesempenios.some(
             (x) =>
               x.asignatura.asignatura_id == this.idAsignatura &&
-              x.asignatura.asignatura_id != null
+              x.asignatura.asignatura_id != null &&
+              !x.diciembreFebrero
+              
           )
         )
           this.alumnosConInformes.push(alumno);
@@ -246,7 +250,7 @@ export class ListInformesComponent implements OnInit {
 
  // metodo que obtiene el informe de un alumno por asignatura
 
-  getInformeAlumno(alumno: Alumno, idAsignatura: number): InformesAlumnoDto {
+  getInformeAlumno(alumno: AlumnoInformeDto, idAsignatura: number): InformesHistorial {
     const informe = alumno.informeDesempenios.filter(
       (inf) => inf.asignatura.asignatura_id === idAsignatura
     );

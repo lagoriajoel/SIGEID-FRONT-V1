@@ -49,6 +49,7 @@ export class MisMateriasComponent implements OnInit {
   informes: boolean=false;
   cicloLectivo:string="";
   
+  
  
   dataSource!:MateriasDto[];
   columnsToDisplay = ['nombre','anioCurso'];
@@ -135,7 +136,7 @@ export class MisMateriasComponent implements OnInit {
 
    
    
-
+   
 
    
     

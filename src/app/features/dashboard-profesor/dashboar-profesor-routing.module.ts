@@ -7,6 +7,7 @@ import { ActualizarInformesComponent } from './actualizar-informes/actualizar-in
 import { ListarInformesMateriasComponent } from './listar-informes-materias/listar-informes-materias.component';
 import { FormEditInformeComponent } from './form-edit-informe/form-edit-informe.component';
 import { CicloLectivoComponent } from './ciclo-lectivo/ciclo-lectivo.component';
+import { MostrarMateriasComponent } from './mostrar-materias/mostrar-materias.component';
 
 const routes: Routes = [
   
@@ -21,6 +22,8 @@ const routes: Routes = [
         { path: 'listarInformesMaterias', component: ListarInformesMateriasComponent},
         { path: 'formActualzar', component: FormEditInformeComponent},
         { path: 'cicloLectivo', component: CicloLectivoComponent},
+        { path: 'mostrarMateria', component: MostrarMateriasComponent},
+
 
 
 

@@ -168,7 +168,7 @@ dataSource: any;
 
    
   
-   this._informeService.actualizarContenidoFebrero(this.contenidos).subscribe({
+   this._informeService.actualizarContenidoFebrero(this.contenidos, this.idInforme).subscribe({
     next: data=>{
       this.notificationService.openSnackBar("Informe Actualizado Correctamente")
       console.log(data);},

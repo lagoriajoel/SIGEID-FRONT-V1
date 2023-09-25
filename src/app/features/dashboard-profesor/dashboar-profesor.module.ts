@@ -9,12 +9,14 @@ import { ActualizarInformesComponent } from './actualizar-informes/actualizar-in
 import { ListarInformesMateriasComponent } from './listar-informes-materias/listar-informes-materias.component';
 import { FormEditInformeComponent } from './form-edit-informe/form-edit-informe.component';
 import { CicloLectivoComponent } from './ciclo-lectivo/ciclo-lectivo.component';
+import { MostrarMateriasComponent } from './mostrar-materias/mostrar-materias.component';
+
 
 
 
 
 @NgModule({
-  declarations: [MisContenidosComponent, MisMateriasComponent, ActualizarInformesComponent, ListarInformesMateriasComponent, FormEditInformeComponent, CicloLectivoComponent],
+  declarations: [MisContenidosComponent, MisMateriasComponent, ActualizarInformesComponent, ListarInformesMateriasComponent, FormEditInformeComponent, CicloLectivoComponent, MostrarMateriasComponent],
   imports: [
     CommonModule,
     DashboarProfesorRoutingModule,

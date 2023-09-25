@@ -17,6 +17,7 @@ import { tap } from 'rxjs';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { CursosService } from 'src/app/core/services/cursos/cursos.service';
 import { AddAlumnoCursoComponent } from '../add-alumno-curso/add-alumno-curso.component';
+import { AlumnoInformeDto } from 'src/app/core/Entities/AlumnoInformeDto';
 
 
 @Component({
@@ -25,7 +26,7 @@ import { AddAlumnoCursoComponent } from '../add-alumno-curso/add-alumno-curso.co
   styleUrls: ['./listar-alumnos.component.css']
 })
 export class ListarAlumnosComponent implements OnInit {
-  alumnos: Alumno[] = [];
+  alumnos: AlumnoInformeDto[] = [];
   loading: boolean=false
   id:number;
   anioCurso!:string;

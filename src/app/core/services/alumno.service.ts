@@ -24,8 +24,8 @@ export class AlumnoService {
     return this.httpClient.get<Alumno[]>(this.AlumnoURL + 'list');
   }
 
-  public listarCurso(id: number): Observable<Alumno[]> {
-    return this.httpClient.get<Alumno[]>(this.AlumnoURL + `listOfCurso/${id}` );
+  public listarCurso(id: number): Observable<AlumnoInformeDto[]> {
+    return this.httpClient.get<AlumnoInformeDto[]>(this.AlumnoURL + `listOfCurso/${id}` );
   }
 
   public cantidadDeAlumnosAnio(anio: string): Observable<number> {

@@ -10,4 +10,21 @@ button {
     margin-left: 10px;
 }
 
+h3 {
+    margin: 0%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    left: 0;
+  }
 
+  .titulo {
+    display: flex;
+    justify-content: left;
+   
+    
+  }
+  .subtitulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }

@@ -18,3 +18,17 @@ p {
    display: inline; 
    margin-left: 50px;
 }
+
+h3 {
+    margin: 0%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    left: 0;
+  }
+
+  .titulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
