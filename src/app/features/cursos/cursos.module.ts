@@ -6,12 +6,16 @@ import { ListarComponent } from './pages/listar/listar.component';
 
 import { AddEditCursoComponent } from './pages/add-edit-curso/add-edit-curso.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CicloLectivoComponent } from './ciclo-lectivo/ciclo-lectivo.component';
+import { AddCicloLectivoComponent } from './pages/add-ciclo-lectivo/add-ciclo-lectivo.component';
 
 
 @NgModule({
   declarations: [
     ListarComponent,
-    AddEditCursoComponent
+    AddEditCursoComponent,
+    CicloLectivoComponent,
+    AddCicloLectivoComponent
   ],
   imports: [
     CommonModule,

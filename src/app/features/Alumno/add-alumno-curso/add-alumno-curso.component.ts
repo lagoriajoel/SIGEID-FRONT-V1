@@ -23,6 +23,7 @@ export class AddAlumnoCursoComponent implements OnInit {
   cursos: CursoDto[] = [];
   alumno!: Alumno;
   idAlumno!: number;
+  misCursos: boolean
 
   displayedColumns: string[] = ["anio",
   "Division",
@@ -47,18 +48,30 @@ export class AddAlumnoCursoComponent implements OnInit {
     private notificationService: NotificationService){
 
     this.idAlumno=data.id; 
-    console.log(data.id);
+
+    this.misCursos=data.misCursos;
+    console.log(this.misCursos);
+
+   
     this._alumnoService.detail(data.id).subscribe({
       next:data=>{
         this.alumno=data
         console.log(data);
       }
     })
-    this.cargarCurso()
+    this.misCursos ? this.cargarCursosAlumno(this.idAlumno): this.cargarCurso()
   }
 
   
-
+   cargarCursosAlumno(id: number){
+    this._cursoService.listaPorAlumno(id).subscribe(data => {
+      this.dataSource.data = data;
+      this.cursos=data
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+         })
+    
+   }
   cargarCurso(): void {
     this._cursoService.lista().subscribe(data => {
       this.dataSource.data = data;
@@ -124,5 +137,7 @@ export class AddAlumnoCursoComponent implements OnInit {
      this._snackBar.open(error.error);
    }   })
  }
-  
+  aceptar1(){
+    this.dialogRef.close(true);
+  }
 }

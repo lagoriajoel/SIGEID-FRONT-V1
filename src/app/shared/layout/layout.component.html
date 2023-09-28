@@ -71,7 +71,7 @@
           </mat-icon>
           <p mat-line> Mis Cursos </p>
         </a>
-        <a *ngIf="isDirectivo" mat-list-item [routerLink]="['/cursos']" [queryParams]="{ informesDesempenio: 'true'}" routerLinkActive="active" >
+        <a *ngIf="isDirectivo" mat-list-item [routerLink]="['/cursos/cicloLectivo']" [queryParams]="{ informesDesempenio: 'true'}" routerLinkActive="active" >
           <mat-icon mat-list-icon>
            folder_open
           </mat-icon>
@@ -97,19 +97,20 @@
   
        
 
-        <a *ngIf="isAdmin" mat-list-item [routerLink]="['/cursos']"  [queryParams]="{ curso: 'true'}" routerLinkActive="active">
+       
+        <a *ngIf="isAdmin" mat-list-item [routerLink]="['/cursos/cicloLectivo']"  [queryParams]="{ curso: 'true'}" routerLinkActive="active">
 
           <mat-icon mat-list-icon>
             business
           </mat-icon>
           <p mat-line> Cursos </p>
         </a>
-        <a *ngIf="isAdmin" mat-list-item [routerLink]="['/materias/mostrar']" routerLinkActive="active">
+        <!-- <a *ngIf="isAdmin" mat-list-item [routerLink]="['/materias/mostrar']" routerLinkActive="active">
           <mat-icon mat-list-icon>
            assignment
           </mat-icon>
           <p mat-line> Espacios Curriculares </p>
-        </a>
+        </a> -->
 
         <a *ngIf="isAdmin" mat-list-item [routerLink]="['/user']">
           <mat-icon mat-list-icon>

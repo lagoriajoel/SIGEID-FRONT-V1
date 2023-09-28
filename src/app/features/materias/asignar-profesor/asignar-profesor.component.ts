@@ -4,9 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router, Routes } from '@angular/router';
+import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { Profesor } from 'src/app/core/Entities/profesor';
 import { MateriasService } from 'src/app/core/services/materias.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 import { ProfesorService } from 'src/app/core/services/profesor.service';
 
 @Component({
@@ -18,8 +19,9 @@ export class AsignarProfesorComponent implements OnInit {
 
   loading: boolean=false
   profesores:Profesor[]=[];
-  idProfesor: number=0
+  idProfesor!: number
   idAsignatura: number=0
+  idCurso: number=0
  
    displayedColumns: string[] = ["dni","nombre","apellido","email","acciones"];
    dataSource = new MatTableDataSource(this.profesores);
@@ -35,11 +37,14 @@ export class AsignarProfesorComponent implements OnInit {
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _materiaService: MateriasService,
-    private _router: Router
+    private _router: Router,
+    
    
     ) { 
     this.dataSource = new MatTableDataSource();
     this.idAsignatura = data.idAsignatura; 
+  this.idCurso=data.idCurso;
+  
     
   }
 
@@ -63,6 +68,7 @@ export class AsignarProfesorComponent implements OnInit {
   selectRow(profesor : Profesor) {
     this.selectedRowIndex = profesor.id;
     this.idProfesor=profesor.id;
+    console.log(this.idProfesor);
   }
 
   ngAfterViewInit() {
@@ -85,9 +91,11 @@ export class AsignarProfesorComponent implements OnInit {
     this.dialogRef.close(false);
     
     
-    this._router.navigate([`/materias/detalles/${this.idAsignatura}`] ,{ 
+    this._router.navigate([`/materias/detalles`] ,{ 
       queryParams: {
-        profesor:this.idProfesor
+        curso: this.idCurso,
+        id:this.idAsignatura,
+        profesor: this.idProfesor
       }
    } );
 

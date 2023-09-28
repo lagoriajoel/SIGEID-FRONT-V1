@@ -69,6 +69,7 @@ export class MostrarMateriasComponent implements OnInit {
     "turno",
     "cicloLectivo"
   ];
+  idCurso!: number
 
   dataSource = new MatTableDataSource(this.materias);
   dataSourceFilters = new MatTableDataSource(this.materias);
@@ -92,6 +93,10 @@ export class MostrarMateriasComponent implements OnInit {
 
   ) {
     this.dataSource = new MatTableDataSource();
+    this.route.queryParamMap.subscribe((params) => {
+     this.idCurso=Number(params.get('curso')!);
+
+    })
    
   }
 
@@ -102,14 +107,14 @@ export class MostrarMateriasComponent implements OnInit {
     this.cargarMaterias();
 
       //filtrado
-setTimeout(() => {
+// setTimeout(() => {
   
-  this.empFilters.push({name:'nombre',options:this.nombre,defaultValue:this.defaultValue});
-  this.empFilters.push({name:'anioCurso',options:this.anioCurso,defaultValue:this.defaultValue});
-  this.empFilters.push({name:'division',options:this.division,defaultValue:this.defaultValue});
-  this.empFilters.push({name:'cicloLectivo',options:this.cicloLectivo,defaultValue:this.defaultValue});
+//   this.empFilters.push({name:'nombre',options:this.nombre,defaultValue:this.defaultValue});
+//   this.empFilters.push({name:'anioCurso',options:this.anioCurso,defaultValue:this.defaultValue});
+//   this.empFilters.push({name:'division',options:this.division,defaultValue:this.defaultValue});
+ 
 
-}, 5);
+// }, 5);
     this.dataSource.filterPredicate = function (record,filter) {
      
       var map = new Map(JSON.parse(filter));
@@ -149,7 +154,8 @@ setTimeout(() => {
         this.cicloLectivo = Array.from(set) 
       }
     })
-    this.materiaService.lista().subscribe(data => {
+
+    this.materiaService.listarCurso(this.idCurso).subscribe(data => {
       this.dataSource.data = data;
       console.log(data);
       this.materias=data
@@ -214,7 +220,12 @@ setTimeout(() => {
   mostrarDetalle(materia: MateriasDto){
     let id = materia.asignatura_id
     console.log(id);
-    this.router.navigate(["/materias/detalles/", id]);
+    this.router.navigate(["/materias/detalles/"], {
+      queryParams: {
+        id: id,
+        curso: this.idCurso
+      }
+    });
 
   }
  

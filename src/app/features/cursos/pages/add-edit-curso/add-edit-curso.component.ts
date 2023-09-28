@@ -57,6 +57,7 @@ export class AddEditCursoComponent implements OnInit {
   ];
  
   selectedValue!: string;
+  cicloLectivo: string;
  
   loading: boolean = false;
   operacion: string = 'Agregar ';
@@ -71,11 +72,11 @@ export class AddEditCursoComponent implements OnInit {
       division: ['', Validators.required],
       tecnicatura:['', Validators.required],
       turno:['', Validators.required],
-      cicloLectivo: ['', [Validators.required]],
+      
       
     })
     this.id = data.id;
-  
+    this.cicloLectivo = data.cicloLectivo
 
   }
 
@@ -106,7 +107,7 @@ export class AddEditCursoComponent implements OnInit {
         division: data.division,
         tecnicatura: data.tecnicatura,
         turno: data.turno,
-        cicloLectivo: data.cicloLectivo
+        
        
       })
     })
@@ -129,7 +130,7 @@ export class AddEditCursoComponent implements OnInit {
       division: this.form.value.division,
       tecnicatura: this.form.value.tecnicatura,
       turno: this.form.value.turno,
-      cicloLectivo: this.form.value.cicloLectivo
+      cicloLectivo: this.cicloLectivo
     }
 
      this.loading=true

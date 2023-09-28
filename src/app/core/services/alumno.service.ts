@@ -60,6 +60,9 @@ export class AlumnoService {
   public delete(id: number): Observable<any> {
     return this.httpClient.delete<any>(this.AlumnoURL + `delete/${id}`);
   }
+  public deleteAlumnoCurso(id: number, idCurso:number): Observable<any> {
+    return this.httpClient.delete<any>(this.AlumnoURL + `deleteAlumnoCurso/${id}/${idCurso}`);
+  }
 
   public generarPDF(informeId: number, dniAlumno:string) {
 

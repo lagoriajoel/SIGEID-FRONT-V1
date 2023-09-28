@@ -1,9 +1,9 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center none">
   <div fxFlex="95%">
 
-    <h2 *ngIf="isAlumno"> Alumnos</h2>
-    <h2 *ngIf="(isCurso || isInformeDesempenio) && !isDirectivo"> Cursos</h2>
-    
+   
+    <h2 *ngIf="!isDirectivo"> Cursos </h2>
+    <h3 *ngIf="!isDirectivo">Ciclo Lectivo: {{cicloLectivo}}</h3>
     <mat-card>
       <mat-divider></mat-divider>
           <div class="titulo" *ngIf="isDirectivo">
@@ -20,9 +20,9 @@
       
 
 
-        <div class="serch">
+        <div *ngIf="!isDirectivo" class="serch">
 
-        <button *ngIf="isCurso" mat-raised-button (click)="addEditCurso()" >
+        <button  mat-raised-button (click)="addEditCurso()" >
           <mat-icon>add</mat-icon>
           Agregar Curso
         </button>
@@ -74,13 +74,14 @@
           <ng-container  matColumnDef="acciones">
             <th  mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</th>
             <td mat-cell *matCellDef="let element" > 
-                <mat-icon *ngIf="isCurso" (click)="addEditCurso(element.id)" class="btnEdit" matTooltip="Editar">edit</mat-icon>
-                <mat-icon *ngIf="isCurso" (click)="deleteCurso(element.id)" class="btnDelete" matTooltip="Delete">delete</mat-icon>
-                <mat-icon *ngIf="isAlumno" (click)="addAlumno(element.id)" class="btnEdit" matTooltip="Agregar Alumno">person_add</mat-icon>
-                <mat-icon *ngIf="isAlumno" (click)="addAlumno(element.id)" class="btnEdit" matTooltip="Ver Alumnos">visibility</mat-icon>       
-                <button  *ngIf="isInforme" mat-raised-button (click)="informes(element.id , element.anio)">
-                  <mat-icon>add_circle</mat-icon>
-                  Generar Informes
+                <mat-icon *ngIf="!isDirectivo" (click)="addEditCurso(element.id)" class="btnEdit" matTooltip="Editar">edit</mat-icon>
+                <mat-icon *ngIf="!isDirectivo" (click)="deleteCurso(element.id)" class="btnDelete" matTooltip="Delete">delete</mat-icon>
+               
+                <mat-icon *ngIf="!isDirectivo" (click)="addAlumno(element.id)" class="btnEdit" matTooltip="Ver Alumnos">visibility</mat-icon>       
+                <button  *ngIf="!isDirectivo" mat-raised-button (click)="irMaterias(element.id , element.anio)">
+                  
+                 
+                  Espacios Curriculares
                 </button>
                 
               </td>

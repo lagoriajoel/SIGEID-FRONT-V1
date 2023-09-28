@@ -32,8 +32,8 @@ export class DetalleMateriaComponent implements OnInit {
  
   loading: boolean = false;
   operacion: string = 'Agregar ';
-  id: number;
-  
+  id!: number;
+  idCurso!: number
 
   constructor(
     private fb: FormBuilder, private _materiasService: MateriasService,
@@ -49,28 +49,38 @@ export class DetalleMateriaComponent implements OnInit {
     )
      {
    
-      this.id= Number(this._routes.snapshot.paramMap.get("id"))!
-      console.log('id numero  '+ this.id);
-      this._materiasService.detail(this.id).subscribe(data=>{
-        console.log(data);
-        this.NombreMateria=data.nombre;
-        this.anioMateria = data.curso.anio;
-        this.divisionMateria = data.curso.division;
-        this.cicloLectivoMateria  = data.curso.cicloLectivo;
-        this.idAsignatura=data.asignatura_id
-        this._profesorService.listarPorMateria(data.asignatura_id).subscribe(
-          {
-            next: data => {
 
-              this.NombreProfesor=data.nombreCompleto
-             
-             },
-             error: (err) => {
-              this._notificacionService.openSnackBar(err.error.Mensaje);
-             }
-          }
-          );
+
+      this._route.queryParamMap.subscribe((params) => {
+        this.idCurso = Number(params.get('curso'));
+        this.id = Number(params.get('id'));
+
+
+        setTimeout(() => {
+          this._materiasService.detail(this.id).subscribe(data=>{
+            console.log(data);
+            this.NombreMateria=data.nombre;
+            this.anioMateria = data.curso.anio;
+            this.divisionMateria = data.curso.division;
+            this.cicloLectivoMateria  = data.curso.cicloLectivo;
+            this.idAsignatura=data.asignatura_id
+            this._profesorService.listarPorMateria(data.asignatura_id).subscribe(
+              {
+                next: data => {
+    
+                  this.NombreProfesor=data.nombreCompleto
+                 
+                 },
+                 error: (err) => {
+                  this._notificacionService.openSnackBar(err.error.Mensaje);
+                 }
+              }
+              );
+          })
+        }, 10);
       })
+      
+      
    
     
   }
@@ -102,7 +112,8 @@ export class DetalleMateriaComponent implements OnInit {
       width: "700px",
       disableClose: true,
          data: {
-          idAsignatura: this.idAsignatura
+          idAsignatura: this.idAsignatura,
+          idCurso: this.idCurso
          }
     
     });
@@ -112,7 +123,12 @@ export class DetalleMateriaComponent implements OnInit {
      this._materiasService.asignarAsignatura(this.idProfesor, this.idAsignatura).subscribe({
       next: data=>{
         console.log("ok");
-        this._router.navigate(["/materias/mostrar"]);
+        this._router.navigate(["/materias/mostrar"],{
+          queryParams: {
+            curso: this.idCurso
+
+          }
+        });
         
       },
     error: error=>{
@@ -121,7 +137,13 @@ export class DetalleMateriaComponent implements OnInit {
   }
   cancelar() {
     
-    this._router.navigate(["/materias/mostrar"]);
+    this._router.navigate(["/materias/mostrar"],{
+      queryParams: {
+        curso: this.idCurso
+
+      }
+    });
+    
   }
 
 

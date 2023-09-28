@@ -131,7 +131,7 @@ export class AddEditProfesoresComponent implements OnInit {
   }
 
   mensajeExito(operacion: string) {
-    this._snackBar.open(`El Alumno fue ${operacion} con exito`, '', {
+    this._snackBar.open(`El Profesor fue ${operacion} con exito`, '', {
       duration: 2000
     });
   }

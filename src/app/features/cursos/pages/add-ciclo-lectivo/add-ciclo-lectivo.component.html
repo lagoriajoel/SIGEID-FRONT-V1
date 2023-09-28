@@ -1,0 +1,44 @@
+<h2>Agregar Ciclo Lectivo</h2>
+<div class="container">
+  <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+</div>
+<form [formGroup]="form" (ngSubmit)="enviarCiclo()">
+
+  <mat-dialog-content >
+
+   
+
+
+    <table class="example-full-width" cellspacing="0"><tr>
+      <td> <mat-form-field class="example-full-width">
+        
+        <input formControlName="cicloLectivo" matInput placeholder="Ingrese el Ciclo Lectivo" autocomplete="off">
+     
+      </mat-form-field></td>
+      
+    </tr></table>
+     
+      
+
+    <table class="example-full-width" cellspacing="0"><tr>
+      
+      
+    </tr></table>
+ 
+  
+  
+      <div class="column">
+       
+          <mat-label>Ciclo Lectivo</mat-label>
+          <mat-label>{{cicloLectivo}}</mat-label>
+      
+       
+      </div>
+   
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
+    <button type="submit" mat-button cdkFocusInitial>Aceptar</button>
+  </mat-dialog-actions>
+  
+</form>

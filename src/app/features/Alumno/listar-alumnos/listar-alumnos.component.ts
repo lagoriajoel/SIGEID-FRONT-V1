@@ -28,7 +28,7 @@ import { AlumnoInformeDto } from 'src/app/core/Entities/AlumnoInformeDto';
 export class ListarAlumnosComponent implements OnInit {
   alumnos: AlumnoInformeDto[] = [];
   loading: boolean=false
-  id:number;
+  idCurso!:number;
   anioCurso!:string;
   divisionCurso!:string;
 
@@ -56,7 +56,7 @@ export class ListarAlumnosComponent implements OnInit {
   ) {
     
     this.dataSource = new MatTableDataSource();
-   this.id =this._routes.snapshot.params['id']
+   this.idCurso =this._routes.snapshot.params['id']
   }
 
   
@@ -67,7 +67,7 @@ export class ListarAlumnosComponent implements OnInit {
     this.dataSource.sort = this.sort;
     this.listarAlumnos();
     
-    this.cursoService.detail(this.id).subscribe({
+    this.cursoService.detail(this.idCurso).subscribe({
       next: data=>{
         this.anioCurso=data.anio
         this.divisionCurso = data.division
@@ -103,7 +103,7 @@ export class ListarAlumnosComponent implements OnInit {
       width: "800px",
       height: "600px",
       disableClose: true,
-      data: { id: id, idCurso: this.id},
+      data: { id: id, idCurso: this.idCurso},
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -120,6 +120,34 @@ export class ListarAlumnosComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  deleteAlumnoCurso(id: number) {
+
+    this.dialog.open(ConfirmDialogComponent, {
+      width: "500px",
+      disableClose: true,
+   data: {
+    title:"Eliminar Alumno del Curso",
+    message:"¿Esta seguro de eliminar el alumno del Curso?"
+   }
+   
+
+    }).afterClosed().subscribe((res) => {
+
+     if(res){
+      this.alumnoService.deleteAlumnoCurso(id, this.idCurso).subscribe(() => {
+        this.listarAlumnos();
+        this.mensajeExito();
+      },
+      error => {
+        this.notificationService.openSnackBar(error.error.Mensaje);
+      })
+     }
+
+    });
+
+    
+    this.loading = true;
   }
 
   deleteAlumno(id: number) {

@@ -53,15 +53,11 @@
   
   
       <div class="column">
-        <mat-form-field class="middle-width">
+       
           <mat-label>Ciclo Lectivo</mat-label>
-          <input formControlName="cicloLectivo" matInput placeholder="Ingrese el ciclo lectivo" autocomplete="off">
-        </mat-form-field>
-        <div class="error">
-          <span *ngIf="form.get('cicloLectivo')?.hasError('required') && form.get('cicloLectivo')?.touched">
-            El Ciclo Lectivo es un campo <strong>requerido</strong>  
-          </span>
-        </div>
+          <mat-label>{{cicloLectivo}}</mat-label>
+      
+       
       </div>
    
   </mat-dialog-content>
