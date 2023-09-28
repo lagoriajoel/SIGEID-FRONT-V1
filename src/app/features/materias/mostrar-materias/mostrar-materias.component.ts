@@ -53,7 +53,7 @@ export class MostrarMateriasComponent implements OnInit {
   nombre: string[]=['Todos','Física','Matematica','Química','FEC','Ingles','Historia','Biología','Informatica','Geografía','Dibujo Técnico', 'Ed Física'];
   anioCurso: string[]=['Todos','1','2','3','4','5','6'];
   division: string[]=['Todos','A','B','C','D','F','G','H'];
-  cicloLectivo: string[]=['Todos','2021','2022','2023','2024','2025','2026'];
+  cicloLectivo: string[]=[];
   empFilters: EmpFilter[]=[];
   
   defaultValue = "Todos";
@@ -82,6 +82,7 @@ export class MostrarMateriasComponent implements OnInit {
     private notificationService: NotificationService,
     private titleService: Title,
     private materiaService: MateriasService,
+    private cursoService: CursosService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private router: Router,
@@ -101,12 +102,14 @@ export class MostrarMateriasComponent implements OnInit {
     this.cargarMaterias();
 
       //filtrado
+setTimeout(() => {
+  
+  this.empFilters.push({name:'nombre',options:this.nombre,defaultValue:this.defaultValue});
+  this.empFilters.push({name:'anioCurso',options:this.anioCurso,defaultValue:this.defaultValue});
+  this.empFilters.push({name:'division',options:this.division,defaultValue:this.defaultValue});
+  this.empFilters.push({name:'cicloLectivo',options:this.cicloLectivo,defaultValue:this.defaultValue});
 
-    this.empFilters.push({name:'nombre',options:this.nombre,defaultValue:this.defaultValue});
-    this.empFilters.push({name:'anioCurso',options:this.anioCurso,defaultValue:this.defaultValue});
-    this.empFilters.push({name:'division',options:this.division,defaultValue:this.defaultValue});
-    this.empFilters.push({name:'cicloLectivo',options:this.cicloLectivo,defaultValue:this.defaultValue});
-
+}, 5);
     this.dataSource.filterPredicate = function (record,filter) {
      
       var map = new Map(JSON.parse(filter));
@@ -138,6 +141,14 @@ export class MostrarMateriasComponent implements OnInit {
 
   // metodo que lista las materias 
   cargarMaterias(): void {
+    this.cursoService.lista().subscribe({
+      next: (data) => {
+        let anios=data.map(data=>data.cicloLectivo)
+        const set= new Set(anios)
+        set.add("Todos")
+        this.cicloLectivo = Array.from(set) 
+      }
+    })
     this.materiaService.lista().subscribe(data => {
       this.dataSource.data = data;
       console.log(data);

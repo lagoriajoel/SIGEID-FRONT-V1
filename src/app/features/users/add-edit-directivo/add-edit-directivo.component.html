@@ -10,7 +10,7 @@
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>DNI</mat-label>
-            <input formControlName="dni" matInput placeholder="Ingrese su DNI" autocomplete="off">
+            <input type="number" formControlName="dni" matInput placeholder="Ingrese su DNI" autocomplete="off">
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('dni')?.hasError('required') && form.get('dni')?.touched">

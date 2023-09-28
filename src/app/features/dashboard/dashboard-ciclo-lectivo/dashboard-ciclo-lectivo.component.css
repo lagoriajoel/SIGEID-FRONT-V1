@@ -46,3 +46,16 @@ table {
     opacity: 0.5;
   }
   
+  .content {
+    padding: 16px;
+  }
+  
+  .content > mat-card {
+    width: 200px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+  

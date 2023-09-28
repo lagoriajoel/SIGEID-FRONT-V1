@@ -157,6 +157,7 @@ export class MisMateriasComponent implements OnInit {
             next: data=> {
               console.log(data);
               this.dataSource=data
+              this.materias=data
             }
           })
           
@@ -175,7 +176,17 @@ export class MisMateriasComponent implements OnInit {
 
   
 
-  
+  mostrar(materia: MateriasDto) {
+    this.router.navigate(['/dashboardProfesor/detalleMateria'], { 
+      queryParams: {
+        cicloLectivo: materia.cicloLectivo,
+        idMateria: materia.asignatura_id,
+      
+        contenidos: 'true'
+        
+      }
+    });
+  }
   
 
   

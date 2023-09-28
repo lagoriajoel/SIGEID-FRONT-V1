@@ -11,7 +11,10 @@ const routes: Routes = [
   children:[
     { path:'listar', component: ListInformesComponent },
     { path:'actualizarInforme', component: ActualizarDiciembreFebreroComponent },
-    { path:'graficos', component: EstadisticasComponent },
+   // { path:'graficos', component: EstadisticasComponent },
+    { path:'graficos', component: GraficosComponent },
+
+
 
   
     { path:'**', redirectTo:'listar' }

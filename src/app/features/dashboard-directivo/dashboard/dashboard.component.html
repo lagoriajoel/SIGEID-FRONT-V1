@@ -7,8 +7,13 @@
 
             
             
-                  <mat-card-title>Buscar Informe de Desempeño </mat-card-title>
-                  <mat-card-subtitle>Ingrese el DNI del Alumno/a</mat-card-subtitle>
+          <mat-divider></mat-divider>
+          <div class="titulo">
+
+              <h3 >BUSCAR INFORMES DE DESEMEPEÑO</h3>
+          </div>
+          <mat-divider></mat-divider>
+                 <div class="subtitulo"></div> Ingrese el DNI del Alumno/a
                   <mat-card-content>
       
                       <mat-form-field >
@@ -28,9 +33,7 @@
       
                   </mat-card-content>
       
-                  <mat-card-actions class="login-actions">
-                    
-                  </mat-card-actions>
+                
       
              
       
@@ -39,14 +42,88 @@
           </form>
 
 
+          <mat-divider></mat-divider>
 
+          <mat-grid-list cols="4" rowHeight="100px">
+                 
+            <mat-grid-tile>
+             
+                <div class="mat-grid-tile-content">
+                   
+                  <div class="row">
+                   
+                    <mat-label>DNI</mat-label>  
+                 
+                 
+                  </div>
+                  <div class="row">
+                    <mat-label>Nombres</mat-label> 
+                 
+                  </div>
+                  
+               
+               </div>
+        
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <div class="mat-grid-tile-content">
+                   
+                <div >
+                 
+                  {{dniAlumno}}
+               
+               
+                </div>
+                <div>
+                 {{NombreAlumno}}
+               
+                </div>
+                <div>
+                 
+                
+                 </div>
+             
+             </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <div class="mat-grid-tile-content">
+              <div class="row">
+                  <mat-label>Apellido</mat-label>  
+                 
+              </div>
+              <div class="row">
+                Email  
+            </div>
+            
+           </div>
+          </mat-grid-tile>
+            <mat-grid-tile>
+              <div class="mat-grid-tile-content">
+                <div >
+                     {{apellidoAlumno}}
+                   
+                </div>
+                <div >
+                   {{emailAlumno}}
+              </div>
+              
+             </div>
+               
+            </mat-grid-tile>
+        
+        
+            
+          </mat-grid-list>
 
-        <div>
-          <h3>Alumno/a:</h3> {{nombreAlumno}} {{apellidoAlumno}} 
-        </div>
+          <mat-divider></mat-divider>
+          
+<div class="encab">
 
-      
-        <table mat-table [dataSource]="dataSource" matSort>
+  <p>1° Año </p>
+  
+</div>
+              <mat-divider></mat-divider>     
+        <table mat-table [dataSource]="dataSource1" matSort>
   
            
           <ng-container matColumnDef="Asignatura">
@@ -60,7 +137,57 @@
             <td mat-cell *matCellDef="let element">  {{element.asignatura.anioCurso}} Año </td>
           </ng-container>
         
-      
+          <ng-container matColumnDef="cicloLectivo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ciclo Lectivo </th>
+            <td mat-cell *matCellDef="let element">  {{element.asignatura.cicloLectivo}} </td>
+          </ng-container>
+          
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</th>
+            <td mat-cell *matCellDef="let element"> 
+              <!-- capturamos el id del informe  -->
+              <button mat-raised-button (click)="generarPDF(element.id)">
+                <mat-icon  class="btnVer"  matTooltip="Ver">visibility</mat-icon> Ver </button>  
+                <button mat-raised-button (click)="historialContenidos(element.id)" >
+                  <mat-icon>add</mat-icon>
+                  Historial Contenidos
+                </button>
+              </td>
+
+              
+         </ng-container>
+        
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-divider></mat-divider>
+          
+<div class="encab">
+
+  <p>2° Año </p>
+  
+</div>
+              <mat-divider></mat-divider>     
+        <table mat-table [dataSource]="dataSource2" matSort>
+  
+           
+          <ng-container matColumnDef="Asignatura">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Asignatura </th>
+            <td mat-cell *matCellDef="let element"> {{element.asignatura.nombre}} </td>
+          </ng-container>
+        
+       
+          <ng-container matColumnDef="Curso">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Curso </th>
+            <td mat-cell *matCellDef="let element">  {{element.asignatura.anioCurso}} Año </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="cicloLectivo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ciclo Lectivo </th>
+            <td mat-cell *matCellDef="let element">  {{element.asignatura.cicloLectivo}} </td>
+          </ng-container>
           
           <ng-container matColumnDef="acciones">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</th>
@@ -83,11 +210,192 @@
         </table>
 
         
-          <mat-paginator [pageSizeOptions]="[10, 20]"
-          showFirstLastButtons
-          >
-        </mat-paginator>
+        <mat-divider></mat-divider>
           
+        <div class="encab">
+        
+          <p>3° Año </p>
+          
+        </div>
+                      <mat-divider></mat-divider>     
+                <table mat-table [dataSource]="dataSource3" matSort>
+          
+                   
+                  <ng-container matColumnDef="Asignatura">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Asignatura </th>
+                    <td mat-cell *matCellDef="let element"> {{element.asignatura.nombre}} </td>
+                  </ng-container>
+                
+               
+                  <ng-container matColumnDef="Curso">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Curso </th>
+                    <td mat-cell *matCellDef="let element">  {{element.asignatura.anioCurso}} Año </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="cicloLectivo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Curso </th>
+                    <td mat-cell *matCellDef="let element">  {{element.asignatura.cicloLectivo}} </td>
+                  </ng-container>
+                
+              
+                  
+                  <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</th>
+                    <td mat-cell *matCellDef="let element"> 
+                      <!-- capturamos el id del informe  -->
+                      <button mat-raised-button (click)="generarPDF(element.id)">
+                        <mat-icon  class="btnVer"  matTooltip="Ver">visibility</mat-icon> Ver </button>  
+                        <button mat-raised-button (click)="historialContenidos(element.id)" >
+                          <mat-icon>add</mat-icon>
+                          Historial Contenidos
+                        </button>
+                      </td>
+        
+                      
+                 </ng-container>
+                
+                
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-divider></mat-divider>
+          
+                <div class="encab">
+                
+                  <p>4° Año </p>
+                  
+                </div>
+                              <mat-divider></mat-divider>     
+                        <table mat-table [dataSource]="dataSource4" matSort>
+                  
+                           
+                          <ng-container matColumnDef="Asignatura">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Asignatura </th>
+                            <td mat-cell *matCellDef="let element"> {{element.asignatura.nombre}} </td>
+                          </ng-container>
+                        
+                       
+                          <ng-container matColumnDef="Curso">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Curso </th>
+                            <td mat-cell *matCellDef="let element">  {{element.asignatura.anioCurso}} Año </td>
+                          </ng-container>
+                        
+                      
+                          <ng-container matColumnDef="cicloLectivo">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Curso </th>
+                            <td mat-cell *matCellDef="let element">  {{element.asignatura.cicloLectivo}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="acciones">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</th>
+                            <td mat-cell *matCellDef="let element"> 
+                              <!-- capturamos el id del informe  -->
+                              <button mat-raised-button (click)="generarPDF(element.id)">
+                                <mat-icon  class="btnVer"  matTooltip="Ver">visibility</mat-icon> Ver </button>  
+                                <button mat-raised-button (click)="historialContenidos(element.id)" >
+                                  <mat-icon>add</mat-icon>
+                                  Historial Contenidos
+                                </button>
+                              </td>
+                
+                              
+                         </ng-container>
+                        
+                        
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-divider></mat-divider>
+          
+                        <div class="encab">
+                        
+                          <p>5° Año </p>
+                          
+                        </div>
+                                      <mat-divider></mat-divider>     
+                                <table mat-table [dataSource]="dataSource5" matSort>
+                          
+                                   
+                                  <ng-container matColumnDef="Asignatura">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Asignatura </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.asignatura.nombre}} </td>
+                                  </ng-container>
+                                
+                               
+                                  <ng-container matColumnDef="Curso">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Curso </th>
+                                    <td mat-cell *matCellDef="let element">  {{element.asignatura.anioCurso}} Año </td>
+                                  </ng-container>
+                                  <ng-container matColumnDef="cicloLectivo">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Curso </th>
+                                    <td mat-cell *matCellDef="let element">  {{element.asignatura.cicloLectivo}} </td>
+                                  </ng-container>
+                              
+                                  
+                                  <ng-container matColumnDef="acciones">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</th>
+                                    <td mat-cell *matCellDef="let element"> 
+                                      <!-- capturamos el id del informe  -->
+                                      <button mat-raised-button (click)="generarPDF(element.id)">
+                                        <mat-icon  class="btnVer"  matTooltip="Ver">visibility</mat-icon> Ver </button>  
+                                        <button mat-raised-button (click)="historialContenidos(element.id)" >
+                                          <mat-icon>add</mat-icon>
+                                          Historial Contenidos
+                                        </button>
+                                      </td>
+                        
+                                      
+                                 </ng-container>
+                                
+                                
+                                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+                                <mat-divider></mat-divider>
+          
+                                <div class="encab">
+                                
+                                  <p>6° Año </p>
+                                  
+                                </div>
+                                              <mat-divider></mat-divider>     
+                                        <table mat-table [dataSource]="dataSource6" matSort>
+                                  
+                                           
+                                          <ng-container matColumnDef="Asignatura">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Asignatura </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.asignatura.nombre}} </td>
+                                          </ng-container>
+                                        
+                                       
+                                          <ng-container matColumnDef="Curso">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Curso </th>
+                                            <td mat-cell *matCellDef="let element">  {{element.asignatura.anioCurso}} Año </td>
+                                          </ng-container>
+                                          <ng-container matColumnDef="cicloLectivo">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Curso </th>
+                                            <td mat-cell *matCellDef="let element">  {{element.asignatura.cicloLectivo}} </td>
+                                          </ng-container>
+                                      
+                                          
+                                          <ng-container matColumnDef="acciones">
+                                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</th>
+                                            <td mat-cell *matCellDef="let element"> 
+                                              <!-- capturamos el id del informe  -->
+                                              <button mat-raised-button (click)="generarPDF(element.id)">
+                                                <mat-icon  class="btnVer"  matTooltip="Ver">visibility</mat-icon> Ver </button>  
+                                                <button mat-raised-button (click)="historialContenidos(element.id)" >
+                                                  <mat-icon>add</mat-icon>
+                                                  Historial Contenidos
+                                                </button>
+                                              </td>
+                                
+                                              
+                                         </ng-container>
+                                        
+                                        
+                                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                        </table>                       
         
       
       </mat-card>

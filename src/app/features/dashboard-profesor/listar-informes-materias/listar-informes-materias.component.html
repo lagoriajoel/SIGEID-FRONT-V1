@@ -61,19 +61,18 @@
               <td mat-cell *matCellDef="let element" > 
                
                 <button mat-raised-button *ngIf="!isDirectivo"(click)="actualizarInforme(element.id)" >
-                  <mat-icon>add</mat-icon>
+                 
                   Actualizar
                 </button>
 
                 <button mat-raised-button (click)="historialContenidos(element.id)" >
-                  <mat-icon>add</mat-icon>
+                 
                   Historial Contenidos
                 </button>
                  
-                <mat-icon   class="btnEdit" (click)="verInforme(element.id)" matTooltip="Ver Informe">visibility</mat-icon>   
+                <mat-icon  class="material-symbols-outlined" (click)="verInforme(element.id)" matTooltip="Exportar a PDF">picture_as_pdf</mat-icon>   
              
               
-                
            </ng-container>
           
           

@@ -8,6 +8,7 @@ import { InformeContenidoDto } from '../Entities/informeContenidosDto';
 import { contenidoInformeDto } from '../Entities/contenidoInformeDto';
 import { environment } from 'src/environments/environment';
 import { InformesHistorial } from '../Entities/InformeHistorial';
+import { estadisticaDTO } from '../Entities/estadisticaDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -72,5 +73,8 @@ export class InformesService {
   }
   public numAlumnosConInformesAnio( anio:string): Observable<any> {
     return this.httpClient.get<any>(this.informeURL + `numAlumnosConInformePorAnio/${anio}`);
+  }
+  public estadisticasPorAnio( anio:string, cicloLectivo:string): Observable<any>{
+    return this.httpClient.get<estadisticaDTO[]>(this.informeURL + `estadisticas/${anio}/${cicloLectivo}`);
   }
 }

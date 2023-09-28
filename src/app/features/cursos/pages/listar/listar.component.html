@@ -2,10 +2,20 @@
   <div fxFlex="95%">
 
     <h2 *ngIf="isAlumno"> Alumnos</h2>
-    <h2 *ngIf="isCurso || isInformeDesempenio"> Cursos</h2>
+    <h2 *ngIf="(isCurso || isInformeDesempenio) && !isDirectivo"> Cursos</h2>
     
     <mat-card>
-      
+      <mat-divider></mat-divider>
+          <div class="titulo" *ngIf="isDirectivo">
+
+              <h3 >INFORMES POR CURSOS </h3>
+          </div>
+          <mat-divider></mat-divider>
+                 <div *ngIf="isDirectivo" class="subtitulo">
+
+                   Seleccione un Curso
+                 </div>
+
       <mat-card-content>
       
 

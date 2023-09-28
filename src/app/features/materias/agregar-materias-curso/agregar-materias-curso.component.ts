@@ -51,16 +51,16 @@ export class AgregarMateriasCursoComponent implements OnInit {
       nombre: ["", [Validators.required, Validators.maxLength(50)]],
     });
 
-    
-    this.idCurso = Number(data.id);
-    console.log(data.id+"  agregar materia");
+    this.id = data.id;
+    this.idCurso = Number(data.idCurso);
+    console.log(data.id);
   }
 
   ngOnInit(): void {
     this.esEditar(this.id);
     this._cursoService.detail(this.idCurso!).subscribe({
       next: data=>{
-        console.log(data +" aca");
+       console.log(data);
         this.curso=data
         this.anioCurso=data.anio
         this.divisionCurso=data.division
@@ -74,17 +74,27 @@ export class AgregarMateriasCursoComponent implements OnInit {
   esEditar(id: number | undefined) {
     if (id !== undefined) {
       this.operacion = "Editar ";
-      
+      this.getMateria(id)
     }
   }
 
-  
+  getMateria(id: number) {
+    this._materiasService.detail(id).subscribe(data => {
+      this.form.setValue({
+        nombre: data.nombre,
+        
+        
+       
+      })
+    })
+  }
 
   cancelar() {
     this.dialogRef.close(false);
   }
 
-  addEditAlumno() {
+  addEditMateria() {
+
     if (this.form.invalid) {
       return;
     }
@@ -96,10 +106,20 @@ export class AgregarMateriasCursoComponent implements OnInit {
      asignatura_id: 0,
       nombre: this.form.value.nombre,
       anioCurso: this.anioCurso!,
+      tecnicatura: this.tecnicaturaCurso!, //
       cicloLectivo: this.curso.cicloLectivo,
       curso: cursoAlumno!,
       profesor: null,
     };
+    const materiaNueva1: MateriasCursoDto = {
+      asignatura_id: this.id!,
+       nombre: this.form.value.nombre,
+       anioCurso: this.curso.anio,
+       tecnicatura: this.curso.tecnicatura, //
+       cicloLectivo: this.curso.cicloLectivo,
+       curso: cursoAlumno!,
+       profesor: null,
+     };
 
     setTimeout(() => {
       this.loading = true;
@@ -121,7 +141,12 @@ export class AgregarMateriasCursoComponent implements OnInit {
       );
     } else {
       // Es editar
-    
+        this._materiasService.update(this.id, materiaNueva1).subscribe({
+            next: data => {
+              this.mensajeExito("actualizada");
+              this.dialogRef.close(true);
+            }
+        })
      
     }
   }

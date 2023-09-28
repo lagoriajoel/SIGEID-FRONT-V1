@@ -30,6 +30,7 @@ export interface ciclosLectivos {
 })
 export class CicloLectivoComponent implements OnInit {
   dataSource!:ciclosLectivos[];
+  cursos:string[]=[]
   columnsToDisplay = ['cicloLectivo'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: ciclosLectivos | null;
@@ -59,6 +60,7 @@ export class CicloLectivoComponent implements OnInit {
                 if (!this.unicos.includes(materias.cicloLectivo)){
                   this.unicos.push(materias.cicloLectivo)
                   this.ciclos.push({cicloLectivo:materias.cicloLectivo})
+                 
                 }
                
               })

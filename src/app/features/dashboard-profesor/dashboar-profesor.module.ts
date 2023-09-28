@@ -10,13 +10,14 @@ import { ListarInformesMateriasComponent } from './listar-informes-materias/list
 import { FormEditInformeComponent } from './form-edit-informe/form-edit-informe.component';
 import { CicloLectivoComponent } from './ciclo-lectivo/ciclo-lectivo.component';
 import { MostrarMateriasComponent } from './mostrar-materias/mostrar-materias.component';
+import { DetalleMateriasComponent } from './detalle-materias/detalle-materias.component';
 
 
 
 
 
 @NgModule({
-  declarations: [MisContenidosComponent, MisMateriasComponent, ActualizarInformesComponent, ListarInformesMateriasComponent, FormEditInformeComponent, CicloLectivoComponent, MostrarMateriasComponent],
+  declarations: [MisContenidosComponent, MisMateriasComponent, ActualizarInformesComponent, ListarInformesMateriasComponent, FormEditInformeComponent, CicloLectivoComponent, MostrarMateriasComponent, DetalleMateriasComponent],
   imports: [
     CommonModule,
     DashboarProfesorRoutingModule,

@@ -47,7 +47,7 @@ export class ListarComponent implements OnInit {
   isInforme: boolean = false;
   isInformeDesempenio: boolean = false;
   isMaterias: boolean = false; //
-
+  isDirectivo: boolean = false;
   isCurso: boolean = false;
   color:string=""
   informesPorAsignatura:number = 0;
@@ -63,7 +63,7 @@ export class ListarComponent implements OnInit {
 
   anio: string[]=['Todos','1','2','3','4','5','6'];
   division: string[]=['Todos','A','B','C','D','F','G','H','I'];
-  cicloLectivo: string[]=['Todos','2020','2021','2022','2023','2024','2025','2026'];
+  cicloLectivo: string[]=[];
   empFilters: EmpFilter[]=[];
 
   displayedColumns: string[] = ["anio",
@@ -96,6 +96,7 @@ export class ListarComponent implements OnInit {
   ) {
     this.dataSource = new MatTableDataSource();
     this.auth.isAdmin() ? this.isAdmin = true : this.isAdmin = false;
+    this.auth.isDirectivo() ? this.isDirectivo = true : this
   }
   
   ngOnInit() {
@@ -119,10 +120,12 @@ export class ListarComponent implements OnInit {
     
     
     //filtrado
-    
+    setTimeout(() => {
+      
     this.empFilters.push({name:'anio',options:this.anio,defaultValue:this.defaultValue});
     this.empFilters.push({name:'division',options:this.division,defaultValue:this.defaultValue});
     this.empFilters.push({name:'cicloLectivo',options:this.cicloLectivo,defaultValue:"2023"});
+    }, 10);
     
     this.dataSource.filterPredicate = function (record,filter) {
      
@@ -157,7 +160,12 @@ export class ListarComponent implements OnInit {
   cargarCurso(): void {
     this.cursoService.lista().subscribe({
       next: data => {
-        console.log(data);
+        
+         let anios=data.map(data=>data.cicloLectivo)
+         const set= new Set(anios)
+         set.add("Todos")
+         this.cicloLectivo = Array.from(set) //
+         console.log(set);
         this.dataSource.data = data;
         this.cursos=data
         this.dataSource.paginator = this.paginator;

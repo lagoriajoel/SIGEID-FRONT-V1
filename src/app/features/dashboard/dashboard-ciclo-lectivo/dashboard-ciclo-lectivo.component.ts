@@ -22,6 +22,7 @@ import { NotificationService } from 'src/app/core/services/notification.service'
   ],
 })
 export class DashboardCicloLectivoComponent implements OnInit {
+  
   dataSource!:CursoDto[];
   columnsToDisplay = ['cicloLectivo'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
@@ -45,7 +46,7 @@ export class DashboardCicloLectivoComponent implements OnInit {
           next: data=>{
            this.cursos=data
            this.dataSource=data
-          
+         
           },
           error:error=>{
             this.notificationService.openSnackBar(error.error.Mensaje);}

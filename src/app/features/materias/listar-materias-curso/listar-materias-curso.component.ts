@@ -10,6 +10,8 @@ import { MateriasDto } from 'src/app/core/Entities/materias';
 import { AuthenticationService } from 'src/app/core/services/auth.service';
 import { MateriasService } from 'src/app/core/services/materias.service';
 import { AgregarMateriasCursoComponent } from '../agregar-materias-curso/agregar-materias-curso.component';
+import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
   selector: 'app-listar-materias-curso',
@@ -20,7 +22,7 @@ export class ListarMateriasCursoComponent implements OnInit {
 
   materias: MateriasDto[] = [];
   loading: boolean = false;
-  id!:number;
+  idCurso!:number;
   isContenidos = false;
   isInformes = 0;
   isMaterias: boolean = false;
@@ -28,7 +30,7 @@ export class ListarMateriasCursoComponent implements OnInit {
   isAdministrador: boolean = false;
   
 
-  displayedColumns: string[] = ["nombre", "año", "division", "cicloLectivo"];
+  displayedColumns: string[] = ["nombre", "año", "division", "cicloLectivo","acciones"];
   dataSource = new MatTableDataSource(this.materias);
 
   clickedRows = new Set<MateriasDto>();
@@ -44,6 +46,7 @@ export class ListarMateriasCursoComponent implements OnInit {
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _routes: ActivatedRoute,
+    private notificationService: NotificationService,
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthenticationService
@@ -56,15 +59,15 @@ export class ListarMateriasCursoComponent implements OnInit {
     this.titleService.setTitle("Gestion de Informes - Mis Espacios");
     this.dataSource.sort = this.sort;
     this.route.queryParamMap.subscribe((params) => {
-     this.id= Number(params.get("curso")); 
-    console.log(this.id);
+     this.idCurso= Number(params.get("curso")); 
+   
      this.authService.isAdmin()? this.isAdministrador=true: false;
      console.log(this.isAdministrador);
   
     });
 
 
-    this.listarMaterias(this.id);
+    this.listarMaterias(this.idCurso);
   }
   listarMaterias(id: number): void {
     this.materiaService.listarCurso(id).subscribe({
@@ -120,19 +123,57 @@ export class ListarMateriasCursoComponent implements OnInit {
     }
   }
 
-  agregarEspacio(){
-
+  addEspacio(id?: number){
+      console.log(id);
     const dialogRef = this.dialog.open(AgregarMateriasCursoComponent, {
       width: "550px",
       disableClose: true,
-      data: { id: this.id },
+      data: { idCurso: this.idCurso,
+              id: id},
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.listarMaterias(this.id);
+        this.listarMaterias(this.idCurso);
       }
     });
 
+  }
+  EditMateria(id: number) {
+
+  }
+  deleteCurso(id: number) {
+       
+     this.dialog.open(ConfirmDialogComponent, {
+      width: "500px",
+      disableClose: true,
+   data: {
+    title:"Eliminar Espacio Curricular",
+    message:"¿Esta seguro de eliminar el Espacio?"
+   }
+   
+
+    }).afterClosed().subscribe((res) => {
+
+     if(res){
+      this.materiaService.delete(id).subscribe(() => {
+        this.listarMaterias(this.idCurso);
+        this.mensajeExito();
+      },
+      error => {
+        this.notificationService.openSnackBar(error.error.Mensaje);
+      })
+     }
+
+    });
+
+    
+    this.loading = true;
+  }
+  
+  mensajeExito() {
+    this._snackBar.open('El espacio curricular fue eliminado con exito', '', {
+      duration: 2000
+    });
   }
 }

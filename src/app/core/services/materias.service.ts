@@ -39,7 +39,7 @@ export class MateriasService {
     return this.httpClient.post<any>(this.materiasURL + 'save', materias);
   }
 
-  public update(id: number, materias: MateriasDto): Observable<any> {
+  public update(id: number, materias: MateriasCursoDto): Observable<any> {
     return this.httpClient.put<any>(this.materiasURL + `update/${id}`, materias);
   }
 

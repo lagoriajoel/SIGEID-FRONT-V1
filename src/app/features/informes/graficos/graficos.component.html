@@ -1,16 +1,32 @@
 <div class="container" fxLayout="row" fxLayoutAlign="center none">
     <div fxFlex="95%">
-    <h2 mat-dialog-title>Informes de Desempeño por Año</h2>
-   
+      <mat-card>
+
+    
+      <mat-divider></mat-divider>
+      <div class="titulo">
+
+          <h3 >INFORMES DE DESEMPEÑO POR AÑO</h3>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="subtitulo"></div> Ingrese el DNI del Alumno/a
     <div>
+      <form [formGroup]="form">
+
+
+
                   <mat-form-field>
             <mat-label>Ciclo Lectivo </mat-label>
-            <mat-select>
+            <mat-select formControlName="cicloLectivo">
               <mat-option *ngFor="let ciclo of ciclos" [value]="ciclo.value">
                 {{ciclo.value}}
               </mat-option>
             </mat-select>
           </mat-form-field>
+
+          <button mat-raised-button id="login" (click)="buscar()"> Buscar</button>
+
+      </form>
     </div>
    
     <div style="width:100%;">
@@ -34,6 +50,6 @@
   <canvas id="myChart6" width="700" height="250" #mychart6></canvas>
 </div>
 
-  
+</mat-card>
     </div>
 </div>

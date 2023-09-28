@@ -5,6 +5,7 @@ export interface MateriasCursoDto {
     nombre: string;
     anioCurso:string;
     cicloLectivo:string;
+    tecnicatura:string;
     curso: CursoInforme;
     profesor: null;
 

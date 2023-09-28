@@ -1,8 +1,8 @@
 <div class="container">
-    <h2 mat-dialog-title>Agregar Espacio Curricular</h2>
+    <h2 mat-dialog-title>{{ operacion }} Espacio Curricular</h2>
     <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
   </div>
-  <form [formGroup]="form" (ngSubmit)="addEditAlumno()">
+  <form [formGroup]="form" (ngSubmit)="addEditMateria()">
   
     <mat-dialog-content >
 
