@@ -109,6 +109,7 @@ this.title.setTitle("SIGEID - INFORMES")
   }
 
   actualizarInforme(id: number): void {
+    
     const alumno=this.alumnos.find(alumno=>alumno.id == id)!
       
       

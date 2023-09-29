@@ -31,7 +31,7 @@ export class CicloLectivoComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private router:Router) {
-
+      
       this.route.queryParamMap.subscribe((params) => {
         params.get("alumnos") ? (this.isAlumno = true) : (this.isAlumno = false);
         params.get("informes")
@@ -69,7 +69,7 @@ export class CicloLectivoComponent implements OnInit {
    }
 
   ngOnInit(): void {
-   
+   this.isDirectivo=this.authService.isDirectivo()
   }
 
   agregarCiclo(){

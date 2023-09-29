@@ -93,6 +93,7 @@ export class FormEditInformeComponent implements OnInit {
 
     this.dataSource = new MatTableDataSource<contenidoAdeudadoDto>(
       this.contenidosDesaprobados
+         
     );
     this.alumnoInforme = data.informe;
     console.log(this.alumnoInforme);

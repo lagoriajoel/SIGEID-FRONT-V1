@@ -50,10 +50,10 @@ export class LayoutComponent implements OnInit, OnDestroy, AfterViewInit {
         this.isDirectivo=this.authService.isDirectivo();
         
         if(this.isAdmin){
-            this.usuario= 'Administrador :';
+            this.usuario= 'Administrador/a :';
         }
         else if(this.isProfesor){
-            this.usuario='Profesor :';
+            this.usuario='Profesor/a :';
         }
         else if(this.isDirectivo){
             this.usuario='Director/a :';

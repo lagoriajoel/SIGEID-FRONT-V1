@@ -48,13 +48,13 @@ export class DashboardHomeComponent implements OnInit {
      this.isProfesor=this.authService.isProfesor();
      
      if(this.isAdmin){
-         this.usuario= 'Administrador :';
+         this.usuario= 'Administrador/a :';
      }
      else if(this.isProfesor){
-         this.usuario='Profesor :';
+         this.usuario='Profesor/a :';
      }
      else{
-         this.usuario= 'Alumno :';
+         this.usuario= 'Alumno/a :';
         
      }
 

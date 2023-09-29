@@ -2,7 +2,7 @@
     <div fxFlex="95%">
 
 </div>
-<button (click)="agregarCiclo()"> agregar Ciclo Lectivo</button>
+<button *ngIf="!isDirectivo"(click)="agregarCiclo()"> agregar Ciclo Lectivo</button>
 
 <div class="content">
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
