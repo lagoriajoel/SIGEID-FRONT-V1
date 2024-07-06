@@ -8,9 +8,25 @@
        
         
         <mat-card-content>
-          <div class="example-element-position">Curso: {{anioCurso}} Año</div>
-          <div class="example-element-symbol"> Espacio Curricular:{{nombreCurso}} </div>
-          <div class="example-element-name">Ciclo Lectivo: {{cicloLectivo}} </div>
+           <div class="row">
+            
+          <div class="curso">Curso:</div>
+          <div class="curso-detalle">{{anioCurso}} Año</div>
+           </div>
+         
+           <div class="row">
+            
+          <div class="curso"> Espacio Curricular:  </div>
+          <div class="curso-detalle"> {{nombreCurso}} </div>
+           </div>
+
+           <div class="row">
+
+            
+          <div class="curso">Ciclo Lectivo: </div>
+          <div class="curso-detalle"> {{cicloLectivo}} </div>
+           </div>
+
         
         </mat-card-content>
         <mat-card-actions class="botones">

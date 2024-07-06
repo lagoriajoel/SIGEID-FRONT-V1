@@ -154,12 +154,12 @@ export class HistorialContenidosComponent implements OnInit {
        
 
         this.dataSource.data =array
-        contenidos= array.filter(cont => cont.instanciaEvaluacion_diciembre=="desaprobado")
+        contenidos= array.filter(cont => cont.instanciaEvaluacion_diciembre=="desaprobado" || cont.instanciaEvaluacion_diciembre=="ausente")
         
 
         this.dataSource2.data = contenidos
         
-        contenidos2= array.filter(cont => cont.instanciaEvaluacion_febrero=="desaprobado");
+        contenidos2= array.filter(cont => cont.instanciaEvaluacion_febrero=="desaprobado" || cont.instanciaEvaluacion_febrero=="ausente");
         this.dataSource3.data = contenidos2
 
         contenidos3= contenidos2.filter(cont => cont.instanciaEvaluacion_1=="desaprobado" || cont.instanciaEvaluacion_1=="ausente");

@@ -10,6 +10,8 @@ export const environment = {
   logLevel: NgxLoggerLevel.TRACE,
   serverLogLevel: NgxLoggerLevel.OFF,
   //apiURL: 'https://informes-backend.onrender.com'
-  apiURL: 'http://localhost:8001'
+   apiURL: 'http://localhost:8001'
+  //apiURL: 'http://sigeid-back-net:8001'
+
 
 };

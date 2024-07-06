@@ -18,8 +18,8 @@
                   <mat-form-field>
             <mat-label>Ciclo Lectivo </mat-label>
             <mat-select formControlName="cicloLectivo">
-              <mat-option *ngFor="let ciclo of ciclos" [value]="ciclo.value">
-                {{ciclo.value}}
+              <mat-option *ngFor="let ciclo of ciclos" [value]="ciclo">
+                {{ciclo}}
               </mat-option>
             </mat-select>
           </mat-form-field>

@@ -45,7 +45,7 @@ export class ProfesorUserComponent implements OnInit {
    }
  
    ngOnInit() {
-     this.titleService.setTitle("Gestion de Informes - Profesores");
+     this.titleService.setTitle("SIGEID");
    
 
      this.dataSource.sort = this.sort;

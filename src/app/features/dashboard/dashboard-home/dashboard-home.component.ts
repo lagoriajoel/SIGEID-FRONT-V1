@@ -26,6 +26,7 @@ export class DashboardHomeComponent implements OnInit {
   usuario: string=''
   isAdmin: boolean = false;
   isProfesor: boolean = false; //
+  isDirector: boolean = false;
  
   constructor(
    private authService: AuthenticationService,
@@ -46,6 +47,8 @@ export class DashboardHomeComponent implements OnInit {
 
    
      this.isProfesor=this.authService.isProfesor();
+     this.isDirector=this.authService.isDirectivo();
+
      
      if(this.isAdmin){
          this.usuario= 'Administrador/a :';
@@ -53,6 +56,9 @@ export class DashboardHomeComponent implements OnInit {
      else if(this.isProfesor){
          this.usuario='Profesor/a :';
      }
+     else if(this.isDirector){
+      this.usuario='Profesor/a :';
+  }
      else{
          this.usuario= 'Alumno/a :';
         

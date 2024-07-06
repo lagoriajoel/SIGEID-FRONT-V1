@@ -1,3 +1,14 @@
 .botones {
     display: grid;
 }
+.curso {
+    font-weight: 500;
+}
+.curso-detalle {
+    font-weight: 300;
+    margin-left: 5px;
+}
+.row {
+    display: flex
+}
+

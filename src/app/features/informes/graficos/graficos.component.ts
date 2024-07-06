@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Chart } from 'chart.js';
 import { estadisticaDTO } from 'src/app/core/Entities/estadisticaDTO';
 import { Informes } from 'src/app/core/Entities/informe';
+import { CursosService } from 'src/app/core/services/cursos/cursos.service';
 import { InformesService } from 'src/app/core/services/informes.service';
 import { __values } from 'tslib';
 
@@ -34,16 +35,8 @@ export class GraficosComponent implements OnInit {
     {value: '6', viewValue: 'Sexto'},
 
   ];
-  ciclos: cicloLectivo[] = [
-    {value: '2020'},
-    {value: '2021'},
-    {value: '2022'},
-
-    {value: '2023'},
-    {value: '2024'},
-    {value: '2025'},
-
-  ]
+  ciclos: String[] = []
+  
   form!: FormGroup;
   labeldata1: any[] = [];
   realdata1: any[] = [];
@@ -91,9 +84,19 @@ export class GraficosComponent implements OnInit {
   ctx6: any;
   @ViewChild('mychart6') mychart6: any;
 
-  constructor(private informeService: InformesService) { 
+  constructor(private informeService: InformesService,
+    private cursosService: CursosService) { 
   
-   
+   this.cursosService.lista().subscribe({
+    next:data=>{
+      let datos=data.map(data=>data.cicloLectivo)
+
+      let ciclos= new Set(datos)
+
+      this.ciclos=Array.from(ciclos)
+      console.log(this.ciclos);
+    }
+   })
   }
   private createForm() {
    

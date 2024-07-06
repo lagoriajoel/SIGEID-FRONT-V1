@@ -80,6 +80,6 @@ export class AlumnoService {
 
   fetchFileNames() {
     return this.httpClient
-      .get<string[]>('http://localhost:8080/getFiles');
+      .get<string[]>(environment.apiURL+'/getFiles');
   }
 }

@@ -27,19 +27,18 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private logger: NGXLogger,
-    private notificationService: NotificationService,
-    private titleService: Title,
+   
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.titleService.setTitle(' Usuarios');
+    
     this.logger.log('Usuarios cargados');
   }
 
   irAprofesores(){
    
-    console.log("ir a profesores");
+  
     this.router.navigate(['/profesor']);
   }
   
