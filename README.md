@@ -1,7 +1,7 @@
 # SIGEID
-![Logo](assets/images/sigeid_home.png)
-![Logo](assets/images/informes.png)
-![Logo](assets/images/estadísticas.png)
+![Logo](src/assets/images/sigeid_home.png)
+![Logo](src/assets/images/informes.png)
+![Logo](src/assets/images/estadísticas.png)
 
 
 
