@@ -14,7 +14,7 @@
 - **Generación de Informes de Desempeño:** Permite a los docentes crear informes detallados sobre el desempeño de los estudiantes de manera eficiente y estandarizada.
 - **Estadísticas y Análisis:** Genera estadísticas y análisis detallados que permiten al equipo directivo tomar decisiones informadas sobre el rendimiento académico.
 - **Interfaz Intuitiva:** Diseñada para ser fácil de usar, permitiendo a los usuarios navegar y utilizar el sistema sin dificultad.
-- **Seguridad y Privacidad:** Asegura que la información de los estudiantes y los informes sean manejados con estricta confidencialidad y seguridad.
+- **Seguridad y Privacidad:** Utiliza spring Security para asegura que la información de los estudiantes y los informes sean manejados con estricta confidencialidad y seguridad.
 
 ## Objetivos
 
@@ -30,10 +30,10 @@
 
 ## Tecnologías Utilizadas
 
-- **Frontend:** Angular
-- **Backend:** Spring Boot
+- **Frontend:** Angular, Angular Material, bootstrap
+- **Backend:** Spring Boot, Spring Security, JasperReport
 - **Base de Datos:** MySQL
-- **DevOps:** Docker
+- **DevOps:** Docker, AWS
 
 
 
