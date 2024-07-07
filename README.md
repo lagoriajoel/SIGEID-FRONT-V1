@@ -1,6 +1,6 @@
 # SIGEID
 ![Logo](src/assets/images/sigeid_home.png)
-![Logo](src/assets/images/images.png)
+![Logo](src/assets/images/images.gif)
 
 
 
