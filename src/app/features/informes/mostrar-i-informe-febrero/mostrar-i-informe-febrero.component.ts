@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
@@ -50,7 +51,7 @@ export class MostrarIInformeFebreroComponent implements OnInit {
   estrategias: estrategiaDto[] = [];
 
   rowHeight:number=0
-  
+  form: FormGroup
 
   instancia: instancia[] = [
     {value: '-', viewValue: ''},
@@ -77,6 +78,7 @@ dataSource: any;
     private notificationService: NotificationService,
     private _criteriosService :criterioService,
     private _estrategiaService :estrategiaService,
+    private fb: FormBuilder,
     private _informeService :InformesService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { 
@@ -100,7 +102,9 @@ dataSource: any;
     this.NombreDivision=data.alumno.curso.division
     this.cicloLectivo=data.alumno.curso.cicloLectivo
    this.listarCriteriosEstrategias(data.idAsignatura)
-   console.log(this.contenidos);
+     this.form=this.fb.group({
+      resultado: ['', Validators.required],
+     })
   
   }
 
@@ -173,7 +177,7 @@ dataSource: any;
       this.notificationService.openSnackBar("Informe Actualizado Correctamente")
       console.log(data);},
     error: (err)=>{
-      this.notificationService.openSnackBar(err.error.Mensaje)
+      this.notificationService.openSnackBar(err.error.mensaje)
       console.log(err);},
     
    })

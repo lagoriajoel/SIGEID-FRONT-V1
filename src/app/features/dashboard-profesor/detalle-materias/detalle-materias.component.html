@@ -29,14 +29,30 @@
 
         
         </mat-card-content>
-        <mat-card-actions class="botones">
+        <mat-divider></mat-divider>
+        <section class="botones">
+        <div class="fila-btn">
+          <button  mat-stroked-button (click)="generarInformes(materia)">Generar Informes</button>
+        </div>
+          <mat-divider></mat-divider>
+
+          <div class="fila-btn">
+            <button  mat-stroked-button (click)="contenidos(materia)">Contenidos/Estrategias</button>
+          </div>
+            <mat-divider></mat-divider>
+            <div class="fila-btn">
+              <button mat-stroked-button (click)="actualizar(materia)">Actualizar Diciembre/Febrero</button>
+        </div>
+          <mat-divider></mat-divider>
+          <div class="fila-btn">
+            <button mat-stroked-button (click)="actualizarMesa(materia)">Actualizar Mesa Examen</button>
+          </div>
+            <mat-divider></mat-divider>
         
-          <button  type="button" (click)="generarInformes(materia)">Generar Informes</button>
-          <button   type="button" (click)="contenidos(materia)">Contenidos/Estrategias</button>
-          <button  type="button" (click)="actualizar(materia)">Actualizar Diciembre/Febrero</button>
-          <button  type="button" (click)="actualizarMesa(materia)">Actualizar Mesa Examen</button>
         
-        </mat-card-actions>
+        
+        
+      </section>
       </mat-card>
     </div>
   </div>

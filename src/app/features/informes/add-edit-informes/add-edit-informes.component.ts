@@ -21,6 +21,7 @@ import { criterioService } from "src/app/core/services/criterio.service";
 import { estrategiaService } from "src/app/core/services/estrategia.service";
 import { criterioDto } from "src/app/core/Entities/criterioDTO";
 import { estrategiaDto } from "src/app/core/Entities/estrategiaDto";
+import { contenidoAdeudadoDto } from "src/app/core/Entities/contenidoAdeudadoDto";
 
 @Component({
   selector: "app-add-edit-informes",
@@ -32,6 +33,7 @@ export class AddEditInformesComponent implements OnInit {
 
   //Array de contenidos adeudados por el Alumno
   contenidos: contenido[] = [];
+  contenidosAdeudados: contenidoAdeudadoDto[] = [];
 
   loading: boolean = false;
   operacion: string = "Agregar ";
@@ -174,7 +176,8 @@ export class AddEditInformesComponent implements OnInit {
       profesorNombre:this.authService.getName(),
       asignatura: materiaInf,
       alumno: alumnoInf,
-      contenidosAdeudados: this.contenidos,
+     // contenidosAdeudados: this.contenidos,       corregir  error al cambiar contenidos por contenidosAdeudados
+     contenidosAdeudados: this.contenidosAdeudados
     };
 
   

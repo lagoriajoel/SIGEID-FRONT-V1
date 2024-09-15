@@ -1,5 +1,6 @@
 <div class="container">
-    <h2 mat-dialog-title>Informes de Desempeño de {{NombreCurso}} {{NombreDivision}}- Actualizacion Febrero</h2>
+<form [formGroup]="form" (ngSubmit)="actualizarInforme()">
+  <h2 mat-dialog-title>Informes de Desempeño de {{NombreCurso}} {{NombreDivision}}- Actualizacion Febrero</h2>
   
     <mat-divider></mat-divider>
   
@@ -135,7 +136,7 @@
              
           <mat-selection-list  class="lista">
             <mat-list-item *ngFor="let estrategia of estrategias">
-              {{estrategia.estrategias}}
+              {{estrategia.estrategia}}
             </mat-list-item>
           </mat-selection-list>
        
@@ -173,7 +174,7 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Febrero</th>
           <td mat-cell *matCellDef="let element"> 
                
-              <mat-select  (selectionChange)="EvaluacionFebrero($event, element.id)">
+              <mat-select  (selectionChange)="EvaluacionFebrero($event, element.id)" formControlName="resultado">
               <mat-option *ngFor="let instancia of instancia"  [value]="instancia.value">
                 {{instancia.viewValue}}
               </mat-option>
@@ -190,10 +191,11 @@
   
     <mat-dialog-actions align="end">
       <button type="button" (click)="cancelar()" mat-button>Cancelar</button>
-      <button type="button" (click)="actualizarInforme()"mat-button cdkFocusInitial> Actualizar </button>
+      <button type="submit" mat-button cdkFocusInitial> Actualizar </button>
     </mat-dialog-actions>
     
-    </div>
+</form>    
+</div>
   
   
   

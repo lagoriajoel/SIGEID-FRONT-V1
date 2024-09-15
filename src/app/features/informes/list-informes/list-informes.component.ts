@@ -4,7 +4,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { Title } from "@angular/platform-browser";
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, Params, Router } from "@angular/router";
 import { Alumno } from "src/app/core/Entities/alumno";
 import { Informes } from "src/app/core/Entities/informe";
 import { AlumnoService } from "src/app/core/services/alumno.service";
@@ -18,6 +18,8 @@ import { CursosService } from "src/app/core/services/cursos/cursos.service";
 import { CursoDto } from "src/app/core/Entities/CursoDto";
 import { AlumnoInformeDto } from "src/app/core/Entities/AlumnoInformeDto";
 import { InformesHistorial } from "src/app/core/Entities/InformeHistorial";
+import { ActualizarComponent } from "../actualizar/actualizar.component";
+import { AlumnoDto } from "src/app/core/Entities/AlumnoDto";
 
 
 @Component({
@@ -57,6 +59,7 @@ export class ListInformesComponent implements OnInit {
     private _materiaService: MateriasService,
     private _cursorService:CursosService,
     public dialog: MatDialog,
+    private router: Router,
   
     private _routes: ActivatedRoute
   ) {
@@ -136,6 +139,7 @@ export class ListInformesComponent implements OnInit {
         idAlumno: idAlumno,
         id: Number(this.id),
         idAsignatura: Number(this.idAsignatura),
+      
       },
     });
 
@@ -146,7 +150,7 @@ export class ListInformesComponent implements OnInit {
     });
   }
   // aactualizar el informe de desepeño
-  actualizarInforme(idAlumno: number, value: boolean): void {
+  actualizarInformeDiciembre(idAlumno: number, value: boolean): void {
     if (this.isInforme != 0) {
       const alumno=this.alumnosConInformes.find(alumno=>alumno.id == idAlumno)!
       
@@ -221,8 +225,47 @@ export class ListInformesComponent implements OnInit {
       });
     }
   }
+    //Nueva funcionalidad para actualizar 2024
 
-
+    actualizarInforme(idAlumno: number, value: boolean): void {
+      if (this.isInforme != 0) {
+        const alumno=this.alumnosConInformes.find(alumno=>alumno.id == idAlumno)!
+        
+        
+         this.InformeAlumno = this.getInformeAlumno(alumno, this.idAsignatura);
+       
+   
+        const dialogRef = this.dialog.open(ActualizarComponent, {
+          width: "1000px",
+          disableClose: true,
+          data: {
+            alumno: alumno,
+            informe: this.InformeAlumno,
+            NombreAlumno: alumno.nombres + " " + alumno.apellido,
+            dni: alumno.dni,
+            value: value,
+            NombreAsignatura: this.NombreAsignatura,
+            idAsignatura: Number(this.idAsignatura),
+           
+          },
+        });
+   
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result) {
+            this.listarAlumnosConInformes();
+          }
+        });
+      }
+    }
+ 
+    actualizar(alumno:AlumnoInformeDto){
+      this.router.navigate(['informes/actualizar'], {
+        queryParams: {
+          asignaturaId:this.idAsignatura,
+          AlumnoId: alumno.id,
+        }
+      });
+    }
   
   //mostrar el informe de desempeño
   verInforme(idAlumno: number){

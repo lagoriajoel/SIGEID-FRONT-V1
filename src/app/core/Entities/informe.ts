@@ -15,5 +15,5 @@ export interface Informes {
     profesorNombre: string;
     asignatura: MateriaContenido;
     alumno: AlumnoInforme
-    contenidosAdeudados: contenido []
+    contenidosAdeudados: contenidoAdeudadoDto []
 }

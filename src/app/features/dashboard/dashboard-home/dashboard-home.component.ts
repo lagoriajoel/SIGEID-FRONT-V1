@@ -41,13 +41,15 @@ export class DashboardHomeComponent implements OnInit {
 
   ngOnInit() {
     
-    this.titleService.setTitle("SiGeID - Dashboard");
-     this.nombreUsuario=this.authService.getName()
-     this.isAdmin = this.authService.isAdmin();
+    this.titleService.setTitle("SiGeID - Dashboard")
+     
+    this.nombreUsuario=this.authService.getName()
+    console.log(this.nombreUsuario);
+     this.isAdmin = this.authService.isAdmin()
 
    
-     this.isProfesor=this.authService.isProfesor();
-     this.isDirector=this.authService.isDirectivo();
+     this.isProfesor=this.authService.isProfesor()
+     this.isDirector=this.authService.isDirectivo()
 
      
      if(this.isAdmin){

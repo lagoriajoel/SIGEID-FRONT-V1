@@ -40,6 +40,8 @@ export class MostrarInformeComponent implements OnInit {
   alumnoInforme!: Informes
   estado:boolean = false;
   idInforme!: number 
+  isDiciembre: boolean = false
+  isFebrero: boolean = false
  
 
   NombreProfesor: string =''
@@ -63,7 +65,7 @@ export class MostrarInformeComponent implements OnInit {
   ];
   instanciaSelect: string = ''
 
-displayedColumns: string[] = ["nombre", "descripcion", "diciembre"];
+displayedColumns: string[] = ["nombre", "descripcion", "diciembre", "febrero"];
   
 
 dataSource: any;
@@ -85,7 +87,7 @@ dataSource: any;
    
     this.contenidos=this.data.informe.contenidosAdeudados
   
-    this.dataSource = new MatTableDataSource<contenido>(this.contenidos) 
+    this.dataSource = new MatTableDataSource<contenidoAdeudadoDto>(this.contenidos) 
    this.alumnoInforme=data.informe
    this.value=data.value
      
@@ -94,14 +96,18 @@ dataSource: any;
     this.NombreAlumno=data.alumno.nombres
     this.ApellidoAlumno=data.alumno.apellido
     this.email=data.alumno.email
-    
+    this.idInforme=data.informe.id
     this.NombreAsignatura=data.NombreAsignatura
-    this.NombreCurso=data.alumno.curso.anio
+    this.NombreCurso=data.informe.asignatura.anioCurso
     this.dniAlumno=data.alumno.dni
     this.NombreDivision=data.alumno.curso.division
-    this.cicloLectivo=data.alumno.curso.cicloLectivo
+    this.cicloLectivo=data.informe.asignatura.cicloLectivo
+    this.NombreProfesor=data.informe.profesorNombre
+    this.isDiciembre=data.informe.diciembre
+    this.isFebrero=data.informe.febrero
    this.listarCriteriosEstrategias(data.idAsignatura)
-   console.log(this.contenidos);
+   console.log(data);
+   console.log(this.isDiciembre);
   
   }
 
@@ -172,6 +178,7 @@ dataSource: any;
       this.contenidos.forEach(contenido=>{
         if(contenido.id==id){
           contenido.instanciaEvaluacion_febrero="aprobado"
+          
         
         }
       })
@@ -190,7 +197,7 @@ dataSource: any;
     this.contenidos.forEach(contenido=>{
       if(contenido.id==id){
         contenido.instanciaEvaluacion_febrero="ausente"
-        
+       
       }
     })
     console.log(this.contenidos);
@@ -204,12 +211,12 @@ dataSource: any;
 
    
   
-   this._informeService.actualizarContenidoDiciembre(this.contenidos).subscribe({
+   this._informeService.actualizarDiciembreFebrero(this.contenidos, this.idInforme).subscribe({
     next: data=>{
       this.notificationService.openSnackBar("Informe Actualizado Correctamente")
       console.log(data);},
     error: (err)=>{
-      this.notificationService.openSnackBar(err.error.Mensaje)
+      this.notificationService.openSnackBar(err.error.mensaje)
       console.log(err);},
 
    })

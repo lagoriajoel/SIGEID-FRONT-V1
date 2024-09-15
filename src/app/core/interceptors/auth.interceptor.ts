@@ -39,10 +39,17 @@ export class AuthInterceptor implements HttpInterceptor {
 
 
                                             //this.notification.openSnackBar("Invalid credentials") 
-                                                console.log("sesion expiradaaaaaaaaaaaaaa");
+                                               console.log("error 401" +err.message);
+                            
                                                 this.dialog.closeAll();
                                                 this.router.navigate(['/auth/login']);
                                             }
+                                          else if(err.status=== 403){
+                                            console.log("error 403");
+                            
+                                            this.dialog.closeAll();
+                                            this.router.navigate(['/auth/login']);
+                                          }  
                                         }
                                     }));
                             

@@ -60,7 +60,7 @@ export class AddEditEstrategiasComponent implements OnInit {
       console.log(data);
       this.form.setValue({
     
-        estrategias: data.estrategias
+        estrategias: data.estrategia
   
     })
   },
@@ -85,7 +85,7 @@ export class AddEditEstrategiasComponent implements OnInit {
 
     const estrategia: estrategiaDto = {
        id:0,
-      estrategias: this.form.value.estrategias,
+      estrategia: this.form.value.estrategias,
       asignatura: materia
     };
 

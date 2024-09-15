@@ -5,12 +5,15 @@ import { ListInformesComponent } from './list-informes/list-informes.component';
 import { ActualizarDiciembreFebreroComponent } from './actualizar-diciembre-febrero/actualizar-diciembre-febrero.component';
 import { GraficosComponent } from './graficos/graficos.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas/estadisticas.component';
+import { ActualizarComponent } from './actualizar/actualizar.component';
 
 const routes: Routes = [
   {path:'', component: LayoutComponent,
   children:[
     { path:'listar', component: ListInformesComponent },
     { path:'actualizarInforme', component: ActualizarDiciembreFebreroComponent },
+    { path:'actualizar', component: ActualizarComponent },
+
    // { path:'graficos', component: EstadisticasComponent },
     { path:'graficos', component: GraficosComponent },
 

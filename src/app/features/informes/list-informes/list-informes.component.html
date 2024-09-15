@@ -3,6 +3,11 @@
       <mat-card>
         
         <mat-card-content>
+          <div class="titulo">
+            <h2>
+              Actualización Diciembre Febrero
+            </h2>
+          </div>
 
           <mat-divider></mat-divider>
           <div class="titulo">
@@ -65,7 +70,7 @@
                  
                 <mat-icon *ngIf="isInforme===1"  class="btnEdit" (click)="verInforme(element.id)" matTooltip="Ver Informe">visibility</mat-icon>   
               
-                <button *ngIf="isInforme===1&&!isDirectivo" mat-raised-button (click)="actualizarInforme(element.id, true)" >
+                <button *ngIf="isInforme===1&&!isDirectivo" mat-raised-button (click)="actualizarInformeDiciembre(element.id, true)" >
                   <mat-icon>add</mat-icon>
                  Diciembre
                 </button>
@@ -73,12 +78,16 @@
                   <mat-icon>add</mat-icon>
                  Febrero
                 </button>
+
+                <button *ngIf="isInforme===1&&!isDirectivo" mat-raised-button (click)="actualizarInforme(element.id, false)" >
+                  <mat-icon>info</mat-icon>
+                 Actualizar Informe
+                </button>
            </ng-container>
           
           
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr
-                mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+            <tr  mat-row (click)="actualizar(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
           
           </table>
   

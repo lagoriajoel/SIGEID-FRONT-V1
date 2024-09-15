@@ -23,7 +23,7 @@ export class InformesService {
     return this.httpClient.get<Informes[]>(this.informeURL + 'list');
   }
   public listaPorAlumnoMateria(id: number, idAsignatura:number): Observable<Informes> {
-    return this.httpClient.get<Informes>(this.informeURL + `/listAlumno/${id}/asignatura/${idAsignatura}`);
+    return this.httpClient.get<Informes>(this.informeURL + `listAlumno/${id}/asignatura/${idAsignatura}`);
   }
   public listarPorMaterias(nombre:string, anio:string): Observable<Informes[]> {
     return this.httpClient.get<Informes[]>(this.informeURL + `listOfNombreAsignatura/${nombre}/${anio}`);
@@ -39,6 +39,9 @@ export class InformesService {
     return this.httpClient.get<InformesHistorial>(this.informeURL + `list/${id}`);
   }
 
+  public instanciaEvaluacion(informeId: number): Observable<number> {
+    return this.httpClient.get<number>(this.informeURL + `instanciaEvaluacion/${informeId}`);
+  }
  
   public save(informe: Informes): Observable<any> {
     return this.httpClient.post<any>(this.informeURL + 'save', informe);
@@ -47,12 +50,17 @@ export class InformesService {
   public update(id: number, informe: Informes): Observable<any> {
     return this.httpClient.put<any>(this.informeURL + `update/${id}`, informe);
   }
-  public actualizarContenidoDiciembre( contenidos: contenidoAdeudadoDto[]): Observable<any> {
-    return this.httpClient.put<any>(this.informeURL + `actualizarContenidoDiciembre/`, contenidos);
+  public actualizarContenidoDiciembre( contenidos: contenidoAdeudadoDto[],  id:number): Observable<any> {
+    return this.httpClient.put<any>(this.informeURL + `actualizarContenidoDiciembre/${id}`, contenidos);
   }
   public actualizarContenidoFebrero( contenidos: contenidoAdeudadoDto[], id:number): Observable<any> {
     return this.httpClient.put<any>(this.informeURL + `actualizarContenidoFebrero/${id}`, contenidos);
   }
+  //test changes 2024
+  public actualizarDiciembreFebrero( contenidos: contenidoAdeudadoDto[], id:number): Observable<any> {
+    return this.httpClient.put<any>(this.informeURL + `actualizarDiciembreFebrero/${id}`, contenidos);
+  }
+  //test changes
   public actualizarContenidoExamen( contenidos: contenidoInformeDto[]): Observable<any> {
     return this.httpClient.put<any>(this.informeURL + `actualizarContenidoExamen/`, contenidos);
   }

@@ -1,5 +1,6 @@
 .botones {
     display: grid;
+    margin-top: 2rem;
 }
 .curso {
     font-weight: 500;
@@ -11,4 +12,6 @@
 .row {
     display: flex
 }
-
+.botones .fila-btn {
+    margin: 8px 8px 8px 0;
+  }

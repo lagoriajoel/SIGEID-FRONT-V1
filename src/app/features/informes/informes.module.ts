@@ -11,6 +11,7 @@ import { MostrarIInformeFebreroComponent } from './mostrar-i-informe-febrero/mos
 import { GraficosComponent } from './graficos/graficos.component';
 import { Grafico2Component } from './estadisticas/grafico2/grafico2.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas/estadisticas.component';
+import { ActualizarComponent } from './actualizar/actualizar.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { EstadisticasComponent } from './estadisticas/estadisticas/estadisticas.
     MostrarIInformeFebreroComponent,
     GraficosComponent,
     Grafico2Component,
-    EstadisticasComponent
+    EstadisticasComponent,
+    ActualizarComponent
   ],
   imports: [
     CommonModule,
