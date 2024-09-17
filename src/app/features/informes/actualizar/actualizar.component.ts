@@ -53,6 +53,15 @@ export class ActualizarComponent implements OnInit {
   informeId!: number;
   numInstanciasEvaluacion!:number;
   loading: boolean= true;
+  presidenteMesa_1!:string
+  presidenteMesa_2!:string
+  presidenteMesa_3!:string
+  presidenteMesa_4!:string
+  fechaExamen_1!:string
+  fechaExamen_2!:string
+  fechaExamen_3!:string
+  fechaExamen_4!:string
+
   
  
 
@@ -65,6 +74,7 @@ export class ActualizarComponent implements OnInit {
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private _informesService: InformesService,
+    private _notificationService: NotificationService
   ) { 
       this.numInstanciasEvaluacion = 0
     this._route.queryParamMap.subscribe((params) => {
@@ -141,7 +151,15 @@ export class ActualizarComponent implements OnInit {
         this.nombreProfesor=data.profesorNombre;
         this.informeId=data.id
        this.getInstaciasEvaluacion(data.id)
-        
+       this.presidenteMesa_1=data.presidenteMesaInstancia_1
+       this.presidenteMesa_2=data.presidenteMesaInstancia_2
+       this.presidenteMesa_3=data.presidenteMesaInstancia_3
+       this.presidenteMesa_4=data.presidenteMesaInstancia_4
+       this.fechaExamen_1=data.fechaInstancia_1
+       this.fechaExamen_2=data.fechaInstancia_2
+       this.fechaExamen_3=data.fechaInstancia_3
+       this.fechaExamen_4=data.fechaInstancia_4
+
         this.estrategias = data.estrategiasEvaluacion
         this.criterios = data.criteriosEvaluacion
         this.contenidos = data.contenidosAdeudados
@@ -157,7 +175,7 @@ export class ActualizarComponent implements OnInit {
       this.contenidos.forEach(contenido=>{
         if(contenido.id==id){
           contenido.instanciaEvaluacion_diciembre="aprobado"
-          
+          contenido.aprobado=true
         
         }
       })
@@ -167,7 +185,7 @@ export class ActualizarComponent implements OnInit {
       this.contenidos.forEach(contenido=>{
         if(contenido.id==id){
           contenido.instanciaEvaluacion_diciembre="desaprobado"
-         
+          contenido.aprobado=false
         }
       })
       console.log(this.contenidos);
@@ -176,7 +194,7 @@ export class ActualizarComponent implements OnInit {
     this.contenidos.forEach(contenido=>{
       if(contenido.id==id){
         contenido.instanciaEvaluacion_diciembre="ausente"
-       
+        contenido.aprobado=false
       }
     })
     console.log(this.contenidos);
@@ -189,7 +207,7 @@ resultadoInstanciaFebrero(ob: MatSelectChange, id: number){
     this.contenidos.forEach(contenido=>{
       if(contenido.id==id){
         contenido.instanciaEvaluacion_febrero="aprobado"
-        
+        contenido.aprobado=true
       
       }
     })
@@ -199,7 +217,7 @@ resultadoInstanciaFebrero(ob: MatSelectChange, id: number){
     this.contenidos.forEach(contenido=>{
       if(contenido.id==id){
         contenido.instanciaEvaluacion_febrero="desaprobado"
-       
+       contenido.aprobado=false
       }
     })
     console.log(this.contenidos);
@@ -208,7 +226,7 @@ resultadoInstanciaFebrero(ob: MatSelectChange, id: number){
   this.contenidos.forEach(contenido=>{
     if(contenido.id==id){
       contenido.instanciaEvaluacion_febrero="ausente"
-     
+      contenido.aprobado=false
     }
   })
   console.log(this.contenidos);
@@ -222,7 +240,7 @@ resultadoInstanciaExamen(ob: MatSelectChange, id: number){
                           this.contenidos.forEach(contenido=>{
                             if(contenido.id==id){
                               contenido.instanciaEvaluacion_1="aprobado"
-                                        
+                              contenido.aprobado=true        
                             }
                           })
                         console.log(this.contenidos);
@@ -231,7 +249,7 @@ resultadoInstanciaExamen(ob: MatSelectChange, id: number){
                           this.contenidos.forEach(contenido=>{
                             if(contenido.id==id){
                               contenido.instanciaEvaluacion_1="desaprobado"
-                            
+                              contenido.aprobado=false
                             }
                           })
                           console.log(this.contenidos);
@@ -240,7 +258,7 @@ resultadoInstanciaExamen(ob: MatSelectChange, id: number){
                         this.contenidos.forEach(contenido=>{
                           if(contenido.id==id){
                             contenido.instanciaEvaluacion_1="ausente"
-                          
+                            contenido.aprobado=false
                           }
                         })
                         console.log(this.contenidos);
@@ -252,7 +270,7 @@ resultadoInstanciaExamen(ob: MatSelectChange, id: number){
                       this.contenidos.forEach(contenido=>{
                         if(contenido.id==id){
                           contenido.instanciaEvaluacion_2="aprobado"
-                                    
+                          contenido.aprobado=true       
                         }
                       })
                     console.log(this.contenidos);
@@ -261,7 +279,7 @@ resultadoInstanciaExamen(ob: MatSelectChange, id: number){
                       this.contenidos.forEach(contenido=>{
                         if(contenido.id==id){
                           contenido.instanciaEvaluacion_2="desaprobado"
-                        
+                          contenido.aprobado=false
                         }
                       })
                       console.log(this.contenidos);
@@ -270,7 +288,7 @@ resultadoInstanciaExamen(ob: MatSelectChange, id: number){
                     this.contenidos.forEach(contenido=>{
                       if(contenido.id==id){
                         contenido.instanciaEvaluacion_2="ausente"
-                      
+                        contenido.aprobado=false
                       }
                     })
                     console.log(this.contenidos);
@@ -283,7 +301,7 @@ resultadoInstanciaExamen(ob: MatSelectChange, id: number){
         this.contenidos.forEach(contenido=>{
           if(contenido.id==id){
             contenido.instanciaEvaluacion_3="aprobado"
-                      
+            contenido.aprobado=true  
           }
         })
       console.log(this.contenidos);
@@ -292,7 +310,7 @@ resultadoInstanciaExamen(ob: MatSelectChange, id: number){
         this.contenidos.forEach(contenido=>{
           if(contenido.id==id){
             contenido.instanciaEvaluacion_3="desaprobado"
-          
+            contenido.aprobado=false
           }
         })
         console.log(this.contenidos);
@@ -301,7 +319,7 @@ resultadoInstanciaExamen(ob: MatSelectChange, id: number){
       this.contenidos.forEach(contenido=>{
         if(contenido.id==id){
           contenido.instanciaEvaluacion_3="ausente"
-        
+          contenido.aprobado=false
         }
       })
       console.log(this.contenidos);
@@ -314,7 +332,7 @@ if(ob.value =="aprobado"){
   this.contenidos.forEach(contenido=>{
     if(contenido.id==id){
       contenido.instanciaEvaluacion_4="aprobado"
-                
+      contenido.aprobado=true
     }
   })
 console.log(this.contenidos);
@@ -323,7 +341,7 @@ else if(ob.value =="desaprobado"){
   this.contenidos.forEach(contenido=>{
     if(contenido.id==id){
       contenido.instanciaEvaluacion_4="desaprobado"
-    
+      contenido.aprobado=false
     }
   })
   console.log(this.contenidos);
@@ -332,7 +350,7 @@ else if(ob.value =="ausente"){
 this.contenidos.forEach(contenido=>{
   if(contenido.id==id){
     contenido.instanciaEvaluacion_4="ausente"
-  
+    contenido.aprobado=false
   }
 })
 console.log(this.contenidos);
@@ -370,8 +388,10 @@ actualizarInforme(){
         
         error: (err)=>{
         
-          console.log(err);},
-        
+          console.log(err.error.mensaje);
+          this._notificationService.openSnackBar(err.error.mensaje);
+        }
+          
        })
     });
 }

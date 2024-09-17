@@ -67,22 +67,11 @@
                   <mat-icon>add</mat-icon>
                   Generar Informe
                 </button>
-                 
-                <mat-icon *ngIf="isInforme===1"  class="btnEdit" (click)="verInforme(element.id)" matTooltip="Ver Informe">visibility</mat-icon>   
+                 Exportar
+                <mat-icon *ngIf="isInforme===1"  class="btnEdit" (click)="verInforme(element.id)" matTooltip="Ver Informe"> picture_as_pdf</mat-icon>   
               
-                <button *ngIf="isInforme===1&&!isDirectivo" mat-raised-button (click)="actualizarInformeDiciembre(element.id, true)" >
-                  <mat-icon>add</mat-icon>
-                 Diciembre
-                </button>
-                <button *ngIf="isInforme===1&&!isDirectivo" mat-raised-button (click)="actualizarInformeFebrero(element.id, false)" >
-                  <mat-icon>add</mat-icon>
-                 Febrero
-                </button>
-
-                <button *ngIf="isInforme===1&&!isDirectivo" mat-raised-button (click)="actualizarInforme(element.id, false)" >
-                  <mat-icon>info</mat-icon>
-                 Actualizar Informe
-                </button>
+              
+              
            </ng-container>
           
           

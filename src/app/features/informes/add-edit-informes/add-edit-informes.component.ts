@@ -130,6 +130,7 @@ export class AddEditInformesComponent implements OnInit {
         this.dataSource.data = data;
       
         this.contenidos = data;
+        this.contenidosAdeudados=data
        
       });
   }
@@ -176,7 +177,8 @@ export class AddEditInformesComponent implements OnInit {
       profesorNombre:this.authService.getName(),
       asignatura: materiaInf,
       alumno: alumnoInf,
-     // contenidosAdeudados: this.contenidos,       corregir  error al cambiar contenidos por contenidosAdeudados
+      //contenidosAdeudados: this.contenidos, 
+     //      corregir  error al cambiar contenidos por contenidosAdeudados
      contenidosAdeudados: this.contenidosAdeudados
     };
 

@@ -66,7 +66,7 @@ export class DetalleMateriasComponent implements OnInit {
   }
 
   generarInformes(materia: MateriasDto) {
-    this.router.navigate(["/informes/listar/"], {
+    this.router.navigate(["/informes/generarInforme/"], {
       queryParams: {
         curso: materia.curso.id,
         asignatura: materia.asignatura_id,

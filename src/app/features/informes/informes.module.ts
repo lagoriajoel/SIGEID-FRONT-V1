@@ -12,6 +12,7 @@ import { GraficosComponent } from './graficos/graficos.component';
 import { Grafico2Component } from './estadisticas/grafico2/grafico2.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas/estadisticas.component';
 import { ActualizarComponent } from './actualizar/actualizar.component';
+import { ListarAlumnosComponent } from './listar-alumnos/listar-alumnos.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ActualizarComponent } from './actualizar/actualizar.component';
     GraficosComponent,
     Grafico2Component,
     EstadisticasComponent,
-    ActualizarComponent
+    ActualizarComponent,
+    ListarAlumnosComponent
   ],
   imports: [
     CommonModule,

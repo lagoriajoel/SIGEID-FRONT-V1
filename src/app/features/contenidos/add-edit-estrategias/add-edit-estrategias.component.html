@@ -2,7 +2,7 @@
     <h2 mat-dialog-title>{{ operacion }} Estrategia de Evaluacion</h2>
     <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
   </div>
-  <form [formGroup]="form" (ngSubmit)="addEditContenido()">
+  <form [formGroup]="form" (ngSubmit)="addEditEstrategia()">
   
     <mat-dialog-content >
   
@@ -10,7 +10,7 @@
         <div class="column">
           <mat-form-field appearance="fill">
             <mat-label>Estrategia</mat-label>
-            <input formControlName="estrategias" matInput placeholder="Ingrese el Nombre del Contenido" autocomplete="off">
+            <input formControlName="estrategia" matInput placeholder="Ingrese el Nombre del Contenido" autocomplete="off">
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('nombre')?.hasError('required') && form.get('dni')?.touched">

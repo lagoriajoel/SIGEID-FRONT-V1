@@ -22,8 +22,8 @@ export class InformesService {
   public lista(): Observable<Informes[]> {
     return this.httpClient.get<Informes[]>(this.informeURL + 'list');
   }
-  public listaPorAlumnoMateria(id: number, idAsignatura:number): Observable<Informes> {
-    return this.httpClient.get<Informes>(this.informeURL + `listAlumno/${id}/asignatura/${idAsignatura}`);
+  public listaPorAlumnoMateria(id: number, idAsignatura:number): Observable<InformesHistorial> {
+    return this.httpClient.get<InformesHistorial>(this.informeURL + `listAlumno/${id}/asignatura/${idAsignatura}`);
   }
   public listarPorMaterias(nombre:string, anio:string): Observable<Informes[]> {
     return this.httpClient.get<Informes[]>(this.informeURL + `listOfNombreAsignatura/${nombre}/${anio}`);

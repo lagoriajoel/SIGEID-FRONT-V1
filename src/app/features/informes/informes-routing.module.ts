@@ -6,6 +6,7 @@ import { ActualizarDiciembreFebreroComponent } from './actualizar-diciembre-febr
 import { GraficosComponent } from './graficos/graficos.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas/estadisticas.component';
 import { ActualizarComponent } from './actualizar/actualizar.component';
+import { ListarAlumnosComponent } from './listar-alumnos/listar-alumnos.component';
 
 const routes: Routes = [
   {path:'', component: LayoutComponent,
@@ -13,6 +14,9 @@ const routes: Routes = [
     { path:'listar', component: ListInformesComponent },
     { path:'actualizarInforme', component: ActualizarDiciembreFebreroComponent },
     { path:'actualizar', component: ActualizarComponent },
+    { path:'generarInforme', component: ListarAlumnosComponent },
+
+
 
    // { path:'graficos', component: EstadisticasComponent },
     { path:'graficos', component: GraficosComponent },

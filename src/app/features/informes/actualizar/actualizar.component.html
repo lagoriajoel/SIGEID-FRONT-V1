@@ -122,18 +122,104 @@
                 <table>
                     <tr>
                         <th>Presidente de Mesa</th>
-                        <td>Juan Pérez</td>
-                        <td>Juan Pérez</td>
-                        <td>Juan Pérez</td>
-                        <td></td>
+                        <td>
+                          <div *ngIf="!isButtonVisible || !isElementVisible(2)"> 
+
+                            {{presidenteMesa_1}}
+                            preseidente mesa
+                          </div>
+                          <div >
+                         
+                              <input *ngIf="isButtonVisible && isElementVisible(2)" matInput >
+                           
+                          </div>
+
+                        </td>
+                        <td>
+                          <div *ngIf="!isButtonVisible || !isElementVisible(3)"> 
+
+                            {{presidenteMesa_2}}
+                            preseidente mesa
+                          </div>
+                          <div >
+                         
+                              <input *ngIf="isButtonVisible && isElementVisible(3)" matInput >
+                           
+                          </div>
+
+                        </td>
+                        <td>
+                          <div *ngIf="!isButtonVisible || !isElementVisible(4)"> 
+
+                            {{presidenteMesa_3}}
+                            preseidente mesa
+                          </div>
+                          <div >
+                         
+                              <input *ngIf="isButtonVisible && isElementVisible(4)" matInput >
+                           
+                          </div>
+
+                        </td>
+                        <td>
+                          <div *ngIf="!isButtonVisible || !isElementVisible(5)"> 
+
+                            {{presidenteMesa_4}}
+                            preseidente mesa
+                          </div>
+                          <div >
+                         
+                              <input *ngIf="isButtonVisible && isElementVisible(5)" matInput >
+                           
+                          </div>
+
+                        </td>
+                     
         
                     </tr>
                     <tr>
                         <th>Fecha</th>
-                        <td>18/7/2023</td>
-                        <td>18/7/2023</td>
-                        <td>18/7/2023</td>
-                        <td></td>
+                        <td>
+                          <div *ngIf="!isButtonVisible || !isElementVisible(2)">
+                            {{fechaExamen_1}}
+
+                          </div>
+                           <div *ngIf="isButtonVisible && isElementVisible(2)">
+
+                           <input type="date" name="" id="">
+                           </div>
+                        </td>
+                        <td>
+                          <div *ngIf="!isButtonVisible || !isElementVisible(3)">
+                            {{fechaExamen_2}}
+
+                          </div>
+                           <div *ngIf="isButtonVisible && isElementVisible(3)">
+
+                           <input type="date" name="" id="">
+                           </div>
+                        </td>
+                        <td>
+                          <div *ngIf="!isButtonVisible || !isElementVisible(4)">
+                            {{fechaExamen_3}}
+
+                          </div>
+                           <div *ngIf="isButtonVisible && isElementVisible(4)">
+
+                           <input type="date" name="" id="">
+                           </div>
+                        </td>
+                        <td>
+                          <div *ngIf="!isButtonVisible || !isElementVisible(5)">
+                            {{fechaExamen_4}}
+
+                          </div>
+                           <div *ngIf="isButtonVisible && isElementVisible(5)">
+
+                           <input type="date" name="" id="">
+                           </div>
+                        </td>
+                     
         
                     </tr>
                   

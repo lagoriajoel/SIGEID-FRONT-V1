@@ -32,7 +32,7 @@ export class AddEditEstrategiasComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.form = this.fb.group({
-      estrategias: ["", [Validators.required]],
+      estrategia: ["", [Validators.required]],
     
     });
 
@@ -60,7 +60,7 @@ export class AddEditEstrategiasComponent implements OnInit {
       console.log(data);
       this.form.setValue({
     
-        estrategias: data.estrategia
+        estrategia: data.estrategia
   
     })
   },
@@ -75,7 +75,7 @@ export class AddEditEstrategiasComponent implements OnInit {
     this.dialogRef.close(false);
   }
 
-  addEditContenido() {
+  addEditEstrategia() {
     if (this.form.invalid) {
       return;
     }
@@ -85,7 +85,7 @@ export class AddEditEstrategiasComponent implements OnInit {
 
     const estrategia: estrategiaDto = {
        id:0,
-      estrategia: this.form.value.estrategias,
+      estrategia: this.form.value.estrategia,
       asignatura: materia
     };
 

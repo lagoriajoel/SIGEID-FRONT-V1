@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { contenido } from '../Entities/Contenido';
 import { environment } from 'src/environments/environment';
+import { contenidoAdeudadoDto } from '../Entities/contenidoAdeudadoDto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,9 @@ export class ContenidosService {
   public listarContenido(id: number): Observable<contenido[]> {
     return this.httpClient.get<contenido[]>(this.ContenidoURL + `list/${id}` );
   }
-  public listarContenidoPorAsignatura(idAsignatura: number): Observable<contenido[]> {
-    return this.httpClient.get<contenido[]>(this.ContenidoURL + `listOfAsignatura/${idAsignatura}` );
+  //cambio contenido por contenido Dto
+  public listarContenidoPorAsignatura(idAsignatura: number): Observable<contenidoAdeudadoDto[]> {
+    return this.httpClient.get<contenidoAdeudadoDto[]>(this.ContenidoURL + `listOfAsignatura/${idAsignatura}` );
   }
 
   public detail(id: number): Observable<contenido> {

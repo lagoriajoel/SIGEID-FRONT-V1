@@ -1,0 +1,266 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlumnoInformeDto } from 'src/app/core/Entities/AlumnoInformeDto';
+import { CursoDto } from 'src/app/core/Entities/CursoDto';
+import { InformesHistorial } from 'src/app/core/Entities/InformeHistorial';
+import { AlumnoService } from 'src/app/core/services/alumno.service';
+import { CursosService } from 'src/app/core/services/cursos/cursos.service';
+import { MateriasService } from 'src/app/core/services/materias.service';
+import { AddEditInformesComponent } from '../add-edit-informes/add-edit-informes.component';
+import { MostrarInformeComponent } from '../mostrar-informe/mostrar-informe.component';
+import { MostrarIInformeFebreroComponent } from '../mostrar-i-informe-febrero/mostrar-i-informe-febrero.component';
+import { ActualizarComponent } from '../actualizar/actualizar.component';
+
+@Component({
+  selector: 'app-listar-alumnos',
+  templateUrl: './listar-alumnos.component.html',
+  styleUrls: ['./listar-alumnos.component.css']
+})
+export class ListarAlumnosComponent implements OnInit {
+  informes: InformesHistorial[] = [];
+  // informeAlumnos!: Informes;
+   alumnos: AlumnoInformeDto[] = [];
+   alumnosConInformes: AlumnoInformeDto[] = [];
+   loading: boolean = true;
+   id: string = "";
+   idAsignatura!: number;
+   fecha: string = "";
+   isInforme!: number;
+   InformeAlumno!: InformesHistorial;
+   NombreAsignatura: string = "";
+   curso!:CursoDto
+   anioCurso: string = "";
+   divisionCurso: string = "";
+   tecnicatura: string = "";
+   cicloLectivo: string = "";
+ 
+   displayedColumns: string[] = ["dni", "nombres", "apellido","informes"];
+   dataSource = new MatTableDataSource(this.alumnos);
+ 
+   @ViewChild(MatSort, { static: true })
+   sort: MatSort = new MatSort();
+   @ViewChild(MatPaginator) paginator!: MatPaginator;
+   isDirectivo: boolean=false;
+ 
+   constructor(
+     private titleService: Title,
+     private alumnoService: AlumnoService,
+     private _materiaService: MateriasService,
+     private _cursorService:CursosService,
+     public dialog: MatDialog,
+     private router: Router,
+   
+     private _routes: ActivatedRoute
+   ) {
+     this.dataSource = new MatTableDataSource();
+ 
+     this._routes.queryParamMap.subscribe((params) => {
+      this.id = params.get("curso")!;
+       this.idAsignatura = Number(params.get("asignatura"))!;
+       this.isInforme = Number(params.get("informe"))!;
+       this.NombreAsignatura = params.get("nombreAsignatura")!;
+        params.get("directivo") ? this.isDirectivo=true : this.isDirectivo=false;
+ 
+ 
+ 
+       
+         this._cursorService.detail(Number(this.id)).subscribe(data => {
+           this.anioCurso=data.anio;
+           this.divisionCurso=data.division;
+           this.tecnicatura=data.tecnicatura;
+           this.cicloLectivo=data.cicloLectivo;
+     })
+     
+     });
+ 
+   }
+ 
+   ngOnInit() {
+     this.titleService.setTitle("Gestion de Informes - Cursos");
+     this.dataSource.sort = this.sort;
+ 
+     this.isInforme === 0
+       ? this.listarAlumnos()
+       : this.listarAlumnosConInformes();
+       
+         
+   }
+ 
+   //lista todos los alumnos del curso
+   listarAlumnos(): void {
+     this.alumnoService.listarCurso(Number(this.id)).subscribe((data) => {
+       this.dataSource.data = data;
+       console.log(data);
+       this.dataSource.paginator = this.paginator;
+       this.dataSource.sort = this.sort;
+     });
+   }
+ 
+   // lista los alumnos que tiene informes de desempeño de la asignatura
+   listarAlumnosConInformes(): void {
+     this.alumnoService.listarCurso(Number(this.id)).subscribe((data) => {
+       data.forEach((alumno) => {
+         console.log(alumno);
+         if (
+           alumno.informeDesempenios.some(
+             (x) =>
+               x.asignatura.asignatura_id == this.idAsignatura &&
+               x.asignatura.asignatura_id != null &&
+               !x.diciembreFebrero
+               
+           )
+         )
+           this.alumnosConInformes.push(alumno);
+       });
+ 
+       this.dataSource.data = this.alumnosConInformes;
+       this.dataSource.paginator = this.paginator;
+       this.dataSource.sort = this.sort;
+     });
+   }
+ 
+   // abre un modal para agregar los contenidos adeidados por el alumno
+   generarInforme(idAlumno: number) {
+     const dialogRef = this.dialog.open(AddEditInformesComponent, {
+       width: "1000px",
+       disableClose: true,
+       data: {
+         idAlumno: idAlumno,
+         id: Number(this.id),
+         idAsignatura: Number(this.idAsignatura),
+       
+       },
+     });
+ 
+     dialogRef.afterClosed().subscribe((result) => {
+       if (result) {
+         this.listarAlumnos();
+       }
+     });
+   }
+   // aactualizar el informe de desepeño
+   actualizarInformeDiciembre(idAlumno: number, value: boolean): void {
+     if (this.isInforme != 0) {
+       const alumno=this.alumnosConInformes.find(alumno=>alumno.id == idAlumno)!
+       
+       
+        this.InformeAlumno = this.getInformeAlumno(alumno, this.idAsignatura);
+      
+  
+       const dialogRef = this.dialog.open(MostrarInformeComponent, {
+         width: "1000px",
+         disableClose: true,
+         data: {
+           alumno: alumno,
+           informe: this.InformeAlumno,
+           NombreAlumno: alumno.nombres + " " + alumno.apellido,
+           dni: alumno.dni,
+           value: value,
+           NombreAsignatura: this.NombreAsignatura,
+           idAsignatura: Number(this.idAsignatura),
+          
+         },
+       });
+  
+       dialogRef.afterClosed().subscribe((result) => {
+         if (result) {
+           this.listarAlumnosConInformes();
+         }
+       });
+     }
+   }
+ 
+   ngAfterViewInit() {
+     this.dataSource.paginator = this.paginator;
+     this.dataSource.sort = this.sort;
+   }
+ 
+   applyFilter(event: Event) {
+     const filterValue = (event.target as HTMLInputElement).value;
+     this.dataSource.filter = filterValue.trim().toLowerCase();
+ 
+     if (this.dataSource.paginator) {
+       this.dataSource.paginator.firstPage();
+     }
+   }
+   // aactualizar el informe de desepeño febrero
+   actualizarInformeFebrero(idAlumno: number, value: boolean): void {
+     if (this.isInforme != 0) {
+       const alumno=this.alumnosConInformes.find(alumno=>alumno.id == idAlumno)!
+       
+       
+        this.InformeAlumno = this.getInformeAlumno(alumno, this.idAsignatura);
+      
+  
+       const dialogRef = this.dialog.open(MostrarIInformeFebreroComponent, {
+         width: "1000px",
+         disableClose: true,
+         data: {
+           alumno: alumno,
+           informe: this.InformeAlumno,
+           NombreAlumno: alumno.nombres + " " + alumno.apellido,
+           dni: alumno.dni,
+           value: value,
+           NombreAsignatura: this.NombreAsignatura,
+           idAsignatura: Number(this.idAsignatura),
+          
+         },
+       });
+  
+       dialogRef.afterClosed().subscribe((result) => {
+         if (result) {
+           this.listarAlumnosConInformes();
+         }
+       });
+     }
+   }
+     //Nueva funcionalidad para actualizar 2024
+ 
+     actualizarInforme(idAlumno: number, value: boolean): void {
+      
+     }
+  
+     actualizar(alumno:AlumnoInformeDto){
+     
+     }
+   
+   //mostrar el informe de desempeño
+   verInforme(idAlumno: number){
+     
+     const alumno=this.alumnosConInformes.find(alumno=>alumno.id == idAlumno)!
+       
+       
+     this.InformeAlumno = this.getInformeAlumno(alumno, this.idAsignatura);
+ 
+     let informeId = this.InformeAlumno.id;
+ 
+     this.alumnoService
+       .generarPDF(informeId,alumno.dni )
+       .subscribe((data) => {
+         let donwloadURL = window.URL.createObjectURL(data);
+         // let link= document.createElement('a')
+         // link.href=donwloadURL
+         // link.download="informe.pdf"
+         // link.click()
+         console.log(data);
+ 
+         window.open(donwloadURL, "_blank");
+       });
+   }
+ 
+  // metodo que obtiene el informe de un alumno por asignatura
+ 
+   getInformeAlumno(alumno: AlumnoInformeDto, idAsignatura: number): InformesHistorial {
+     const informe = alumno.informeDesempenios.filter(
+       (inf) => inf.asignatura.asignatura_id === idAsignatura
+     );
+ 
+     return informe[0];
+   }
+ }
+ 
