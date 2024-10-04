@@ -189,36 +189,7 @@ export class ListarAlumnosComponent implements OnInit {
      }
    }
    // aactualizar el informe de desepeño febrero
-   actualizarInformeFebrero(idAlumno: number, value: boolean): void {
-     if (this.isInforme != 0) {
-       const alumno=this.alumnosConInformes.find(alumno=>alumno.id == idAlumno)!
-       
-       
-        this.InformeAlumno = this.getInformeAlumno(alumno, this.idAsignatura);
-      
-  
-       const dialogRef = this.dialog.open(MostrarIInformeFebreroComponent, {
-         width: "1000px",
-         disableClose: true,
-         data: {
-           alumno: alumno,
-           informe: this.InformeAlumno,
-           NombreAlumno: alumno.nombres + " " + alumno.apellido,
-           dni: alumno.dni,
-           value: value,
-           NombreAsignatura: this.NombreAsignatura,
-           idAsignatura: Number(this.idAsignatura),
-          
-         },
-       });
-  
-       dialogRef.afterClosed().subscribe((result) => {
-         if (result) {
-           this.listarAlumnosConInformes();
-         }
-       });
-     }
-   }
+   
      //Nueva funcionalidad para actualizar 2024
  
      actualizarInforme(idAlumno: number, value: boolean): void {

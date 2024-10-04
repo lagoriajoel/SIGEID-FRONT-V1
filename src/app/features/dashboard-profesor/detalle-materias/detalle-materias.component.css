@@ -15,3 +15,27 @@
 .botones .fila-btn {
     margin: 8px 8px 8px 0;
   }
+.mat-elevation-z4 {
+    height: 100%;
+}
+
+.linea {
+    display: flex;
+    align-items: baseline;
+   
+    line-height: 0; 
+   
+  }
+  .linea h3 {
+    margin-right: 10px;
+    font-weight: 400;
+    font-size: medium;
+    margin-left: 10px;
+
+  }
+  .detalles {
+    display: flex;
+    background-color: rgb(237, 236, 235);
+    
+
+  }

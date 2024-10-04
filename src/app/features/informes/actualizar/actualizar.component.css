@@ -48,6 +48,7 @@ header p {
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+   
 }
 .detalles, .contenidos {
     display: flex;
@@ -146,11 +147,26 @@ tbody, td, th {
     width: 12.5%;
     
    }
-   .botones {
+   .botones  {
     display: flex;
     position: fixed;
     width: 100%;
     background-color: #f0f0f0;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: -10px;
+    margin-top: -40px;
+    margin-bottom: 0;
+   
+    padding: 5px;
    }
+   .botones button {
+    margin-left: 10px;
+   }
+
+   .informe {
+    padding: 5px;;
+    margin-top: 40px;
+   }
+   .inf {
+    padding: 5px 20px 20px 20px;
+   }
+

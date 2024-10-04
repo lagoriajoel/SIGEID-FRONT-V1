@@ -9,26 +9,37 @@ button:hover{
     color: aliceblue;
     };
 
-.curso {
-    display: flex;
-    align-items: flex-end;
-}
 
-p {
-   display: inline; 
-   margin-left: 50px;
-}
 
-h3 {
-    margin: 0%;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    left: 0;
-  }
+
+
 
   .titulo {
+  
     display: flex;
     align-items: center;
-    justify-content: space-around;
+
   }
   
+  .detalles {
+    display: flex;
+    background-color: rgb(237, 236, 235);
+
+  }
+  .parte-1,.parte-2,.parte-3{
+      flex: 1;
+     
+     
+    
+  }
+  .linea {
+    display: flex;
+    align-items: baseline;
+   
+    line-height: 0; 
+   
+  }
+  .linea h3 {
+    margin-left: 10px;
+
+  }

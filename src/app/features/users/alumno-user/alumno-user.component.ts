@@ -169,7 +169,7 @@ export class AlumnoUserComponent implements OnInit {
     });
   }
   mensajeExito() {
-    this._snackBar.open("El usuario fue eliminado con exito", "", {
+    this._snackBar.open("El Alumno fue agregado con exito", "", {
       duration: 2000,
     });
   }

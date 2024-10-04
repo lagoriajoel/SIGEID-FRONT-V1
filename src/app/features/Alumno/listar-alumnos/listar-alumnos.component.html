@@ -5,9 +5,16 @@
       <mat-card>
         
         <mat-card-content>
+          <div class="add-seccion">
+            <button mat-raised-button (click)="addAlumnos()">Agregar Alumnos</button>
+          </div>
           
        
         <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="posicion">
+            <th mat-header-cell *matHeaderCellDef> # </th>
+            <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
+          </ng-container>
   
            
             <ng-container matColumnDef="dni">
@@ -16,15 +23,15 @@
             </ng-container>
           
          
-            <ng-container matColumnDef="nombres">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
-              <td mat-cell *matCellDef="let element"> {{element.nombres}} </td>
+            <ng-container matColumnDef="apellido">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
+              <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
             </ng-container>
           
          
-            <ng-container matColumnDef="apellido">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </th>
-              <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+            <ng-container matColumnDef="nombres">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+              <td mat-cell *matCellDef="let element"> {{element.nombres}} </td>
                     
             </ng-container>
 

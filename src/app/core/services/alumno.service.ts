@@ -24,6 +24,10 @@ export class AlumnoService {
     return this.httpClient.get<Alumno[]>(this.AlumnoURL + 'list');
   }
 
+  public listaPageable(page:number, size: number, order: string, asc: boolean): Observable<any> {
+    return this.httpClient.get<any>(this.AlumnoURL + `listPage?page=${page}&size=${size}&order=${order}&asc=${asc}`);
+  }
+
   public listarCurso(id: number): Observable<AlumnoInformeDto[]> {
     return this.httpClient.get<AlumnoInformeDto[]>(this.AlumnoURL + `listOfCurso/${id}` );
   }
@@ -33,6 +37,10 @@ export class AlumnoService {
   }
   public listarAnioCurso(anio:string, cicloLectivo: string): Observable<AlumnoInformeDto[]> {
     return this.httpClient.get<AlumnoInformeDto[]>(this.AlumnoURL + `listOfAnioCurso/${anio}/cicloLectivo/${cicloLectivo}` );
+  }
+
+  public listarApellidoNombre( query:string): Observable<Alumno[]> {
+    return this.httpClient.get<Alumno[]>(this.AlumnoURL + 'listApellidoNombre', {params: {query}} );
   }
 
   public listaPorDni(dni: string): Observable<Alumno> {
@@ -50,6 +58,10 @@ export class AlumnoService {
 
   public update(id: number, alumno: AlumnoDto): Observable<any> {
     return this.httpClient.put<any>(this.AlumnoURL + `update/${id}`, alumno);
+  }
+
+  public asignarCurso(cursoId: number, alumnos: Alumno[]): Observable<any> {
+    return this.httpClient.put<any>(this.AlumnoURL + `agregarAlumnos/${cursoId}`, alumnos);
   }
 
   

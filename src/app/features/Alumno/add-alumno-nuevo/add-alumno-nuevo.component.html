@@ -1,0 +1,92 @@
+<ng-container>
+    <h3>Alumnos </h3>
+<!-- search.component.html -->
+<div class="search-container">
+  <!-- Campo de entrada con sugerencias de búsqueda -->
+  <input
+    type="text"
+    [formControl]="searchControl"
+    placeholder="Buscar alumnos por nombre o apellido..."
+    class="search-input"
+    (focus)="showSuggestions = true"  
+    (blur)="hideSuggestions()"       
+  />
+
+  <!-- Lista de sugerencias -->
+  <ul class="suggestions-list" *ngIf="(results$ | async)?.length  && showSuggestions">
+    <li
+      *ngFor="let alumno of results$ | async"
+      class="suggestion-item"
+      (mousedown)="selectSuggestion(alumno)"
+    >
+      {{ alumno.apellido }} {{ alumno.nombres }} (DNI: {{ alumno.dni }})
+    </li>
+  </ul>
+
+  <!-- Mensaje cuando no hay sugerencias -->
+  <p class="no-results" *ngIf="(results$ | async)?.length === 0 && showSuggestions">
+    No se encontraron alumnos.
+  </p>
+</div>
+
+    
+      
+      <div class="scroll-container">
+        
+    <table mat-table [dataSource]="dataSource" matSort>
+
+ 
+      <ng-container matColumnDef="dni">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Dni </th>
+        <td mat-cell *matCellDef="let element"> {{element.dni}} </td>
+      </ng-container>
+    
+    
+      <ng-container matColumnDef="apellido">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </th>
+        <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+      </ng-container>
+    
+    
+      <ng-container matColumnDef="nombres">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </th>
+        <td mat-cell *matCellDef="let element"> {{element.nombres}} </td>
+              
+      </ng-container>
+    
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+              
+      </ng-container>
+    
+      
+      
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones</th>
+        <td mat-cell *matCellDef="let element"> 
+          
+    
+    
+                    
+          </td>
+     </ng-container>
+    
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
+      </div>
+      
+      <mat-paginator [length]="totalElement"
+      [pageSize]="page"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="onPageChange($event)">
+</mat-paginator>
+
+
+      <button mat-button (click)="cancelar()">Cancelar</button>
+      <button mat-button (click)="agregarAlumnos()">Agregar</button>
+      
+</ng-container>

@@ -18,6 +18,9 @@ import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-di
 import { CursosService } from 'src/app/core/services/cursos/cursos.service';
 import { AddAlumnoCursoComponent } from '../add-alumno-curso/add-alumno-curso.component';
 import { AlumnoInformeDto } from 'src/app/core/Entities/AlumnoInformeDto';
+import { AlumnoUserComponent } from '../../users/alumno-user/alumno-user.component';
+import { AddAlumnoNuevoComponent } from '../add-alumno-nuevo/add-alumno-nuevo.component';
+
 
 
 @Component({
@@ -34,7 +37,7 @@ export class ListarAlumnosComponent implements OnInit {
 
   
   
-  displayedColumns: string[] = ["dni", "nombres", "apellido", "email", "acciones"];
+  displayedColumns: string[] = ["posicion","dni", "apellido", "nombres", "email", "acciones"];
   dataSource = new MatTableDataSource(this.alumnos);
 
   clickedRows = new Set<Alumno>();
@@ -80,8 +83,10 @@ export class ListarAlumnosComponent implements OnInit {
   listarAlumnos(): void {
   
 
-    this.alumnoService.listarCurso(this._routes.snapshot.params['id']).subscribe(data => {
-      this.dataSource.data = data;
+    this.alumnoService.listarCurso(this.idCurso).subscribe(data => {
+
+      this.alumnos=data
+      this.dataSource.data = this.alumnos;
       console.log(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -91,36 +96,28 @@ export class ListarAlumnosComponent implements OnInit {
     
   }
 
+  addAlumnos(): void {
+    const dialogRef = this.dialog.open(AddAlumnoNuevoComponent, {
+      width: "800px",
+      disableClose: true,
+      data: { 
+        cursoId: this.idCurso},
+    }).afterClosed().subscribe((result) => {
+      this.listarAlumnos()
+         console.log("cacacac");
+    });
+  
+ 
+   
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  addEditAlumno(id?: number, idCurso?: number) {
-
-    const dialogRef = this.dialog.open(AddAlumnoCursoComponent, {
-      width: "800px",
-      height: "600px",
-      disableClose: true,
-      data: { id: id, idCurso: this.idCurso},
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.listarAlumnos();
-      }
-    });
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+  
+ 
   deleteAlumnoCurso(id: number) {
 
     this.dialog.open(ConfirmDialogComponent, {

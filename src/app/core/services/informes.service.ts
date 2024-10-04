@@ -9,6 +9,7 @@ import { contenidoInformeDto } from '../Entities/contenidoInformeDto';
 import { environment } from 'src/environments/environment';
 import { InformesHistorial } from '../Entities/InformeHistorial';
 import { estadisticaDTO } from '../Entities/estadisticaDTO';
+import { infoMesaDto } from '../Entities/infoMesaDto';
 
 @Injectable({
   providedIn: 'root'
@@ -60,13 +61,17 @@ export class InformesService {
   public actualizarDiciembreFebrero( contenidos: contenidoAdeudadoDto[], id:number): Observable<any> {
     return this.httpClient.put<any>(this.informeURL + `actualizarDiciembreFebrero/${id}`, contenidos);
   }
+  //nueva actualizar
+  public actualizarInstancia( infoMesa: infoMesaDto, id:number): Observable<any> {
+    return this.httpClient.put<any>(this.informeURL + `actualizarInstancia/${id}`, infoMesa);
+  }
   //test changes
   public actualizarContenidoExamen( contenidos: contenidoInformeDto[]): Observable<any> {
     return this.httpClient.put<any>(this.informeURL + `actualizarContenidoExamen/`, contenidos);
   }
 
-  public actualizarInformeMesa( informe: InformeContenidoDto, idInforme: number): Observable<any> {
-    return this.httpClient.put<any>(this.informeURL + `actualizarInformeMesa/${idInforme}`, informe);
+  public actualizarInformeMesa( infoMesa: infoMesaDto, idInforme: number): Observable<infoMesaDto> {
+    return this.httpClient.put<infoMesaDto>(this.informeURL + `actualizarInformeMesa/${idInforme}`, infoMesa);
   }
 
   public asignarContenido(id: number, contenidoId: number): Observable<any> {

@@ -5,6 +5,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { infoMesaDto } from 'src/app/core/Entities/infoMesaDto';
 import { contenido } from 'src/app/core/Entities/Contenido';
 import { contenidoAdeudadoDto } from 'src/app/core/Entities/contenidoAdeudadoDto';
 import { criterioDto } from 'src/app/core/Entities/criterioDTO';
@@ -61,6 +62,8 @@ export class ActualizarComponent implements OnInit {
   fechaExamen_2!:string
   fechaExamen_3!:string
   fechaExamen_4!:string
+  presidenteMesaDto!: string;
+  fechaExamenDto!: string;
 
   
  
@@ -93,10 +96,21 @@ export class ActualizarComponent implements OnInit {
   }
   toggleButton() {
     this.isButtonVisible = !this.isButtonVisible;
+    console.log(this.presidenteMesaDto);
    
 
   }
 
+  NombrePresidenteMesa(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.presidenteMesaDto = inputElement.value;
+  console.log(this.presidenteMesaDto);
+}
+fechaMesaExamen(event:Event): void {
+ const inputElement = event.target as HTMLInputElement;
+ this.fechaExamenDto= inputElement.value;
+ console.log(this.fechaExamenDto);
+}
   isElementVisible(Value: number): boolean {
     var num = this.numInstanciasEvaluacion
     return num == Value;
@@ -361,40 +375,62 @@ break
 
 
 }
+//metodo que genera el objeto actualizar mesaExamen dto
+
+generarInfoMesaExamen(): infoMesaDto {
+  
+  
+  const ac : infoMesaDto = {
+    numInstancia: this.numInstanciasEvaluacion,
+    presidenteMesa: this.presidenteMesaDto,
+    fechaMesa: this.fechaExamenDto,
+    contenidos: this.contenidos
+   
+  }
+
+  return ac
+}
 
 
 
 actualizarInforme(){
+   
   this.loading = true;
 
   this.dialog
     .open(ConfirmDialogComponent, {
       width: "500px",
-      disableClose: true,
+      
       data: {
         title: "Actualizar Informe",
         message: "¿Esta seguro de Actualiza el Informe?",
       },
-    })
-    .afterClosed()
+    }).afterClosed()
     .subscribe((res) => {
+     if (res) {
+      
+              this._informesService.actualizarInstancia(this.generarInfoMesaExamen(), this.informeId).subscribe({
+                next: (res) => {
+                  console.log(res);
+                  this.buscarAlumnoInforme(this.AlumnoId, this.asignaturaId);
+                  this.toggleButton()
+                  this.presidenteMesaDto=""
+                  this.fechaExamenDto=""
+                },
+                error: (err) => {
+                  console.log(err.error.mensaje);
+                  this._notificationService.openSnackBar(err.error.mensaje);
+                }
+              })
          
-      this._informesService.actualizarDiciembreFebrero(this.contenidos, this.informeId).subscribe({
-        next: data=>{
-           
-         this.toggleButton()
-         window.location.reload();
-          console.log(data);},
-        
-        error: (err)=>{
-        
-          console.log(err.error.mensaje);
-          this._notificationService.openSnackBar(err.error.mensaje);
-        }
-          
-       })
+    
+     }
     });
+
+      
 }
+
+
 mensajeExito() {
   this._snackBar.open("El Informa fue actualizado con Exito ", "", {
     duration: 2000,

@@ -3,22 +3,37 @@
       <mat-card>
         
         <mat-card-content>
+        
+        
           <div class="titulo">
-            <h2>
-              Alumnos de generar Informes de desempeño 
-            </h2>
+            <h3>
+              Generar Informes de Desempeño
+            </h3>
           </div>
 
           <mat-divider></mat-divider>
-          <div class="titulo">
+          <div class="detalles">
 
-              <h3 >Curso: {{anioCurso}} Año  </h3>
-              <h3 >División: "{{divisionCurso}}"  {{tecnicatura}} </h3>
-              <h3 >Técnicatura: {{tecnicatura}} </h3>
+             <div class="parte-1">
 
-              <h3 >Ciclo Lectívo: {{cicloLectivo}} </h3>
+                <div class="linea">    <h3 >Curso:   </h3>  {{anioCurso}} Año </div>
+                 <div class="linea">   <h3 >División:  </h3>{{divisionCurso}} </div>
+                 
+
+             </div>
+            <div class="parte-2">
+        
+                  <div class="linea">    <h3 >Técnicatura:  </h3>{{tecnicatura}}</div>
+                  <div class="linea">   <h3 >Turno:  </h3> </div>
+            </div>
+
+              <div class="parte-3">
+                <div class="linea">   <h3 >Espacio Curricular:  </h3>{{NombreAsignatura}} </div>
+                <div class="linea">  <h3 >Ciclo Lectívo:  </h3>{{cicloLectivo}}</div>
+              </div>
 
           </div>
+       
           <mat-divider></mat-divider>
         
         
@@ -31,6 +46,7 @@
           </mat-form-field>
           </div>
   
+         <div class="mat-elevation-z8">
           <table mat-table [dataSource]="dataSource" matSort>
   
            
@@ -68,21 +84,8 @@
                   Generar Informe
                 </button>
                  
-                <mat-icon *ngIf="isInforme===1"  class="btnEdit" (click)="verInforme(element.id)" matTooltip="Ver Informe">visibility</mat-icon>   
-              
-                <button *ngIf="isInforme===1&&!isDirectivo" mat-raised-button (click)="actualizarInformeDiciembre(element.id, true)" >
-                  <mat-icon>add</mat-icon>
-                 Diciembre
-                </button>
-                <button *ngIf="isInforme===1&&!isDirectivo" mat-raised-button (click)="actualizarInformeFebrero(element.id, false)" >
-                  <mat-icon>add</mat-icon>
-                 Febrero
-                </button>
+               
 
-                <button *ngIf="isInforme===1&&!isDirectivo" mat-raised-button (click)="actualizarInforme(element.id, false)" >
-                  <mat-icon>info</mat-icon>
-                 Actualizar Informe
-                </button>
            </ng-container>
           
           
@@ -90,9 +93,10 @@
             <tr  mat-row (click)="actualizar(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
           
           </table>
+         </div>
   
           
-            <mat-paginator [pageSizeOptions]="[10, 20]"
+            <mat-paginator [pageSizeOptions]="[20, 40]"
             showFirstLastButtons
             aria-label="Select page of periodic elements">
           </mat-paginator>

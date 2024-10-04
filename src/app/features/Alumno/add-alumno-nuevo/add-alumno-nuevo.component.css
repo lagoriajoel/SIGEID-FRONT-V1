@@ -1,0 +1,55 @@
+table {
+    width: 100%;
+}
+
+/* search.component.css */
+.search-container {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .scroll-container {
+    height: 300px;
+    overflow: auto;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000; /* Para asegurar que esté encima de otros elementos */
+  }
+  
+  .suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .suggestion-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .no-results {
+    padding: 8px;
+    color: #999;
+    font-size: 14px;
+    text-align: center;
+  }

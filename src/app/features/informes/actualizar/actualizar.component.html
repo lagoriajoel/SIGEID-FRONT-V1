@@ -5,296 +5,300 @@
 </div>
 <ng-container>
 
-    <div class="container informe" >
-        <header>
-            <img src="" alt="">
-            <p>CONSEJO PROVINCIAL DE EDUCACIÓN</p>
-            <P>Provincia de santa cruz</P>
-            </header>
-            <section class="encabezado">
-                <div class="titulo">
-                      Informe de desempeño de los/las Alimnos/as (Acuerdo 075/14)
-                      
-                </div>
-                <div class="detalles">
-            
-                    <div class="left">
-                        <p>Espacio Curricular: {{espacioCurricular}}</p>
-                        <p>Alumno :  {{NombreAlumno}}</p>
-                        <p>DNI : {{dniAlunmno}}</p>
-                    </div>
-    
-                    <div class="right">
-                        <p>Curso:  {{curso}}</p>
-                        <P>Profesor : {{nombreProfesor}}</P>
-                        <p>Ciclo Lectivo : {{cicloLectivo}}</p>
-    
-                    </div>
-                    
-                     
-                </div>
-            
-            </section>
-            <section class="contenidos">
-                <div class="criterios right ">
-                    
-                    <table class="tabla-contenidos">
-                        <thead>
-                            <tr>
-                                <th> Criterios </th>
-                            </tr>
+    <div class="container informe"  >
+           <div class="mat-elevation-z8 inf">
+            <header>
+              <img src="" alt="">
+              <p>CONSEJO PROVINCIAL DE EDUCACIÓN</p>
+              <P>Provincia de santa cruz</P>
+              </header>
+              <section class="encabezado">
+                  <div class="titulo">
+                        Informe de desempeño de los/las Alimnos/as (Acuerdo 075/14)
                         
-                        </thead>
-                          <tbody>
-                            <tr *ngFor="let item of criterios">
-                                <td> {{item.criterio}}</td>
-                               
-                             </tr>
-                           
-                          </tbody>
-                      
-                       </table>
-            
-                </div>
-                <div class="estrategias left">
-                    <table class="tabla-contenidos">
-                        <thead>
-                            <tr>
-                                <th> Estrategias </th>
-                            </tr>
-                        
-                        </thead>
-                          <tbody>
-                            <tr *ngFor="let item of estrategias">
-                                <td> {{item.estrategia}} </td>
-                               
-                             </tr>
-                           
-                            
-                          </tbody>
-                      
-                       </table>
-                </div>
-            </section>
-            <table class="tabla-contenidos">
-            <thead>
-                <tr>
-    
-    
-                    <th>Contenidos Adeudados</th>
-                    <th>Descripción</th>
-                    <th>Inst. Compensación Diciembre</th>
-                    <th>Inst. Compensación Febrero</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let cont of contenidos">
-                    <td>
-                      {{cont.nombre}}
-                    </td>
-                    <td>
-                      {{cont.descripcion}}
-                    </td>
-                    <td>
-                     <div *ngIf="!isButtonVisible || !isElementVisible(0)"> {{cont.instanciaEvaluacion_diciembre}}</div>
-                        <mat-select *ngIf="isButtonVisible && isElementVisible(0)" placeholder=" Seleccione..." (selectionChange)="resultadoInstanciaDiciembre($event, cont.id)" >
-                            <mat-option *ngFor="let instancia of instancia"  [value]="instancia.value">
-                              {{instancia.viewValue}}
-                            </mat-option>
-                            </mat-select>  
-                    </td>
-                    <td>
-                      <div *ngIf="!isButtonVisible || !isElementVisible(1)"> {{cont.instanciaEvaluacion_febrero}}</div>
-                        <mat-select *ngIf="isButtonVisible && isElementVisible(1)" placeholder=" Seleccione..." (selectionChange)="resultadoInstanciaFebrero($event, cont.id)" >
-                            <mat-option *ngFor="let instancia of instancia"  [value]="instancia.value">
-                              {{instancia.viewValue}}
-                            </mat-option>
-                            </mat-select>  
-                     </td>
-                </tr>
-            </tbody>
-            </table>
-            <section>
-              <div class="actualizacion">
-                <h3>Actualización de los Informes de desempeño</h3>
-              </div>
-              <div class="tabla-pres">
-                <table>
-                    <tr>
-                        <th>Presidente de Mesa</th>
-                        <td>
-                          <div *ngIf="!isButtonVisible || !isElementVisible(2)"> 
-
-                            {{presidenteMesa_1}}
-                            preseidente mesa
-                          </div>
-                          <div >
-                         
-                              <input *ngIf="isButtonVisible && isElementVisible(2)" matInput >
-                           
-                          </div>
-
-                        </td>
-                        <td>
-                          <div *ngIf="!isButtonVisible || !isElementVisible(3)"> 
-
-                            {{presidenteMesa_2}}
-                            preseidente mesa
-                          </div>
-                          <div >
-                         
-                              <input *ngIf="isButtonVisible && isElementVisible(3)" matInput >
-                           
-                          </div>
-
-                        </td>
-                        <td>
-                          <div *ngIf="!isButtonVisible || !isElementVisible(4)"> 
-
-                            {{presidenteMesa_3}}
-                            preseidente mesa
-                          </div>
-                          <div >
-                         
-                              <input *ngIf="isButtonVisible && isElementVisible(4)" matInput >
-                           
-                          </div>
-
-                        </td>
-                        <td>
-                          <div *ngIf="!isButtonVisible || !isElementVisible(5)"> 
-
-                            {{presidenteMesa_4}}
-                            preseidente mesa
-                          </div>
-                          <div >
-                         
-                              <input *ngIf="isButtonVisible && isElementVisible(5)" matInput >
-                           
-                          </div>
-
-                        </td>
-                     
-        
-                    </tr>
-                    <tr>
-                        <th>Fecha</th>
-                        <td>
-                          <div *ngIf="!isButtonVisible || !isElementVisible(2)">
-                            {{fechaExamen_1}}
-
-                          </div>
-                           <div *ngIf="isButtonVisible && isElementVisible(2)">
-
-                           <input type="date" name="" id="">
-                           </div>
-                        </td>
-                        <td>
-                          <div *ngIf="!isButtonVisible || !isElementVisible(3)">
-                            {{fechaExamen_2}}
-
-                          </div>
-                           <div *ngIf="isButtonVisible && isElementVisible(3)">
-
-                           <input type="date" name="" id="">
-                           </div>
-                        </td>
-                        <td>
-                          <div *ngIf="!isButtonVisible || !isElementVisible(4)">
-                            {{fechaExamen_3}}
-
-                          </div>
-                           <div *ngIf="isButtonVisible && isElementVisible(4)">
-
-                           <input type="date" name="" id="">
-                           </div>
-                        </td>
-                        <td>
-                          <div *ngIf="!isButtonVisible || !isElementVisible(5)">
-                            {{fechaExamen_4}}
-
-                          </div>
-                           <div *ngIf="isButtonVisible && isElementVisible(5)">
-
-                           <input type="date" name="" id="">
-                           </div>
-                        </td>
-                     
-        
-                    </tr>
-                  
-                   
-                </table>
-              </div>
-             
-            </section>
-            
-            <section class="section-contenidos">
-              <div
-                class="table-responsive"
-              >
-                <table
-                    class="table tabla-actualizar"
-                >
-                    <thead>
-                        <tr>
-                            <th scope="col">Contenidos Adeudados</th>
-                            <th scope="col">Descrpción</th>
-                            <th scope="col">1° Instancia</th>
-                            <th scope="col">2° Instancia</th>
-                            <th scope="col">3° Instancia</th>
-                            <th scope="col">4° Instancia</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let cont of contenidos">
-                            <td>
-                              {{cont.nombre}}
-                            </td>
-                            <td>
-                              {{cont.descripcion}}
-                            </td>
-                            <td>
-
-                              <div *ngIf="!isButtonVisible || !isElementVisible(2)"> {{cont.instanciaEvaluacion_1}}</div>
-
-                                <mat-select *ngIf="isButtonVisible && isElementVisible(2)"  placeholder=" Seleccione..." (selectionChange)="resultadoInstanciaExamen($event, cont.id)" >
-                                    <mat-option *ngFor="let instancia of instancia"  [value]="instancia.value">
-                                      {{instancia.viewValue}}
-                                    </mat-option>
-                                    </mat-select>  
-                            </td>
-                            <td>
-                              <div *ngIf="!isButtonVisible || !isElementVisible(3)"> {{cont.instanciaEvaluacion_2}}</div>
-                                <mat-select *ngIf="isButtonVisible && isElementVisible(3)" placeholder=" Seleccione..." (selectionChange)="resultadoInstanciaExamen($event, cont.id)" >
-                                    <mat-option *ngFor="let instancia of instancia"  [value]="instancia.value">
-                                      {{instancia.viewValue}}
-                                    </mat-option>
-                                    </mat-select>  
-                             </td>
-                             <td>
-                              <div *ngIf="!isButtonVisible || !isElementVisible(4)"> {{cont.instanciaEvaluacion_3}}</div>
-                                <mat-select *ngIf="isButtonVisible && isElementVisible(4)" placeholder=" Seleccione..." (selectionChange)="resultadoInstanciaExamen($event, cont.id)">
-                                    <mat-option *ngFor="let instancia of instancia"  [value]="instancia.value">
-                                      {{instancia.viewValue}}
-                                    </mat-option>
-                                    </mat-select>  
-                             </td>
-                             <td>
-                              <div *ngIf="!isButtonVisible || !isElementVisible(5)"> {{cont.instanciaEvaluacion_4}}</div>
-                                <mat-select *ngIf="isButtonVisible && isElementVisible(5)"  placeholder=" Seleccione..." (selectionChange)="resultadoInstanciaExamen($event, cont.id)">
-                                    <mat-option *ngFor="let instancia of instancia"  [value]="instancia.value">
-                                      {{instancia.viewValue}}
-                                    </mat-option>
-                                    </mat-select>  
-                             </td>  
-                    </tbody>
-                </table>
-              </div>
+                  </div>
+                  <div class="detalles">
               
+                      <div class="left">
+                          <p>Espacio Curricular: {{espacioCurricular}}</p>
+                          <p>Alumno :  {{NombreAlumno}}</p>
+                          <p>DNI : {{dniAlunmno}}</p>
+                      </div>
+      
+                      <div class="right">
+                          <p>Curso:  {{curso}}</p>
+                          <P>Profesor : {{nombreProfesor}}</P>
+                          <p>Ciclo Lectivo : {{cicloLectivo}}</p>
+      
+                      </div>
+                      
+                       
+                  </div>
+              
+              </section>
+              <section class="contenidos">
+                  <div class="criterios right ">
+                      
+                      <table class="tabla-contenidos">
+                          <thead>
+                              <tr>
+                                  <th> Criterios </th>
+                              </tr>
+                          
+                          </thead>
+                            <tbody>
+                              <tr *ngFor="let item of criterios">
+                                  <td> {{item.criterio}}</td>
+                                 
+                               </tr>
+                             
+                            </tbody>
+                        
+                         </table>
+              
+                  </div>
+                  <div class="estrategias left">
+                      <table class="tabla-contenidos">
+                          <thead>
+                              <tr>
+                                  <th> Estrategias </th>
+                              </tr>
+                          
+                          </thead>
+                            <tbody>
+                              <tr *ngFor="let item of estrategias">
+                                  <td> {{item.estrategia}} </td>
+                                 
+                               </tr>
+                             
+                              
+                            </tbody>
+                        
+                         </table>
+                  </div>
+              </section>
+              <table class="tabla-contenidos">
+              <thead>
+                  <tr>
+      
+      
+                      <th>Contenidos Adeudados</th>
+                      <th>Descripción</th>
+                      <th>Inst. Compensación Diciembre</th>
+                      <th>Inst. Compensación Febrero</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let cont of contenidos">
+                      <td>
+                        {{cont.nombre}}
+                      </td>
+                      <td>
+                        {{cont.descripcion}}
+                      </td>
+                      <td>
+                       <div *ngIf="!isButtonVisible || !isElementVisible(0)"> {{cont.instanciaEvaluacion_diciembre}}</div>
+                          <mat-select *ngIf="isButtonVisible && isElementVisible(0)" placeholder=" Seleccione..." (selectionChange)="resultadoInstanciaDiciembre($event, cont.id)" >
+                              <mat-option *ngFor="let instancia of instancia"  [value]="instancia.value">
+                                {{instancia.viewValue}}
+                              </mat-option>
+                              </mat-select>  
+                      </td>
+                      <td>
+                        <div *ngIf="!isButtonVisible || !isElementVisible(1)"> {{cont.instanciaEvaluacion_febrero}}</div>
+                          <mat-select *ngIf="isButtonVisible && isElementVisible(1)" placeholder=" Seleccione..." (selectionChange)="resultadoInstanciaFebrero($event, cont.id)" >
+                              <mat-option *ngFor="let instancia of instancia"  [value]="instancia.value">
+                                {{instancia.viewValue}}
+                              </mat-option>
+                              </mat-select>  
+                       </td>
+                  </tr>
+              </tbody>
+              </table>
+              <section>
+                <div class="actualizacion">
+                  <h3>Actualización de los Informes de desempeño</h3>
+                </div>
+                <div class="tabla-pres">
+                  <table>
+                      <tr>
+                          <th>Presidente de Mesa</th>
+                          <td>
+                            <div *ngIf="!isButtonVisible || !isElementVisible(2)"> 
+  
+                            Prof.  {{presidenteMesa_1}}
+                           
+                            </div>
+                            <div >
+                           
+                                <input (input)="NombrePresidenteMesa($event)" *ngIf="isButtonVisible && isElementVisible(2)" matInput >
+                             
+                            </div>
+  
+                          </td>
+                          <td>
+                            <div  *ngIf="!isButtonVisible || !isElementVisible(3)"> 
+  
+                              Prof.  {{presidenteMesa_2}}
+                            
+                            </div>
+                            <div >
+                           
+                                <input (input)="NombrePresidenteMesa($event)" *ngIf="isButtonVisible && isElementVisible(3)" matInput >
+                             
+                            </div>
+  
+                          </td>
+                          <td>
+                            <div *ngIf="!isButtonVisible || !isElementVisible(4)"> 
+  
+                              Prof.  {{presidenteMesa_3}}
+                             
+                            </div>
+                            <div >
+                           
+                                <input [(ngModel)]="presidenteMesaDto" *ngIf="isButtonVisible && isElementVisible(4)" matInput >
+                             
+                            </div>
+  
+                          </td>
+                          <td>
+                            <div *ngIf="!isButtonVisible || !isElementVisible(5)"> 
+  
+                              Prof.  {{presidenteMesa_4}}
+                            
+                            </div>
+                            
+                            <div >
+                           
+                                <input (input)="NombrePresidenteMesa($event)" *ngIf="isButtonVisible && isElementVisible(5)" matInput >
+                            
+                            </div>
+  
+                          </td>
+                       
+          
+                      </tr>
+                      <tr>
+                          <th>Fecha</th>
+                          <td>
+                            <div *ngIf="!isButtonVisible || !isElementVisible(2)">
+                              {{fechaExamen_1}}
+  
+                            </div>
+                             <div *ngIf="isButtonVisible && isElementVisible(2)">
+  
+                             <input (change)="fechaMesaExamen($event)" type="date" name="" id="">
+                             </div>
+                          </td>
+                          <td>
+                            <div *ngIf="!isButtonVisible || !isElementVisible(3)">
+                              {{fechaExamen_2}}
+  
+                            </div>
+                             <div *ngIf="isButtonVisible && isElementVisible(3)">
+  
+                              <input (change)="fechaMesaExamen($event)" type="date" name="" id="">
+                             </div>
+                          </td>
+                          <td>
+                            <div *ngIf="!isButtonVisible || !isElementVisible(4)">
+                              {{fechaExamen_3}}
+  
+                            </div>
+                             <div *ngIf="isButtonVisible && isElementVisible(4)">
+  
+                              <input (change)="fechaMesaExamen($event)" type="date" name="" id="">
+                             </div>
+                          </td>
+                          <td>
+                            <div *ngIf="!isButtonVisible || !isElementVisible(5)">
+                              {{fechaExamen_4}}
+  
+                            </div>
+                             <div *ngIf="isButtonVisible && isElementVisible(5)">
+  
+                              <input (change)="fechaMesaExamen($event)" type="date" name="" id="">
+                             </div>
+                          </td>
+                       
+          
+                      </tr>
+                    
+                     
+                  </table>
+                </div>
+               
+              </section>
+              
+              <section class="section-contenidos">
+                <div
+                  class="table-responsive"
+                >
+                  <table
+                      class="table tabla-actualizar"
+                  >
+                      <thead>
+                          <tr>
+                              <th scope="col">Contenidos Adeudados</th>
+                              <th scope="col">Descrpción</th>
+                              <th scope="col">1° Instancia</th>
+                              <th scope="col">2° Instancia</th>
+                              <th scope="col">3° Instancia</th>
+                              <th scope="col">4° Instancia</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let cont of contenidos">
+                              <td>
+                                {{cont.nombre}}
+                              </td>
+                              <td>
+                                {{cont.descripcion}}
+                              </td>
+                              <td>
+  
+                                <div *ngIf="!isButtonVisible || !isElementVisible(2)"> {{cont.instanciaEvaluacion_1}}</div>
+  
+                                  <mat-select *ngIf="isButtonVisible && isElementVisible(2)"  placeholder=" Seleccione..." (selectionChange)="resultadoInstanciaExamen($event, cont.id)" >
+                                      <mat-option *ngFor="let instancia of instancia"  [value]="instancia.value">
+                                        {{instancia.viewValue}}
+                                      </mat-option>
+                                      </mat-select>  
+                              </td>
+                              <td>
+                                <div *ngIf="!isButtonVisible || !isElementVisible(3)"> {{cont.instanciaEvaluacion_2}}</div>
+                                  <mat-select *ngIf="isButtonVisible && isElementVisible(3)" placeholder=" Seleccione..." (selectionChange)="resultadoInstanciaExamen($event, cont.id)" >
+                                      <mat-option *ngFor="let instancia of instancia"  [value]="instancia.value">
+                                        {{instancia.viewValue}}
+                                      </mat-option>
+                                      </mat-select>  
+                               </td>
+                               <td>
+                                <div *ngIf="!isButtonVisible || !isElementVisible(4)"> {{cont.instanciaEvaluacion_3}}</div>
+                                  <mat-select *ngIf="isButtonVisible && isElementVisible(4)" placeholder=" Seleccione..." (selectionChange)="resultadoInstanciaExamen($event, cont.id)">
+                                      <mat-option *ngFor="let instancia of instancia"  [value]="instancia.value">
+                                        {{instancia.viewValue}}
+                                      </mat-option>
+                                      </mat-select>  
+                               </td>
+                               <td>
+                                <div *ngIf="!isButtonVisible || !isElementVisible(5)"> {{cont.instanciaEvaluacion_4}}</div>
+                                  <mat-select *ngIf="isButtonVisible && isElementVisible(5)"  placeholder=" Seleccione..." (selectionChange)="resultadoInstanciaExamen($event, cont.id)">
+                                      <mat-option *ngFor="let instancia of instancia"  [value]="instancia.value">
+                                        {{instancia.viewValue}}
+                                      </mat-option>
+                                      </mat-select>  
+                               </td>  
+                      </tbody>
+                  </table>
+                </div>
                 
-    
-            </section>
+                  
+      
+              </section>
+
+           </div>
     
     
     </div>

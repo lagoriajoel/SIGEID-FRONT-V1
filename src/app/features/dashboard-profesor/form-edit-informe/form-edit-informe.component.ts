@@ -207,26 +207,26 @@ export class FormEditInformeComponent implements OnInit {
 
     console.log(this.contenidosInforme);
 
-    this._informeService
-      .actualizarInformeMesa(informe, this.alumnoInforme.id)
-      .subscribe({
-        next: (data) => {
-          this._informeService
-            .actualizarContenidoExamen(this.contenidosInforme)
-            .subscribe({
-              next: (data) => {
-                this.notificationService.openSnackBar(
-                  "Informe Actualizado Correctamente"
-                );
+    // this._informeService
+    //   .actualizarInformeMesa(informe, this.alumnoInforme.id)
+    //   .subscribe({
+    //     next: (data) => {
+    //       this._informeService
+    //         .actualizarContenidoExamen(this.contenidosInforme)
+    //         .subscribe({
+    //           next: (data) => {
+    //             this.notificationService.openSnackBar(
+    //               "Informe Actualizado Correctamente"
+    //             );
                 
-              },
-            });
-        },
-        error: (err) => {
-          this.notificationService.openSnackBar(err.error.Mensaje);
-          console.log(err);
-        },
-      });
+    //           },
+    //         });
+    //     },
+    //     error: (err) => {
+    //       this.notificationService.openSnackBar(err.error.Mensaje);
+    //       console.log(err);
+    //     },
+    //   });
     this.dialogRef.close();
   }
 }

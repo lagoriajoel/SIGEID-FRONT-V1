@@ -1,0 +1,48 @@
+table {
+    width: 100%;
+}
+button {
+    margin: 10px;
+}
+button:hover{
+    background-color:#8ac6ee;
+    color: aliceblue;
+    };
+
+
+
+
+
+
+  .titulo {
+  
+    display: flex;
+    align-items: center;
+
+  }
+  
+  .detalles {
+    display: flex;
+    background-color: rgb(237, 236, 235);
+
+  }
+  .parte-1,.parte-2,.parte-3{
+      flex: 1;
+     
+     
+    
+  }
+  .linea {
+    display: flex;
+    align-items: baseline;
+   
+    line-height: 0; 
+   
+  }
+  .linea h3 {
+    margin-right: 10px;
+    font-weight: 400;
+    font-size: medium;
+    margin-left: 10px;
+
+  }
